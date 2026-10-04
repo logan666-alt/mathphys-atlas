@@ -1,0 +1,2242 @@
+{
+  "version": "3.2.0",
+  "verifiedAt": "2026-09-12",
+  "topics": [
+    {
+      "id": "constrained-derivatives",
+      "name": "约束与偏导",
+      "kind": "method",
+      "symbol": "∂",
+      "home": true,
+      "aliases": [
+        "多元微积分",
+        "数学基础",
+        "隐函数求导",
+        "切平面",
+        "梯度",
+        "法向量",
+        "倒数关系",
+        "循环关系",
+        "循环偏导",
+        "partial derivatives",
+        "implicit differentiation",
+        "constraint surface",
+        "thermodynamics",
+        "热力学",
+        "理想气体",
+        "链式法则",
+        "链式关系",
+        "全微分",
+        "定压"
+      ]
+    },
+    {
+      "id": "boundary",
+      "name": "初始与边界条件",
+      "kind": "method",
+      "symbol": "∂Ω",
+      "home": true,
+      "aliases": [
+        "initial condition",
+        "boundary condition",
+        "初值",
+        "初始条件",
+        "边值",
+        "定解问题",
+        "Dirichlet",
+        "Neumann",
+        "周期边界"
+      ]
+    },
+    {
+      "id": "separation",
+      "name": "分离变量法",
+      "kind": "method",
+      "symbol": "XT",
+      "home": true,
+      "aliases": [
+        "分离变数法",
+        "separation of variables",
+        "分离变量"
+      ]
+    },
+    {
+      "id": "eigen",
+      "name": "本征模态",
+      "kind": "method",
+      "symbol": "λ",
+      "home": true,
+      "aliases": [
+        "本征值",
+        "特征值",
+        "本征函数",
+        "特征函数",
+        "eigenvalue",
+        "eigenfunction",
+        "eigenmode",
+        "normal mode",
+        "正交",
+        "简正模",
+        "驻波"
+      ]
+    },
+    {
+      "id": "fourier",
+      "name": "傅里叶展开",
+      "kind": "method",
+      "symbol": "Σ",
+      "home": true,
+      "aliases": [
+        "傅立叶",
+        "Fourier",
+        "傅里叶级数",
+        "傅立叶级数",
+        "正交展开",
+        "叠加",
+        "superposition",
+        "harmonic",
+        "吉布斯",
+        "Gibbs"
+      ]
+    },
+    {
+      "id": "complex",
+      "name": "复变与保角映射",
+      "kind": "method",
+      "symbol": "z²",
+      "home": false,
+      "aliases": [
+        "复平面",
+        "复数",
+        "解析函数",
+        "complex",
+        "conformal",
+        "保角变换",
+        "复变函数",
+        "映射"
+      ]
+    },
+    {
+      "id": "bessel",
+      "name": "贝塞尔函数",
+      "kind": "method",
+      "symbol": "Jₘ",
+      "home": false,
+      "aliases": [
+        "Bessel",
+        "柱函数",
+        "特殊函数",
+        "贝塞耳",
+        "圆柱坐标"
+      ]
+    },
+    {
+      "id": "greens",
+      "name": "格林函数与镜像",
+      "kind": "method",
+      "symbol": "G",
+      "home": false,
+      "aliases": [
+        "Green",
+        "Green function",
+        "镜像法",
+        "电像法",
+        "格林函数"
+      ]
+    },
+    {
+      "id": "wave",
+      "name": "波动方程",
+      "kind": "application",
+      "symbol": "∿",
+      "home": true,
+      "aliases": [
+        "wave equation",
+        "弦振动",
+        "膜振动",
+        "波动",
+        "波",
+        "驻波",
+        "行波"
+      ]
+    },
+    {
+      "id": "heat",
+      "name": "热传导与扩散",
+      "kind": "application",
+      "symbol": "∇²",
+      "home": true,
+      "aliases": [
+        "heat equation",
+        "diffusion",
+        "热方程",
+        "热传导方程",
+        "热传导",
+        "扩散方程",
+        "输运",
+        "热扩散"
+      ]
+    },
+    {
+      "id": "laplace",
+      "name": "拉普拉斯与泊松方程",
+      "kind": "application",
+      "symbol": "φ",
+      "home": false,
+      "aliases": [
+        "Laplace equation",
+        "Poisson",
+        "泊松方程",
+        "拉普拉斯方程",
+        "静电场",
+        "稳定场",
+        "势函数"
+      ]
+    },
+    {
+      "id": "advection",
+      "name": "对流与输运",
+      "kind": "application",
+      "symbol": "v",
+      "home": false,
+      "aliases": [
+        "advection",
+        "convection",
+        "对流扩散",
+        "平流",
+        "输运方程"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "constraint-surface",
+      "kind": "local",
+      "module": "constraint-surface",
+      "localAssets": [
+        "constraint/page.js",
+        "constraint/surface.js",
+        "constraint/surface.css"
+      ],
+      "title": "约束曲面上的偏导、倒数与循环关系",
+      "originalName": "Constraint Surface and Partial Derivatives",
+      "source": "本站原创",
+      "author": "物理可视化",
+      "url": "#/resource/constraint-surface",
+      "descriptionUrl": "#/resource/constraint-surface",
+      "backupUrl": "#/resources?topic=constrained-derivatives",
+      "topics": [
+        "constrained-derivatives"
+      ],
+      "question": "固定一个变量时，在二维曲面上沿哪个方向求导？为什么倒数关系得到 1，而循环关系得到 −1？",
+      "prerequisites": "基本偏导、隐函数求导和三维坐标；无需编程。",
+      "depth": "课程核心",
+      "format": "可旋转三维交互",
+      "language": "中文",
+      "controls": "点 P 的 u₀、v₀；固定变量；截平面、切平面及法向量；二维投影横纵轴；三维视角与缩放。",
+      "guide": "从无量纲理想气体曲面 uv = w 出发，先推导约束的微分，再在三维曲面上选取截线，用局部切平面和切向量分量比理解偏导。",
+      "reading": "u、v、w 分别是归一化压力、体积、温度；三维空间是状态坐标空间。三种颜色分别对应固定 w、v、u 的截线及切向量。二维投影的增量三角形取在切线上。",
+      "formula": "F=uv-w=0,\\quad v_0\\,du+u_0\\,dv-dw=0",
+      "symbols": "u = p/p₀，v = V/V₀，w = T/T₀；参考量满足 p₀V₀ = nRT₀。P = (u₀,v₀,u₀v₀)。",
+      "steps": [
+        {
+          "title": "固定变量怎样选定方向",
+          "action": "从 u₀ = v₀ = 1 出发，依次选择固定 w、v、u；观察截平面、交线和对应箭头。",
+          "observe": "每条箭头的固定坐标分量为零，三条切向量都落在同一个切平面中。",
+          "evidence": "桌面交互及几何分量已核对"
+        },
+        {
+          "title": "在同一条截线上交换横纵轴",
+          "action": "保持固定 w，将 u₀ 调到 1.4、v₀ 调到 0.7，点击“交换横纵轴”。",
+          "observe": "原来的 δv/δu = −0.5 变成 δu/δv = −2。截线不变，交换的是切向分量之比。",
+          "evidence": "桌面换轴与斜率读数已核对"
+        },
+        {
+          "title": "三个偏导变化，循环乘积保持不变",
+          "action": "移动 P，保留切平面和法向量；比较三个偏导以及循环乘积。",
+          "observe": "法向量与切平面的方向随 P 改变，三个偏导联动，未舍入的乘积始终为 −1。",
+          "evidence": "桌面参数变化及乘积已核对"
+        }
+      ],
+      "think": {
+        "question": "为什么三个循环偏导不能像普通分数那样直接消成 1？",
+        "answer": "它们来自三条不同截线，固定的变量不同。每一项都由同一个法向量的两个分量通过正交条件给出，带有一个负号；相消的是三个法向分量，三个负号留下 −1。"
+      },
+      "cautions": [
+        "箭头表示局部切向方向，显示长度经过缩放；箭头端点不必仍在曲面上。",
+        "二维投影的增量取在切线上；有限的曲面位移还包含 ΔuΔv 项。",
+        "一般曲面的倒数和循环关系要求有关法向分量非零；本演示的 u₀、v₀ 始终为正。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-10-03",
+        "environment": "本机桌面浏览器；公式排版、滑块、截平面、换轴、鼠标与键盘视角、链接恢复及页面切换检查。",
+        "availability": "本站自托管演示，无第三方模拟器或外部计算接口。",
+        "mobile": "本次按用户要求未验收手机端。",
+        "mainland": "沿用本站访问条件，未另行验证特定网络环境。",
+        "note": "核验覆盖主要桌面操作和代表性正参数；一般曲面的推广是数学说明，交互图形的模型固定为 uv = w。"
+      },
+      "visual": "constraint",
+      "mappings": [],
+      "featured": true,
+      "aliases": [
+        "偏导",
+        "偏导循环关系",
+        "偏导倒数关系",
+        "固定变量",
+        "约束曲面",
+        "梯度",
+        "切线",
+        "切平面",
+        "理想气体",
+        "热力学偏导"
+      ],
+      "operation": {
+        "entry": "从资源目录打开本站演示，不跳转外部模拟器。",
+        "startingState": [
+          "u₀ = v₀ = 1，P = (1,1,1)。",
+          "默认固定 w，显示截平面、切平面与法向量。"
+        ],
+        "controls": [
+          {
+            "name": "u₀ / v₀",
+            "meaning": "曲面上的点",
+            "usage": "移动 P，更新截线、法向量与导数。",
+            "evidence": "桌面已操作"
+          },
+          {
+            "name": "当前固定",
+            "meaning": "选择截平面",
+            "usage": "在固定 w、v、u 之间切换。",
+            "evidence": "桌面已操作"
+          },
+          {
+            "name": "交换横纵轴",
+            "meaning": "反向导数",
+            "usage": "交换当前截线投影的两个坐标。",
+            "evidence": "桌面已操作"
+          },
+          {
+            "name": "方向键 / ＋− / Home",
+            "meaning": "三维视角",
+            "usage": "先聚焦三维图，再旋转、缩放或恢复视角。",
+            "evidence": "桌面键盘操作核对"
+          }
+        ],
+        "restart": "点击演示入口回到默认设置，或重新打开带参数的页面链接恢复对应画面。",
+        "restoreDefault": "打开不带查询参数的演示入口；Home 只恢复视角。",
+        "testedRange": "u₀、v₀ 的正值范围 0.4–1.8，默认点及非对称点；三个固定变量、换轴、显示开关和桌面视角操作。",
+        "troubleshooting": [
+          {
+            "symptom": "看不清切平面或方向",
+            "action": "聚焦三维图按 Home 恢复初始视角，确认切平面和法向量已勾选。"
+          },
+          {
+            "symptom": "屏幕上的箭头看起来不是直角",
+            "action": "三维正交投影到二维屏幕未必仍为直角；查看法向量与各切向量的点积读数。"
+          }
+        ],
+        "reviewedAt": "2026-10-03",
+        "evidenceNote": "本站原创代码，数学结构与代表性桌面交互核对；每个偏导的固定变量保持明确。"
+      },
+      "subjects": [
+        "thermodynamics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "thermo-chain-rule",
+      "kind": "local",
+      "module": "thermo-chain-rule",
+      "localAssets": [
+        "thermo/page.js",
+        "thermo/chain.js",
+        "thermo/chain.css"
+      ],
+      "title": "等压变化中的偏导链式关系",
+      "originalName": "Thermodynamic Partial-Derivative Chain Rule",
+      "source": "本站原创",
+      "author": "物理可视化",
+      "url": "#/resource/thermo-chain-rule",
+      "descriptionUrl": "#/resource/thermo-chain-rule",
+      "backupUrl": "#/resources?topic=constrained-derivatives",
+      "topics": [
+        "constrained-derivatives"
+      ],
+      "question": "左边固定 p，右边为何同时出现固定 V、固定 T？这些导数在哪个点取值？",
+      "prerequisites": "基本偏导、全微分与理想气体物态方程。",
+      "depth": "课程核心",
+      "format": "分步交互演示",
+      "language": "中文",
+      "controls": "动作选择、下一步、暂停与继续、单步重播、从头重播、小步长 ΔT。",
+      "guide": "用归一化理想气体 pV=T 和示例函数 X=TV，在共同基准 A=(1,1) 测量定容与定温偏导，再观察等压位移及同步坐标分解。",
+      "reading": "横轴 T，纵轴 V，底色越深 X 越大。定容方向水平，定温方向竖直，等压方向沿 V=T。实心点走实际路径，虚线只表示坐标投影。",
+      "formula": "\\left(\\frac{\\partial X}{\\partial T}\\right)_p=\\left(\\frac{\\partial X}{\\partial T}\\right)_V+\\left(\\frac{\\partial X}{\\partial V}\\right)_T\\left(\\frac{\\partial V}{\\partial T}\\right)_p",
+      "symbols": "固定物质量，归一化 pV=T。X=TV 是数学示例。A 点 T₀=V₀=p₀=X₀=1；固定 p 后 T、V 只有一个独立自由度。",
+      "steps": [
+        {
+          "title": "从同一点测量两个坐标斜率",
+          "action": "从起点依次播放动作 1 和 2，比较水平与竖直移动。",
+          "observe": "动作 1 固定 V=1，动作 2 重新从 A 出发固定 T=1；两个偏导都在 A 取值，并不是实际过程的前后两段。",
+          "evidence": "共同起点、固定条件与读数核对"
+        },
+        {
+          "title": "等压移动与同步分解",
+          "action": "播放动作 3、4，观察实心点和同时展开的两个分量箭头。",
+          "observe": "p 保持 1，V=T；在 A 取斜率时，右边两项分别为 1 和 1，和为 2。分量箭头代表同一位移的两个坐标贡献。",
+          "evidence": "等压约束、方向与贡献数值核对"
+        },
+        {
+          "title": "有限步长与实际两段路径",
+          "action": "在动作 4 减小 ΔT，再比较动作 5 和 6。",
+          "observe": "一阶和与真实变化相差 ΔTΔV，步长缩小时差额按平方减小；两段路径中途的压力改变，第二段的斜率取 B 点。",
+          "evidence": "步长、真实变化及两段路径核对"
+        }
+      ],
+      "think": {
+        "question": "固定 p 后只有一个自由度，为什么仍能使用固定 V、固定 T 的偏导？",
+        "answer": "固定 p 选定实际移动的路径，但 X(T,V) 仍定义在整个 T–V 平面。可以在同一个基准点沿两个坐标方向测量函数的局部斜率，再用物态方程给出的 dV/dT 组合它们。两个坐标偏导无需分别对应实际等压过程；它们提供同一次微小位移的坐标分解。"
+      },
+      "cautions": [
+        "所有链式法则的导数在共同基准点 A 取值。",
+        "一阶分解与真实有限变化分开显示；X=TV 的余项恰为 ΔTΔV。",
+        "两个分量箭头同时展开；动作 5、6 单独演示实际两段路径。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-10-03",
+        "environment": "本机桌面浏览器；同点起步、方向、单步播放与暂停、步长、路径对照、页面切换及链接恢复检查。",
+        "availability": "本站自托管，无外部模拟器、字体或计算接口依赖。",
+        "mobile": "已检查窄屏布局；未做手机实机验收。",
+        "mainland": "沿用本站访问条件，未另行验证特定网络环境。",
+        "note": "数学示例固定为 pV=T、X=TV；核对主要动作和代表性步长，一阶估计与真实有限变化分别显示。"
+      },
+      "visual": "chain",
+      "mappings": [],
+      "featured": true,
+      "aliases": [
+        "热力学",
+        "理想气体",
+        "偏导链式关系",
+        "偏导链式法则",
+        "链式法则",
+        "全微分",
+        "定压",
+        "等压",
+        "定容",
+        "定温",
+        "变量依赖",
+        "自由度",
+        "坐标分解"
+      ],
+      "operation": {
+        "entry": "从资源目录的“约束与偏导”打开本站分步演示。",
+        "startingState": [
+          "A 点 T₀=V₀=p₀=X₀=1，起点画面暂停。",
+          "默认 ΔT=0.1；动作 1–4 都从 A 出发。"
+        ],
+        "controls": [
+          {
+            "name": "下一步",
+            "meaning": "推进一个关键动作",
+            "usage": "只播放下一动作，结束后停住。",
+            "evidence": "单步停止核对"
+          },
+          {
+            "name": "播放本步 / 暂停 / 重播本步",
+            "meaning": "控制当前动作",
+            "usage": "暂停后继续；完成后重播同一动作。",
+            "evidence": "播放状态核对"
+          },
+          {
+            "name": "小步长 ΔT",
+            "meaning": "观察局部极限",
+            "usage": "范围 0.005–0.25；同时改变位移、数值和局部显示范围。",
+            "evidence": "代表性步长数值核对"
+          },
+          {
+            "name": "当前动作",
+            "meaning": "选择实验或路径对照",
+            "usage": "直接选定动作后点击播放；动作 6 从 B 出发。",
+            "evidence": "场景起点核对"
+          }
+        ],
+        "restart": "动作完成后点击“重播本步”；步长保持当前值。",
+        "restoreDefault": "打开不带参数的演示入口，恢复起点和 ΔT=0.1；“从头重播”回到起点并保留当前步长。",
+        "testedRange": "默认步长 0.1、最小步长 0.005 及较大步长；共同基准、七个画面、压力与贡献读数。",
+        "troubleshooting": [
+          {
+            "symptom": "减小步长后，箭头看起来仍然差不多长",
+            "action": "坐标窗口和色阶随步长局部放大；比较坐标刻度、贡献数值和余项。"
+          },
+          {
+            "symptom": "一阶和与真实变化不相等",
+            "action": "两者相差 ΔTΔV；减小步长，有限变化率将趋近基准点的导数。"
+          }
+        ],
+        "reviewedAt": "2026-10-03",
+        "evidenceNote": "本站原创实现，沿用同点求导、路径约束与有限变化的明确区分。"
+      },
+      "subjects": [
+        "thermodynamics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "heat-boundaries",
+      "title": "一块薄板的热，会从边界流走吗？",
+      "originalName": "Heat equation",
+      "source": "VisualPDE",
+      "author": "Benjamin Walker、Adam Townsend、Andrew Krause（VisualPDE 团队）",
+      "descriptionUrl": "https://visualpde.com/basic-pdes/heat-equation",
+      "url": "https://visualpde.com/sim/?preset=heatEquation",
+      "backupUrl": "https://visualpde.com/explore.html",
+      "topics": [
+        "boundary",
+        "heat"
+      ],
+      "question": "同样一团局部热量，为什么换一种边界条件，后来的分布会不同？",
+      "prerequisites": "偏导数、温度场、热量守恒",
+      "depth": "入门",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "画笔添加局部温度；暂停与重置；Neumann、Periodic、Dirichlet 边界及边界数值。当前预设未显示名为 D_T 的参数滑块。",
+      "guide": "先把薄板的每一个位置对应到一个温度值。热方程决定“此刻的温度分布怎样改变”，初始条件决定出发时的分布，边界条件则规定板边与外界怎样相处。先保留默认绝热边界，让一团局部温度起伏扩散，再改变边界；不要在观察守恒时持续用画笔加热。",
+      "reading": "画面是二维物理区域，横向、纵向分别对应 x、y；颜色表示温度变量 T 的大小。动画推进的是时间 t。它不是温度随时间的二维曲线，也不是薄板的真实颜色照片。",
+      "formula": "\\frac{\\partial T}{\\partial t}=D\\nabla^2T,\\qquad \\left.\\frac{\\partial T}{\\partial n}\\right|_{\\partial\\Omega}=0",
+      "symbols": "T 为温度或相对参考温度的偏差；x、y 是空间位置，t 是时间；D>0 为热扩散率，当前预设为 1。∇² 是拉普拉斯算符；∂Ω 是区域边界，n 表示外法线方向。右式为齐次 Neumann（诺伊曼）条件，即无热通量。",
+      "steps": [
+        {
+          "title": "先给一个初始分布",
+          "action": "若首次出现欢迎框，选择“No, let me jump in!”。用左侧 Pause 暂停，在空白区域拖动一小段，随后点 Play。",
+          "observe": "局部起伏向周围展开；停止拖动后再看它怎样变平缓。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "把边界当作问题的一部分",
+          "action": "点左上角 f(x)（Edit equations），展开 Boundary conditions。先查看默认 Neumann 及数值 0，再切换为 Periodic（周期）。",
+          "observe": "周期边界把相对的两边接起来。下一次把热放在边缘附近时，应同时留意对边。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "比较固定温度的边缘",
+          "action": "把同一处边界选项切为 Dirichlet（狄利克雷），确认边界值为 0。点 Restart 重置，再拖出局部初温并播放。",
+          "observe": "边缘被保持在参考温度。对比绝热情况，思考区域内的总温度积分为什么可能减少。",
+          "evidence": "边界切换已实操；重画后的热量对比未定量验证"
+        }
+      ],
+      "think": {
+        "question": "局部温度峰变低，是否意味着热量一定离开了这块板？",
+        "answer": "不一定。峰值描述一个局部位置，积分描述整个区域。无内部热源、均匀材料且边界绝热时，扩散可以让峰值降低、受热范围变宽，同时保持总温度积分。固定为零的 Dirichlet 边界允许向外传热。若温度代表相对参考温度的偏差，积分与实际热量还相差密度、比热等系数。",
+        "formula": "\\frac{d}{dt}\\int_\\Omega T\\,dA=D\\int_{\\partial\\Omega}\\frac{\\partial T}{\\partial n}\\,ds"
+      },
+      "cautions": [
+        "均匀、各向同性且 D 为常数；本条不含对流或持续热源。",
+        "默认界面没有总热量积分读数，不能仅凭颜色宣布守恒已被数值验证。",
+        "边界条件控制边缘，初始条件控制整个区域在起始时刻的值；二者不能互换。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已阅读原站热方程说明；实际拖动画笔、暂停/播放，看到热斑展开，并切换 Periodic、Dirichlet，核对边界值 0。未做热量积分或数值精度测试。"
+      },
+      "visual": "heat",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§7.2 定解条件；§8.1 齐次方程的分离变数法。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§5.5.3 初始条件与边界条件。",
+          "source": "gu1"
+        }
+      ],
+      "featured": true,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开本条 heatEquation 预设。若首次出现欢迎提示，已核验的进入选项为 “No, let me jump in!”。",
+        "startingState": [
+          "先 Pause（暂停），再 Restart（按当前设置重置）。",
+          "f(x) → Boundary conditions：起点为 Neumann，值为 0；初始温度为 0。",
+          "每次画完局部热斑后松开鼠标，再 Play；拖动过程是在持续修改分布。"
+        ],
+        "controls": [
+          {
+            "name": "Pause / Play",
+            "meaning": "暂停 / 播放",
+            "usage": "左侧控制模拟是否随时间演化。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Restart",
+            "meaning": "重置当前初值",
+            "usage": "保留改过的边界条件。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "f(x) → Boundary conditions",
+            "meaning": "方程 → 边界条件",
+            "usage": "本条操作 Neumann、Periodic 与 Dirichlet；Dirichlet 值为 0。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "画布拖动",
+            "meaning": "添加局部初温",
+            "usage": "暂停时画一个小斑点，松开后再播放。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "先暂停，再点 Restart；需要恢复绝热比较时，重新选择 Neumann 并核对值为 0。",
+        "testedRange": "已操作三种边界类型和鼠标画斑。当前预设的扩散系数为 1，没有核验到可直接调扩散率的参数滑块；未测温度积分。",
+        "troubleshooting": [
+          {
+            "symptom": "画面接近单一颜色",
+            "action": "分布可能已变平缓。暂停、重置后重新画一个小斑点。"
+          },
+          {
+            "symptom": "边界对比看不明显",
+            "action": "把局部热斑放到边缘附近，并先确认当前边界类型；这是观察建议，未作定量热量测试。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原始预设入口，再逐项核对本卡起点。入口会打开新标签页；Restart 本身不恢复所有参数。"
+      },
+      "subjects": [
+        "thermodynamics"
+      ]
+    },
+    {
+      "id": "heat-eigenmodes",
+      "title": "热扩散为什么先抹平细小的起伏？",
+      "originalName": "Heat equation in 1D",
+      "source": "VisualPDE",
+      "author": "Benjamin Walker、Adam Townsend、Andrew Krause（VisualPDE 团队）",
+      "descriptionUrl": "https://visualpde.com/basic-pdes/heat-equation#exact-solutions-in-1d",
+      "url": "https://visualpde.com/sim/?preset=heatEquation1D",
+      "backupUrl": "https://visualpde.com/explore.html",
+      "topics": [
+        "separation",
+        "eigen",
+        "heat",
+        "fourier"
+      ],
+      "question": "把温度初值换成更密的余弦起伏，衰减速度会怎样改变？",
+      "prerequisites": "余弦函数、指数函数、二阶导数",
+      "depth": "课程核心",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "Parameters 中的 m（1–10）；初始条件表达式；Restart、播放/暂停；Timestepping 中的时间显示、自动暂停及暂停时刻。当前预设的扩散系数为 1。",
+      "guide": "分离变量法（separation of variables）先寻找“空间形状 × 时间因子”的解。余弦形状的二阶导数仍是自身的倍数，因此热方程只需让它的振幅随时间改变。这里的模态序号 m 决定空间起伏的疏密；高阶模态不是另一种材料，而是同一材料里的另一种初温分量。",
+      "reading": "横轴为一维位置 x，曲线高度为 T(x,t)，颜色也随 T 改变；曲线往下不表示热沿着屏幕下方流动。时间 t 由动画推进。负值可以作为相对参考温度的偏差，不等于负绝对温度。",
+      "formula": "T_m(x,t)=A\\,e^{-D(m\\pi/L)^2t}\\cos\\!\\left(\\frac{m\\pi x}{L}\\right)",
+      "symbols": "A 为初始振幅，L 为区间长度，m 为正整数模态序号，D 为扩散率，x 为位置，t 为时间；当前初值框为 cos(m*pi*x/320)，其中 320 是本预设采用的长度。",
+      "steps": [
+        {
+          "title": "把起点与暂停时刻设好",
+          "action": "打开 f(x) → Parameters，确认 m=8。右上扳手 Settings → Timestepping，启用 Elapsed time 和 Auto pause，把 Pause at t 设为 1000，按 Enter。保留默认时间步长和显示设置。",
+          "observe": "这里的 t 是模拟时间，不是现实中等了多少秒。初值 cos(m*pi*x/320) 中的 m 控制空间起伏数。",
+          "evidence": "已实操：时间显示、自动暂停及输入确认"
+        },
+        {
+          "title": "在统一时刻看高阶模态",
+          "action": "先 Pause，再 Restart，确认角落 t=0；点 Play，等它自动暂停、显示 t=1.00×10³。记住 m=8 的剩余起伏。",
+          "observe": "在保持原显示尺度的本次运行中，曲线已接近水平。细小空间起伏明显衰减。",
+          "evidence": "已实操：m=8，自动暂停于显示 t=1000"
+        },
+        {
+          "title": "换成低阶模态，重复同一过程",
+          "action": "f(x) → Parameters 把 m 调为 2，再 Restart、Play，仍自动暂停于 t=1000。不要改 Views 的显示范围；当前已核对 Min value=-1、Max value=1。",
+          "observe": "m=2 仍有明显起伏。理论衰减率随 m² 增大，因此 m=8 的衰减率为 m=2 的16倍；这一比值来自公式，不是从图片精确测得。",
+          "evidence": "已实操：m=2，同模拟时刻、相同显示设置"
+        }
+      ],
+      "think": {
+        "question": "为什么不是所有温度分量都以同一速度变小？",
+        "answer": "因为二阶空间导数会给第 m 个余弦模态带来 −(mπ/L)² 的因子。代入热方程，时间振幅就满足一阶衰减方程。较密的起伏对应更大的空间曲率，因此衰减更快。绝热边界还允许常数模态 m=0；它的二阶导数为零，保留平均温度。",
+        "formula": "a_m'(t)=-D(m\\pi/L)^2a_m(t),\\qquad \\tau_m=\\frac{L^2}{Dm^2\\pi^2}"
+      },
+      "cautions": [
+        "图中曲线是温度函数，不是材料的真实形状。",
+        "比较衰减时保持 D、长度、显示尺度和初始振幅一致。",
+        "“衰减到零”针对正阶、零均值模态；一般初温在绝热条件下趋向其均值。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读原站说明。第二版实操 m=8 与 m=2，使用 Settings → Timestepping 的 Elapsed time、Auto pause 和 Pause at=1000；两次均重置到 t=0 后运行至显示 t=1.00×10³。未改默认时间步长和显示设置，核对 Min value=-1、Max value=1；m=8 近乎水平，m=2 仍有明显起伏。完成定性对照，未测数值误差或精确衰减比。"
+      },
+      "visual": "heat",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§5.1 傅里叶级数；§8.1 齐次方程的分离变数法；§9.4 施图姆–刘维尔本征值问题。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§6.3.2 二维热传导方程的定解问题；§6.4.1 本征函数的正交性（相关方法，演示为一维）。",
+          "source": "gu1"
+        }
+      ],
+      "featured": true,
+      "aliases": [],
+      "errata": "原站说明中的初值一行少了 x；本页用 cos(mπx/L)。对 x 求两次导数、对 t 求一次导数后，两边均为 −D(mπ/L)²T，可直接检验。",
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 heatEquation1D。先用 Pause 暂停，再展开左上角 f(x) → Parameters。",
+        "startingState": [
+          "默认 m = 8，初值为 cos(m*pi*x/320)；区间长度 320，扩散系数为 1。",
+          "Settings（扳手）→ Timestepping：启用 Elapsed time 和 Auto pause，设置 Pause at t = 1000。",
+          "保留 Steps/frame = 100、Timestep = 0.01、Forward Euler；不改显示缩放。改 m 后一定 Restart。",
+          "显示范围核对入口：Views → Edit view → Colour，Min value = −1，Max value = 1；比较过程中不使用 Snap range 或 Auto snap。"
+        ],
+        "controls": [
+          {
+            "name": "Parameters → m",
+            "meaning": "空间模态序号",
+            "usage": "界面范围 1～10；本次比较 2 和 8。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Initial conditions",
+            "meaning": "初始条件",
+            "usage": "核对余弦表达式，m 改变空间起伏数。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Elapsed time",
+            "meaning": "显示模拟时间",
+            "usage": "在 Settings → Timestepping 内；屏幕角落出现 t。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Auto pause / Pause at",
+            "meaning": "自动暂停 / 暂停时刻",
+            "usage": "开启后把输入值设为 1000，并按 Enter 确认。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Restart / Play",
+            "meaning": "重置 / 播放",
+            "usage": "从 t = 0 重新生成初值，再运行到自动暂停。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Views → Edit view → Colour",
+            "meaning": "显示范围",
+            "usage": "只核对 Min value = −1、Max value = 1；没有改变范围。",
+            "evidence": "已查看设置，未改值"
+          }
+        ],
+        "restart": "Pause 后点 Restart，角落时间回到 0；m 和自动暂停设置会保留。比较另一个 m 时重复重置、播放。",
+        "testedRange": "m = 2 与 8；默认时间步长、相同显示设置、自动暂停显示 t = 1.00×10³。图形用于定性比较，不是数值误差测量。",
+        "troubleshooting": [
+          {
+            "symptom": "曲线几乎成直线",
+            "action": "高阶模态在当前时刻可能已经明显衰减；先 Restart 看初值，再确认 m。"
+          },
+          {
+            "symptom": "找不到时间显示",
+            "action": "打开右上扳手 Settings → Timestepping → Elapsed time；Auto pause 另行开启。"
+          },
+          {
+            "symptom": "改了 m，形状却没变",
+            "action": "m 写在初值表达式中，改完需 Restart 才重新生成初始分布。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原始预设入口，再逐项核对本卡起点。入口会打开新标签页；Restart 本身不恢复所有参数。",
+        "guideSource": "https://visualpde.com/user-guide/advanced-options#timestepping"
+      },
+      "subjects": [
+        "thermodynamics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "loaded-string",
+      "title": "一次拨弦，为什么会激发多个模态？",
+      "originalName": "Loaded String Simulation",
+      "source": "Falstad",
+      "author": "Paul Falstad",
+      "descriptionUrl": "https://www.falstad.com/loadedstring/directions.html",
+      "url": "https://www.falstad.com/loadedstring/",
+      "backupUrl": "https://www.falstad.com/mathphysics.html",
+      "topics": [
+        "fourier",
+        "eigen",
+        "wave",
+        "separation"
+      ],
+      "question": "中点拨弦的三角形初始形状，怎样由平滑的正弦模态拼出来？",
+      "prerequisites": "简谐振动、正弦函数、线性叠加",
+      "depth": "入门",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "Fundamental、Center Pluck、Stopped、Display Modes；可调模态幅度、载荷数、阻尼、张力（后几项仅核对说明）。",
+      "guide": "先看只有一个模态时的弦，再看中点被拉起后的弦。它们具有相同的端点条件，但初始形状不同，所以各模态的系数不同。“模态”是系统允许的基本振动形状，“系数”决定这次运动用了多少该模态；不能把系数柱图当成弦上不同位置的位移。",
+      "reading": "顶部横轴是沿弦的位置，白线高度是横向位移；下方 Harmonics: Magnitudes 的横向位置是模态序号，柱高为模态振幅。相位图表示各模态在各自振动周期中的位置，非粒子的空间轨迹。",
+      "formula": "u(x,t)=\\sum_{n=1}^{\\infty}q_n(t)\\sin\\!\\left(\\frac{n\\pi x}{L}\\right)",
+      "symbols": "u 为弦的横向位移，x 为沿弦位置，L 为长度，t 为时间；n 标记模态，q_n 是随时间变化的系数。此式说明理想连续弦极限；演示实际使用有限个离散载荷。",
+      "steps": [
+        {
+          "title": "只留下一个基本形状",
+          "action": "点击 Fundamental，再勾选 Stopped 暂停。",
+          "observe": "弦呈单峰形状；下方幅度谱主要只有最低模态。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "给相同的弦不同初值",
+          "action": "保持暂停，点击 Center Pluck。",
+          "observe": "顶部变成中点拉起的形状，幅度谱出现多个非零分量。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "把整体拆开来看",
+          "action": "将显示菜单从 Display Phases 改为 Display Modes，再取消 Stopped 播放。",
+          "observe": "小图分别呈现参与运动的模态；它们的位移相加构成顶部总形状。",
+          "evidence": "显示切换已实操；播放见步骤一运行画面"
+        }
+      ],
+      "think": {
+        "question": "如果初始位移关于中点对称，为什么理想固定端弦的偶数阶系数为零？",
+        "answer": "关于中点反射时，偶数阶正弦模态变号，而中点拨弦的初始位移不变。计算两者的投影积分，左右两半贡献相消。对称性筛选的是此次激发的系数，不是说偶数阶模态不存在。实际离散载荷演示应作为连续弦结论的近似。"
+      },
+      "cautions": [
+        "演示是质量集中在等距点上的 loaded string（负载弦），不是完全连续的弦；高阶频率通常并非严格整数倍。",
+        "含阻尼时各模态会衰减；研究无阻尼叠加需另行核对阻尼设置。",
+        "原站旧文字提到 Java 插件；当前页面已转换为 JavaScript，本次无需安装 Java 即能运行。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已阅读完整操作说明。实际点 Fundamental、勾选 Stopped、点 Center Pluck、改 Display Modes；确认单峰、三角形初始位移和模态分解画面。未试声音。"
+      },
+      "visual": "wave",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§5.1 傅里叶级数；§8.1 齐次方程的分离变数法。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§6.1 弦振动的定解问题；§2.1 周期函数的傅里叶级数。",
+          "source": "gu1"
+        }
+      ],
+      "featured": true,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 Loaded String Simulation。控件在模拟图旁；本条只使用可见的 JavaScript 演示。",
+        "startingState": [
+          "点 Fundamental，再勾选 Stopped。",
+          "其余负载、阻尼等参数保留原站打开时的设置；本卡未将它们校准为连续、无阻尼弦。"
+        ],
+        "controls": [
+          {
+            "name": "Fundamental",
+            "meaning": "基模",
+            "usage": "载入最低模态形状。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Stopped",
+            "meaning": "停止演化",
+            "usage": "勾选暂停，取消勾选继续。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Center Pluck",
+            "meaning": "中点拨弦",
+            "usage": "保持暂停时载入中点拉起的初始形状。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Display Modes",
+            "meaning": "显示模态",
+            "usage": "从 Display Phases 切换，查看分量小图。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "返回单模态起点用 Fundamental；返回中点拨弦用 Center Pluck，并核对 Stopped 是否勾选。这两项是重设初值，不会保证恢复其他参数。",
+        "testedRange": "Fundamental、Center Pluck、Stopped 和 Display Modes。未核验声音、所有阻尼或负载数设置。",
+        "troubleshooting": [
+          {
+            "symptom": "小图与导读不同",
+            "action": "检查显示菜单是否为 Display Modes。"
+          },
+          {
+            "symptom": "多次操作后无法比较",
+            "action": "重新打开本条入口，再按起点重设；保留默认负载和阻尼，避免同时改多个量。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原站入口，再按本卡起点选择示例、显示方式和暂停状态；未声称有统一的全参数恢复按钮。"
+      },
+      "subjects": [
+        "classical-mechanics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "wave-travel",
+      "title": "一个初始隆起，怎样分成左右行波？",
+      "originalName": "Wave equation in 1D",
+      "source": "VisualPDE",
+      "author": "Benjamin Walker、Adam Townsend、Andrew Krause（VisualPDE 团队）",
+      "descriptionUrl": "https://visualpde.com/basic-pdes/wave-equation#1d-and-2d-waves",
+      "url": "https://visualpde.com/sim/?preset=waveEquation1D",
+      "backupUrl": "https://visualpde.com/explore.html",
+      "topics": [
+        "wave",
+        "boundary"
+      ],
+      "question": "初始速度为零时，为什么一个局部位移会向两侧传播，而不是原地消失？",
+      "prerequisites": "简谐振动、偏导数、函数平移",
+      "depth": "课程核心",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "初始位移 u 与辅助变量 v 的初值；D 参数；周期边界；重置与暂停。D 的改变已试，未测量波速。",
+      "guide": "达朗贝尔解（d’Alembert solution）把一维波动写成左右移动的两个分量。初始速度为零时，它们各带一半初始位移。先在波到达边界之前观察；本预设两端为周期条件，后续波会从对端重新进入，并不是在固定端反射。",
+      "reading": "横轴是空间位置 x，彩色曲线高度是位移 u；时间由动画推进。颜色依附于函数值，不表示传播方向。黑线是原站叠加的参考曲线，本次更改 D 后它与彩色解分离，不能据此判断求解精度。",
+      "formula": "u_{tt}=c^2u_{xx},\\quad u(x,t)=\\frac{f(x-ct)+f(x+ct)}{2},\\quad c=\\sqrt D",
+      "symbols": "u 是位移；x 是位置；t 是时间；f 是初始位移函数；c 是波速，原站参数 D=c²。公式用于零初速度，在无界区间或边界尚未影响的区域；周期情况要按周期延拓理解。",
+      "steps": [
+        {
+          "title": "重置并看清出发形状",
+          "action": "点 Restart，观察中央的局部隆起，随后观察两侧逐渐分开。",
+          "observe": "先注意彩色曲线的两个峰向相反方向移动，别把横轴误当成时间。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "确认为什么需要两个初值",
+          "action": "点 f(x)，展开 Initial conditions 与 Boundary conditions。查看 u 的高斯形初值、v=0，以及两者的 Periodic 设置。",
+          "observe": "此预设 u_t=v，所以 v 的初值就是初始速度。波动方程在时间上是二阶的。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "停住画面，区分形状和传播",
+          "action": "在默认 D=1 下用 Pause 暂停，再播放；需要返回原始设置时重新打开本条“原站演示”链接。",
+          "observe": "暂停固定的是时刻，横轴仍是位置。Restart 只重置当前设置的初值，不会自动把改过的参数还原。",
+          "evidence": "播放、暂停与重新打开默认预设均已实操"
+        }
+      ],
+      "think": {
+        "question": "两个行波各有一半的振幅，是否意味着能量损失了一半？",
+        "answer": "不能用振幅直接相加来算波的能量。弦的能量包含与速度平方和空间斜率平方成正比的项。初始形状分解为两个反向行波时，位移和速度要一并满足条件。在线性、无阻尼模型中，总能量的变化由边界通量决定。"
+      },
+      "cautions": [
+        "本预设是周期边界，不能描述为“两端固定弦的反射”。",
+        "初始速度不是零时，达朗贝尔公式还包含速度初值的积分项。",
+        "仅观察到参数与图像响应；没有测量传播速度或检验数值误差。",
+        "本次将 D 改为 4 后，随后出现数值不稳定提示；入门任务保留 D=1。若报错，重新打开本条默认预设链接。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读说明；在默认 D=1 短时观察双峰，核对周期边界、u 高斯初值、v=0，并暂停。另测 D=4：黑色叠加线与彩色解分离，稍后出现数值不稳定提示；重新打开默认预设恢复。未作数值精度检验。"
+      },
+      "visual": "wave",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§7.4 达朗贝尔公式 定解问题。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§10.2 一维波动方程的达朗贝尔公式。",
+          "source": "gu1"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": "原站波动说明采用 u_tt=D∇²u。由量纲及代入平面波可得 c=√D。阅读原站驻波频率表达式时也应保留这个平方根。本次不沿用有疑问的黑色叠加线作解析验证。 实际叠加框使用 x±D·t，而给定 PDE 的波速应为 √D；D=1 时差别被掩盖。修改 D 后还曾触发数值不稳定，入门任务因此保留默认值。",
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 waveEquation1D 原始预设，观察彩色数值曲线。",
+        "startingState": [
+          "Parameters：D = 1；初值 u 为中央高斯隆起，v = 0。",
+          "Boundary conditions：u、v 都为 Periodic。",
+          "先短时播放看到两个峰，再 Pause。"
+        ],
+        "controls": [
+          {
+            "name": "Pause / Play",
+            "meaning": "暂停 / 播放",
+            "usage": "短时观察左右行波。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Restart",
+            "meaning": "重置初值",
+            "usage": "按当前参数重新生成隆起。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Initial conditions",
+            "meaning": "两项初始条件",
+            "usage": "u 是位移，v 是初始速度。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Parameters → D",
+            "meaning": "方程参数",
+            "usage": "本导读保留 D = 1；波速为 √D。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "Restart 保留当前 D。要恢复本卡条件，重新打开本条原始预设入口，并核对 D = 1；此恢复方式已实际操作。",
+        "testedRange": "默认 D = 1 的短时运行已观察。D = 4 曾出现叠加线偏离，随后数值不稳定；不把它作为推荐参数。",
+        "troubleshooting": [
+          {
+            "symptom": "出现数值不稳定提示",
+            "action": "重新打开原始预设，恢复 D = 1 后短时观察。仅 Restart 不能修复改过的参数。"
+          },
+          {
+            "symptom": "黑色参考线和彩色曲线分开",
+            "action": "原预设的参考线使用 D 作传播速度，方程要求 √D。保留 D = 1；不要据此测波速。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原始预设入口，再逐项核对本卡起点。入口会打开新标签页；Restart 本身不恢复所有参数。"
+      },
+      "subjects": [
+        "classical-mechanics"
+      ]
+    },
+    {
+      "id": "standing-wave",
+      "title": "二维驻波：节线为什么停在原处？",
+      "originalName": "Wave equation with initial data",
+      "source": "VisualPDE",
+      "author": "Benjamin Walker、Adam Townsend、Andrew Krause（VisualPDE 团队）",
+      "descriptionUrl": "https://visualpde.com/basic-pdes/wave-equation#standing-wave-solutions",
+      "url": "https://visualpde.com/sim/?preset=waveEquationICs",
+      "backupUrl": "https://visualpde.com/explore.html",
+      "topics": [
+        "separation",
+        "eigen",
+        "wave",
+        "boundary"
+      ],
+      "question": "改变两个方向的模态序号，哪些线一直不振动？",
+      "prerequisites": "二维函数、余弦、简谐振动、分离变量",
+      "depth": "课程核心",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "n、m 两个模态序号滑块；D 与 C 参数；位移及辅助变量初值；重置和暂停。",
+      "guide": "先用一个空间形状乘一个时间因子来理解二维驻波（standing wave）。不同位置的位移可以反号，但节线始终为零。这里使用 Neumann 边界的余弦乘积，与固定边缘膜的正弦乘积不同；边界决定允许的空间形状。",
+      "reading": "平面内两个方向对应 x、y，颜色表示位移 u 的正负和大小；它不是温度图。随时间变的是同一空间位置的位移。节线是 u 始终为零的线，不能把某一瞬间所有颜色相同误认为模态消失。",
+      "formula": "\\Phi_{nm}=\\cos\\frac{n\\pi x}{L_x}\\cos\\frac{m\\pi y}{L_y},\\qquad u=A\\Phi_{nm}\\cos(\\sqrt{D\\lambda_{nm}}\\,t)",
+      "symbols": "Φ_nm 是空间本征函数，A 是初始振幅；n、m 分别标记 x、y 方向；L_x、L_y 为区域长度。λ_nm=(nπ/L_x)²+(mπ/L_y)²，D=c²，t 为时间。该式要求 C=0 且初始速度为零。",
+      "steps": [
+        {
+          "title": "核对无阻尼比较的条件",
+          "action": "打开 f(x) → Parameters，查看默认 D=1、C=0。展开 Initial conditions，查看余弦乘积和 v=0。",
+          "observe": "两个方向的空间变化相乘；时间上的振荡不是另一个空间维度。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "改变一个方向的模态",
+          "action": "把 n 调为 2、m 调为 3，点 Restart。",
+          "observe": "在两个方向分别数节线；余弦模态 n=2、m=3 对应两条和三条内部零线。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "把动画暂时停住",
+          "action": "用 Pause 暂停，再播放。在颜色正负交换的过程中盯住同一条节线。",
+          "observe": "波腹会改变位移的正负，节线的位置应保持不变。观察一整段时间，避免只看某个整体过零瞬间。",
+          "evidence": "暂停已实操；节线不动为观察任务"
+        }
+      ],
+      "think": {
+        "question": "为什么同样写着“波动方程”，固定端与自由端的模态会不同？",
+        "answer": "方程约束区域内部怎样变化，边界条件约束边缘可采取的值。固定边缘通常要求位移为零，选出正弦型函数；本例 Neumann 条件要求法向导数为零，选出余弦型函数。模态的形状及允许序号由方程和边界共同决定。"
+      },
+      "cautions": [
+        "C 为原站引入的稳定化/阻尼参数；C≠0 时不再是本页写出的理想无阻尼解。",
+        "不要把本例 Neumann 波动预设称为固定边缘鼓膜；固定边缘请看 Falstad 矩形膜条目。",
+        "本次未进行频率测量、长时稳定性或所有高阶模态的检查。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已阅读驻波说明，实际核对 D=1、C=0、两项初值，将 n=4、m=4 改为 n=2、m=3，重置并看到新空间分布，使用 Pause 暂停。"
+      },
+      "visual": "membrane",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§8.1 齐次方程的分离变数法；§9.4 施图姆–刘维尔本征值问题。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§6.3.1 二维波动方程的定解问题。",
+          "source": "gu1"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": "原站驻波说明中时间频率写成了 Dπ√(n²/L_x²+m²/L_y²)；对其给定方程应为 √Dπ√(n²/L_x²+m²/L_y²)。将 u 对 t 求两次导数可核对；D=1 时这个差别被掩盖。",
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 waveEquationICs，左上角 f(x) 展开 Parameters 和 Initial conditions。",
+        "startingState": [
+          "核对 D = 1、C = 0、n = 4、m = 4。",
+          "位移初值为余弦乘积，v = 0；边界为零法向导数。",
+          "改 n、m 后 Restart，再 Pause 看空间分布。"
+        ],
+        "controls": [
+          {
+            "name": "Parameters → n, m",
+            "meaning": "两个方向的模态序号",
+            "usage": "已从 4、4 改为 2、3。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Parameters → D, C",
+            "meaning": "方程系数",
+            "usage": "本卡保持 D = 1、C = 0。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Initial conditions",
+            "meaning": "初值表达式",
+            "usage": "核对两个方向余弦的乘积和 v = 0。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Restart / Pause",
+            "meaning": "重置 / 暂停",
+            "usage": "先生成新模态，再停住观察节线。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "Restart 会保留 n、m。返回本卡默认形状时把 n、m 改回 4、4，并核对 D = 1、C = 0 后重置。",
+        "testedRange": "已核对 D = 1、C = 0，操作 (n,m) = (4,4) → (2,3)。未对其他参数范围或长时间稳定性作保证。",
+        "troubleshooting": [
+          {
+            "symptom": "一瞬间整张图都接近零",
+            "action": "单一模态可能整体经过平衡位置。短暂播放再暂停，结合前后画面辨认节线。"
+          },
+          {
+            "symptom": "调完序号仍是旧花纹",
+            "action": "点 Restart，参数才重新用于生成初值。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原始预设入口，再逐项核对本卡起点。入口会打开新标签页；Restart 本身不恢复所有参数。"
+      },
+      "subjects": [
+        "classical-mechanics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "rectangular-membrane",
+      "title": "矩形膜：边界怎样筛选本征模态？",
+      "originalName": "Rectangular Membrane Applet",
+      "source": "Falstad",
+      "author": "Paul Falstad",
+      "descriptionUrl": "https://www.falstad.com/membrane/directions.html",
+      "url": "https://www.falstad.com/membrane/",
+      "backupUrl": "https://www.falstad.com/mathphysics.html",
+      "topics": [
+        "eigen",
+        "separation",
+        "boundary",
+        "wave"
+      ],
+      "question": "同一张矩形膜，固定边缘和自由边缘允许怎样不同的振动形状？",
+      "prerequisites": "二维正弦函数、波动方程、固定端条件",
+      "depth": "课程核心",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "模态网格；Fixed Edges；Display 3d+2d；Stopped。纵横比和阻尼等设置已核对说明，未全面试改。",
+      "guide": "先选一个单一模态，数清楚节线。模态编号 (m,n) 分别控制两个空间方向；它们不是坐标，也不是第 m 秒和第 n 秒。切换边界后重新选择模态，才能公平地比较允许的形状；原有位移还可能被重新分解到新的模态集合。",
+      "reading": "三维视图的底面是膜的 x、y 空间，凸起高度为横向位移；二维视图用红、绿区分位移符号。下方方格是模态索引表：固定边缘时左上为 (1,1)，向右 m 增大，向下 n 增大；格子颜色表示模态系数而非膜上位置。",
+      "formula": "\\Phi_{mn}(x,y)=\\sin\\frac{m\\pi x}{L_x}\\sin\\frac{n\\pi y}{L_y},\\quad \\lambda_{mn}=\\left(\\frac{m\\pi}{L_x}\\right)^2+\\left(\\frac{n\\pi}{L_y}\\right)^2",
+      "symbols": "Φ_mn 为空间模态；x、y 为位置，L_x、L_y 为边长；m、n 是正整数；λ_mn 是 −∇² 的本征值。公式针对固定边缘，时间振幅另满足振动方程。",
+      "steps": [
+        {
+          "title": "让三维和俯视图互相对应",
+          "action": "保持 Fixed Edges 勾选，将 Display 菜单改为 Display 3d+2d，勾选 Stopped。",
+          "observe": "底面坐标是两个空间方向；俯视图中的色块对应三维图的正负位移。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "选择单一高阶模态",
+          "action": "双击模态网格第一行第二格，选中固定边缘的 (2,1) 模态。",
+          "observe": "这时有两个相反符号的波腹，中间出现一条内部节线；边缘仍为零。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "换边界后重新理解编号",
+          "action": "取消 Fixed Edges。注意模态系数网格改变；按原站说明，自由边缘的编号和余弦型模态集合与固定边缘不同。",
+          "observe": "同一个格子的位置在切换后不一定代表同一对序号，不能直接将前后格子逐一等同。",
+          "evidence": "已实操"
+        }
+      ],
+      "think": {
+        "question": "为什么 (m,n) 模态内部有 m−1 条和 n−1 条节线？",
+        "answer": "固定边缘的空间解是两个正弦的乘积。sin(mπx/L_x) 在区间内部有 m−1 个零点，每个零点延伸成一条平行于 y 方向的线；另一个因子同理。正方形上交换 m、n 会得到相同本征值，但这不意味着两个空间形状相同。"
+      },
+      "cautions": [
+        "理想均匀、完全弹性薄膜的小振幅模型，不是具有弯曲刚度的薄板。",
+        "原站用有限数量模态重建图像；用鼠标任意变形后的形状可能只是截断近似。",
+        "固定边缘公式不适用于取消 Fixed Edges 后的自由边界。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已阅读完整说明。实际切换 Display 3d+2d、勾选 Stopped、双击第一行第二个模态格，看到双波腹；取消 Fixed Edges，看到模态系数表变化。"
+      },
+      "visual": "membrane",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§8.1 齐次方程的分离变数法；§9.4 施图姆–刘维尔本征值问题。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§6.3.1 二维波动方程的定解问题。",
+          "source": "gu1"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 Rectangular Membrane Simulation。模态选择位于画面下方的格子中。",
+        "startingState": [
+          "Fixed Edges 保持勾选。",
+          "显示菜单选择 Display 3d+2d，勾选 Stopped。"
+        ],
+        "controls": [
+          {
+            "name": "Fixed Edges",
+            "meaning": "固定边缘",
+            "usage": "勾选为固定边缘；本卡最后一步取消勾选进行对比。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Display 3d+2d",
+            "meaning": "立体图和俯视图",
+            "usage": "两个视图表示同一位移场。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Stopped",
+            "meaning": "暂停",
+            "usage": "勾选后看清节线。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "模态格双击",
+            "meaning": "只选一个模态",
+            "usage": "固定边缘下双击第一行第二格，对应 (2,1)。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "重新勾选 Fixed Edges，再双击第一行第二格，恢复本卡的固定边缘单模态比较；这不等同于重置全部原站参数。",
+        "testedRange": "已操作 3d+2d、暂停、固定边缘 (2,1) 和取消 Fixed Edges。未遍历全部模态。",
+        "troubleshooting": [
+          {
+            "symptom": "出现多个混合形状",
+            "action": "原站说明区分单击调幅和双击只选一个模态。本卡需要双击。"
+          },
+          {
+            "symptom": "切换边界后同一格的含义变了",
+            "action": "这是不同本征函数集合。先恢复 Fixed Edges，再按固定边缘的编号寻找模态。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原站入口，再按本卡起点选择示例、显示方式和暂停状态；未声称有统一的全参数恢复按钮。"
+      },
+      "subjects": [
+        "classical-mechanics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "circular-membrane",
+      "title": "圆膜的节圆里，藏着怎样的贝塞尔函数？",
+      "originalName": "Circular Membrane Applet",
+      "source": "Falstad",
+      "author": "Paul Falstad",
+      "descriptionUrl": "https://www.falstad.com/circosc/directions.html",
+      "url": "https://www.falstad.com/circosc/",
+      "backupUrl": "https://www.falstad.com/mathphysics.html",
+      "topics": [
+        "bessel",
+        "eigen",
+        "wave",
+        "separation"
+      ],
+      "question": "为什么圆形鼓膜的径向振动不能简单照搬矩形膜的正弦函数？",
+      "prerequisites": "极坐标、二维波动方程、分离变量",
+      "depth": "进阶",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "Display 3d+2d、Stopped、底部模态格；可选不同角向和径向模态。",
+      "guide": "把圆膜位移分成径向部分与角向部分。极坐标下的拉普拉斯算符使径向方程成为贝塞尔方程（Bessel equation）。固定圆周要求径向函数在边缘为零，因而允许的频率由贝塞尔函数的零点选出。先识别不动的节圆和节直径，再回到教材求解径向方程。",
+      "reading": "三维图的底面是圆膜的二维位置，高度表示横向位移；俯视图颜色也表示位移。它不是温度。底部格子代表不同模态，横向关联角向序号，纵向关联径向序号，不是膜上坐标。",
+      "formula": "\\Phi_{mn}(r,\\theta)=J_m(j_{mn}r/a)\\cos(m\\theta),\\qquad \\omega_{mn}=c\\,j_{mn}/a",
+      "symbols": "r、θ 为极坐标，a 为膜半径，c 为波速；J_m 为第一类贝塞尔函数，j_mn 是 J_m 的第 n 个正零点；m=0,1,…，n=1,2,…。Φ 是空间形状，ω 是角频率。m>0 时还存在 sin(mθ) 的独立方向。",
+      "steps": [
+        {
+          "title": "同时看立体和俯视图",
+          "action": "将显示菜单设为 Display 3d+2d，勾选 Stopped。",
+          "observe": "立体图看位移形状，俯视图更容易找节线；两图描述同一个膜。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "找出内部节圆",
+          "action": "双击模态格第二行第一格，查看标记 (0,2) 的模态。",
+          "observe": "内部有一条节圆，把中心与外环隔开；外侧固定圆周也是零位移边界。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "换成角向变化",
+          "action": "双击模态格第一行第二格，查看 (1,1a)。",
+          "observe": "出现一条节直径，径向没有内部节圆。若恰好接近过零时刻，可短暂取消 Stopped 再暂停。",
+          "evidence": "模态切换已实操；临近过零时的再次播放为操作建议"
+        }
+      ],
+      "think": {
+        "question": "(0,2) 中的 2，为什么不表示两条内部节圆？",
+        "answer": "这里 n 标记第几个正零点。J_0 的第二个正零点落在固定外边缘，因此边缘以内只有第一个零点，对应一条内部节圆。通常径向序号 n 对应 n−1 条内部节圆；不要把固定圆周重复算成内部节点。"
+      },
+      "cautions": [
+        "模型是均匀、张力主导、小振幅的薄膜，不是靠弯曲刚度恢复的薄板。",
+        "m>0 的 a/b 两种方向对应简并模态，可由正弦与余弦角向部分组合。",
+        "本次未测量频率，也未验证所有高阶模式。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读完整说明，实际改为 3d+2d、暂停，双击 (0,2) 与 (1,1a)，看到内部节圆和节直径的区别。"
+      },
+      "visual": "bessel",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "第 11 章 柱函数，尤其 §11.2 贝塞尔方程。",
+          "source": "liang5"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 Circular Membrane Simulation，使用模态格中的编号配合俯视图。",
+        "startingState": [
+          "选择 Display 3d+2d，勾选 Stopped。",
+          "先双击第二行第一格 (0,2)，观察一条内部节圆。"
+        ],
+        "controls": [
+          {
+            "name": "Display 3d+2d",
+            "meaning": "立体图和俯视图",
+            "usage": "用俯视图数节圆与节直径。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Stopped",
+            "meaning": "暂停",
+            "usage": "勾选后冻结当前形状。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "(0,2) 模态格",
+            "meaning": "轴对称的第二径向模态",
+            "usage": "第二行第一格，双击只保留此模态。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "(1,1a) 模态格",
+            "meaning": "有一条节直径的模态",
+            "usage": "第一行第二格，双击进行对比。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "回到本卡起点：勾选 Stopped，双击 (0,2)；不要把这个动作称为恢复原站全部默认设置。",
+        "testedRange": "已操作 (0,2) 与 (1,1a)，核对内部节圆与节直径。未测试全部模态、几何参数或声音。",
+        "troubleshooting": [
+          {
+            "symptom": "外侧圆周也为零，节圆数似乎多一个",
+            "action": "外周是固定边界；内部节圆单独计数。本条 (0,2) 有一条内部节圆。"
+          },
+          {
+            "symptom": "形状近乎平面",
+            "action": "可能停在整体过零附近，可短暂播放再暂停；此恢复动作作为操作建议标注。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原站入口，再按本卡起点选择示例、显示方式和暂停状态；未声称有统一的全参数恢复按钮。"
+      },
+      "subjects": [
+        "classical-mechanics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "fourier-series",
+      "title": "用有限个谐波，能把方波拼到多像？",
+      "originalName": "Fourier Series Applet",
+      "source": "Falstad",
+      "author": "Paul Falstad",
+      "descriptionUrl": "https://www.falstad.com/fourier/directions.html",
+      "url": "https://www.falstad.com/fourier/",
+      "backupUrl": "https://www.falstad.com/mathphysics.html",
+      "topics": [
+        "fourier",
+        "eigen"
+      ],
+      "question": "不断增加展开项数，跳跃附近的过冲为什么还会留下？",
+      "prerequisites": "周期函数、正弦余弦、求和符号",
+      "depth": "入门",
+      "format": "交互函数展开",
+      "language": "英文",
+      "controls": "Square、Triangle；Number of Terms 项数控制条；Sines、Cosines 系数图。声音功能未试。",
+      "guide": "傅里叶级数（Fourier series）把周期函数表示为不同整数倍频率的正弦、余弦之和。先观察少量谐波能捕捉什么，再增加项数。方波的跳跃与三角波的尖角需要不同的高频贡献；不要只追求两条线看起来完全重合。",
+      "reading": "顶部白线是目标周期函数，红线是有限项近似。横轴是一个周期内的自变量 s，可在不同问题里代表位置或时间；本图本身没有指定物理单位。Sines/Cosines 图的横轴是谐波序号，竖向是带符号的系数，不是空间位置。",
+      "formula": "f(s)\\sim\\frac{a_0}{2}+\\sum_{n=1}^{N}\\bigl[a_n\\cos(n\\omega_0s)+b_n\\sin(n\\omega_0s)\\bigr]",
+      "symbols": "s 是周期自变量，ω₀=2π/P，P 为周期；n 为谐波序号，N 是截断项数；a_n、b_n 是展开系数，a₀/2 为平均分量。等价展开的正弦/余弦系数会随原点和相位约定改变。",
+      "steps": [
+        {
+          "title": "先看目标函数与近似",
+          "action": "点击 Square。认出白色方波和红色傅里叶近似。",
+          "observe": "红线由当前保留的谐波相加得到，不是另一条测量曲线。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "比较少项和多项",
+          "action": "点击 Number of Terms 控制条靠左处，再点较靠右处增加项数。",
+          "observe": "少项时只能形成平滑轮廓；多项时平台更平，但跳跃旁仍有过冲。当前界面未显示精确项数读数，本任务只做少/多比较。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "换一个连续但有尖角的函数",
+          "action": "点击 Triangle，与方波比较顶部近似和下方系数。",
+          "observe": "同样有限项，三角波通常更易逼近；它连续而方波有跳跃。留意高阶系数大小，不以不同原点下的正弦/余弦分类作物理判断。",
+          "evidence": "已实操"
+        }
+      ],
+      "think": {
+        "question": "吉布斯现象是否说明傅里叶展开“失效”？",
+        "answer": "不是。吉布斯现象（Gibbs phenomenon）说明不连续点附近的收敛不一致：增加项数会缩窄过冲区域，但过冲峰值相对于跳跃高度的比例不会趋于零。在满足通常分段光滑条件时，跳跃点处的级数收敛到左右极限的平均值，离开跳跃处则能更好地逼近函数。"
+      },
+      "cautions": [
+        "有限项近似、逐点收敛和均匀收敛是不同概念。",
+        "不要把谐波系数图与函数的空间分布混淆。",
+        "当前页面可运行 JavaScript；无需根据旧说明安装 Java。未核验声音及触屏操作。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读说明；实际点击 Square，减少并增加 Number of Terms，观察近似改变与跳跃旁过冲，再点击 Triangle。未做精确项数或误差数值测量。"
+      },
+      "visual": "fourier",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§5.1 傅里叶级数。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§2.1 周期函数的傅里叶级数。",
+          "source": "gu1"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 Fourier Series Applet，演示位于原站页面内；向下找到 Square 和 Number of Terms 控件。",
+        "startingState": [
+          "点击 Square 载入方波。",
+          "Number of Terms 先点击控制条较靠左处，再点击较靠右处；保留非零项以便看见红色近似线。"
+        ],
+        "controls": [
+          {
+            "name": "Square",
+            "meaning": "方波",
+            "usage": "载入白色目标函数。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Number of Terms",
+            "meaning": "保留项数",
+            "usage": "本次用点击控制条改变少项/多项；不要求精确读数。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Triangle",
+            "meaning": "三角波",
+            "usage": "改为连续但有尖角的目标。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "点击 Square 返回方波，再重新选择较少项数；点 Triangle 只切换函数。未核验一键恢复全部默认设置。",
+        "testedRange": "方波、三角波、少项/多项比较。界面未读到精确项数，所以不写“拖到第 N 项”；声音未实测。",
+        "troubleshooting": [
+          {
+            "symptom": "拖动滑块没有反应",
+            "action": "本次成功方式是直接点击 Number of Terms 控制条的位置；从较靠左到较靠右比较。"
+          },
+          {
+            "symptom": "红线消失",
+            "action": "可能选到零项附近，向控制条右侧点击一点，再观察。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原站入口，再按本卡起点选择示例、显示方式和暂停状态；未声称有统一的全参数恢复按钮。"
+      },
+      "subjects": [
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "complex-mapping",
+      "title": "复平面网格经过 z² 后，直角还在吗？",
+      "originalName": "Complex Mapping Viewer",
+      "source": "Falstad",
+      "author": "Keith Orpen、Djun Kim（原作）；Kent Pearce（修订扩展）；Paul Falstad（JavaScript 转换）",
+      "descriptionUrl": "https://www.falstad.com/complexviewer/",
+      "url": "https://www.falstad.com/complexviewer/",
+      "backupUrl": "https://www.falstad.com/mathphysics.html",
+      "topics": [
+        "complex"
+      ],
+      "question": "一个解析函数为什么可以局部旋转、缩放网格，却不一定处处保角？",
+      "prerequisites": "复数、复平面、复导数",
+      "depth": "课程核心",
+      "format": "交互映射工具",
+      "language": "英文",
+      "controls": "g(w)、f(z) 函数选择；Rect / Polar 网格；Grid Size；鼠标移动网格。",
+      "guide": "红网格是输入复数的小邻域，蓝网格是复合映射 g(f(z)) 的像。先把 g 设为恒等函数，单独考察 f(z)=z²。远离原点时，小网格近似被旋转和缩放；在原点附近，导数趋于零，通常的局部保角结论失去前提。",
+      "reading": "水平与竖直方向分别是复数的实部与虚部。红、蓝两套网格叠画在同一个平面中，分别表示输入与输出；它们不是两个时间帧，也不是温度、速度或真实材料。",
+      "formula": "w=z^2,\\qquad f(z_0+\\delta z)-f(z_0)=2z_0\\,\\delta z+(\\delta z)^2",
+      "symbols": "z 为输入复数，w 为输出；z₀ 为网格中心，δz 为小偏移。z₀≠0 时主导项为 2z₀δz，其模决定局部缩放，其辐角决定旋转；z₀=0 时二次项主导。",
+      "steps": [
+        {
+          "title": "只保留平方映射",
+          "action": "把 g(w) 设为 Identity，f(z) 设为 Square，保留 Rect 网格。",
+          "observe": "顶端公式是复合函数。先去掉外层额外变化，才能把图与 z² 对应起来。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "把小网格移离原点",
+          "action": "在绘图区移动鼠标，或拖动一小段，观察红网格及蓝色像。",
+          "observe": "蓝网格的位置、方向和大小随输入点变化；原点以外足够小邻域中的直角应近似保留。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "缩小网格，再移近原点",
+          "action": "点击 Grid Size 的减号，随后将红网格移到坐标轴交点附近。",
+          "observe": "蓝色像会压缩到很小。导数在零点为零，不能套用 f′≠0 时的局部保角判据。",
+          "evidence": "已实操"
+        }
+      ],
+      "think": {
+        "question": "z² 在整个复平面解析，为什么还要排除原点来谈保角？",
+        "answer": "解析性保证复导数存在；局部保角还要求该点导数不为零。对于 z²，f′(0)=0，原点附近角度按二倍角变化。解析函数的全局映射也可能重叠，例如 z 和 −z 有相同平方，不能从局部保角推出全局一一对应。"
+      },
+      "cautions": [
+        "图像只辅助判断；严格的保角条件需要解析且导数非零。",
+        "大网格会显示非线性变形，局部角度结论要在小邻域理解。",
+        "本条未核验 Invert 等其他映射的奇点表现。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读本页说明与作者署名，实际将 g=Identity、f=Square，拖动红网格看到蓝色像，缩小网格并移近原点。"
+      },
+      "visual": "complex",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "第 1 章 复变函数；第 14 章 保角变换法。",
+          "source": "liang5"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 Complex Mapping Viewer，先看页面顶部复合函数及两个函数菜单。",
+        "startingState": [
+          "把 g(w) 设为 Identity，把 f(z) 设为 Square。",
+          "网格选择 Rect；从远离坐标轴交点的小网格开始。"
+        ],
+        "controls": [
+          {
+            "name": "Identity",
+            "meaning": "恒等映射",
+            "usage": "设置 g(w)，去掉外层额外变化。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Square",
+            "meaning": "平方映射",
+            "usage": "设置 f(z)，对应 z²。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Rect",
+            "meaning": "矩形网格",
+            "usage": "观察小网格的角与像。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Grid Size −",
+            "meaning": "缩小网格",
+            "usage": "使用 Grid Size 区域的减号，不是 Zoom 的减号。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "绘图区移动 / 拖动",
+            "meaning": "移动红色输入网格",
+            "usage": "比较红色网格与蓝色像。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "重新选择 g = Identity、f = Square、Rect，并把红网格移离原点。Grid Size 未核验精确数值，按可辨认的小网格观察。",
+        "testedRange": "已测试平方映射、矩形网格、缩小网格及移近原点。未验证其他函数的分支与奇点。",
+        "troubleshooting": [
+          {
+            "symptom": "图形很小或难辨认",
+            "action": "先将网格移离原点；z² 在原点导数为 0，像会明显压缩。"
+          },
+          {
+            "symptom": "点减号后页面位置变了",
+            "action": "回到绘图区，确认使用的是 Grid Size 控件，再定位红网格。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原站入口，再按本卡起点选择示例、显示方式和暂停状态；未声称有统一的全参数恢复按钮。"
+      },
+      "subjects": [
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "electrostatic-potential",
+      "title": "从等势线，看拉普拉斯方程怎样受边界约束",
+      "originalName": "Electrostatics Simulation",
+      "source": "Falstad",
+      "author": "Paul Falstad",
+      "descriptionUrl": "https://www.falstad.com/emstatic/directions.html",
+      "url": "https://www.falstad.com/emstatic/EMStatic.html",
+      "backupUrl": "https://www.falstad.com/mathphysics.html",
+      "topics": [
+        "laplace",
+        "boundary",
+        "greens"
+      ],
+      "question": "没有电荷的区域为什么仍可能有非零电场？接地平面怎样改变解？",
+      "prerequisites": "电势、电场、梯度、静电学",
+      "depth": "课程核心",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "Example: Double Charge / Dipole Charge / Charge + Plane；Show E/Potential；Show Equipotentials。",
+      "guide": "电荷提供源项，导体提供边界条件。在均匀介质中，电势满足泊松方程（Poisson equation）；无电荷区域则满足拉普拉斯方程（Laplace equation），但这不意味着电势或电场一定为零。先用偶极子理解等势线，再与接地平面比较，联系教材中的镜像法（method of images）。",
+      "reading": "画面是二维截面，横纵方向为位置。Show E/Potential 模式中，绿色箭头表示电场方向，白线是勾选 Show Equipotentials 后的等势线，背景颜色编码电势。黄色正号、蓝色负号标出电荷；灰色物体为导体。颜色不能直接当作电场强度。",
+      "formula": "\\nabla^2\\varphi=-\\rho/\\varepsilon,\\qquad \\mathbf E=-\\nabla\\varphi;\\qquad \\rho=0\\ \\Rightarrow\\ \\nabla^2\\varphi=0",
+      "symbols": "φ 是电势，ρ 是电荷密度，ε 为均匀介质介电常数，E 为电场；∇ 为梯度，∇² 为拉普拉斯算符。本演示的点状标记按二维模型理解为无限长线电荷的截面，不是三维孤立点电荷。",
+      "steps": [
+        {
+          "title": "先弄清画面显示的量",
+          "action": "打开全屏版，保留 Example: Double Charge。将显示菜单改为 Show E/Potential，并保留 Show Equipotentials。",
+          "observe": "电场箭头与等势线是不同对象。加载或切换后短暂黑屏时等待绘制完成；若一直空白，转到原站说明。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "用偶极子找零电势线",
+          "action": "选择 Example: Dipole Charge。",
+          "observe": "连接正负电荷中点附近的横向等势线可以为零，但沿它仍可有非零电场；电场垂直于等势线。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "让接地导体成为边界",
+          "action": "选择 Example: Charge + Plane。与偶极子在平面一侧的图案比较。",
+          "observe": "导体表面为等势边界。镜像电荷是为求外部区域解而引入的数学替代，不是真实放在导体内的独立电荷。",
+          "evidence": "已实操"
+        }
+      ],
+      "think": {
+        "question": "∇²φ=0 能否推出 ∇φ=0？",
+        "answer": "不能。例如 φ=−E₀x 满足拉普拉斯方程，却给出非零均匀电场 E=E₀ e_x。拉普拉斯方程约束的是二阶导数之和，具体解还由边界条件决定。镜像法正是构造满足给定边界条件的解；唯一性定理再说明它为什么是所求的解。"
+      },
+      "cautions": [
+        "这是二维静电模型。线电荷电场随距离约按 1/r 变化，不能用它验证三维点电荷的 1/r² 定律。",
+        "本页公式只用于均匀介质；若切换到介电材料示例，需要处理 ε 的空间变化。",
+        "本条仅把镜像法与格林函数主题相连，并非格林函数构造的完整教程。",
+        "静电图像显示平衡解；菜单变换不代表真实电磁信号瞬时传播。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读完整说明。首次嵌入页切换后暂时黑屏；全屏版实际显示两正电荷，切换 Dipole Charge 与 E/Potential 后成功绘制，再检查 Charge + Plane。需给重新绘图留出时间。"
+      },
+      "visual": "potential",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§8.4 泊松方程；§12.1 泊松方程的格林函数法；§12.2 用电像法求格林函数。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§8.4 二维泊松方程的求解。",
+          "source": "gu1"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": null,
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "使用本条 EMStatic.html 全屏版入口。进入后先等电势与场线绘制完成。",
+        "startingState": [
+          "示例选 Example: Double Charge。",
+          "显示选 Show E/Potential，保留 Show Equipotentials 勾选。"
+        ],
+        "controls": [
+          {
+            "name": "Example: Double Charge",
+            "meaning": "两个同号电荷",
+            "usage": "起点，用于辨认电场与电势。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Show E/Potential",
+            "meaning": "电场和电势",
+            "usage": "箭头与背景分别表达不同量。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Show Equipotentials",
+            "meaning": "显示等势线",
+            "usage": "保留勾选，看电场与等势线的关系。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Example: Dipole Charge",
+            "meaning": "偶极子",
+            "usage": "切换到一正一负电荷。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Example: Charge + Plane",
+            "meaning": "电荷与接地平面",
+            "usage": "比较导体边界和镜像法。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "重新选择 Double Charge 与 Show E/Potential，并核对 Show Equipotentials。切换示例会重新绘制，不等于页面失效。",
+        "testedRange": "全屏版三种示例和 E/Potential 显示已运行。首次原站嵌入页面切换后曾短暂黑屏。",
+        "troubleshooting": [
+          {
+            "symptom": "切换后暂时黑屏",
+            "action": "等待重新绘制完成；若持续空白，可重新打开全屏入口。仍不成功就使用原站说明和备用入口，本页不声称它实时可用。"
+          },
+          {
+            "symptom": "箭头和背景颜色似乎不一致",
+            "action": "电势是标量，电场是它的负梯度；零电势处也可能有非零电场。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原站入口，再按本卡起点选择示例、显示方式和暂停状态；未声称有统一的全参数恢复按钮。"
+      },
+      "subjects": [
+        "electrodynamics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "forced-heat",
+      "title": "一直有热源，温度为何仍可能趋于稳定？",
+      "originalName": "Forced heat equation",
+      "source": "VisualPDE",
+      "author": "Benjamin Walker、Adam Townsend、Andrew Krause（VisualPDE 团队）",
+      "descriptionUrl": "https://visualpde.com/basic-pdes/inhomogeneous-heat-equation",
+      "url": "https://visualpde.com/sim/?preset=inhomogHeatEquation",
+      "backupUrl": "https://visualpde.com/explore.html",
+      "topics": [
+        "heat",
+        "eigen",
+        "laplace",
+        "boundary"
+      ],
+      "question": "一边加热、一边冷却，怎样形成非均匀的稳态温度？",
+      "prerequisites": "热方程、二阶导数、二维余弦模态",
+      "depth": "进阶",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "n、m 热源空间模态参数；Neumann 边界数值；初始温度；Restart、Pause。当前扩散系数为 1，无独立 D 滑块。",
+      "guide": "非齐次方程（inhomogeneous equation）加入持续的源项 f。这里源项在空间中既有正区也有负区，分别对应加热和冷却。扩散抹平温差，源项又维持温差；两者平衡时，温度分布可以不再随时间改变，却仍不均匀。",
+      "reading": "二维画面是空间区域 x、y，颜色表示温度变量 T，不是热源强度 f 的单独图层。初始温度为零，但源项随后持续作用。正负值应理解为相对参考温度的偏差。",
+      "formula": "T_t=D\\nabla^2T+D\\lambda\\Phi,\\quad\\Phi=\\cos\\frac{n\\pi x}{L_x}\\cos\\frac{m\\pi y}{L_y},\\quad T=(1-e^{-D\\lambda t})\\Phi",
+      "symbols": "T 为温度偏差，D 为扩散率（当前为 1），Φ 为源项空间形状，λ=(nπ/L_x)²+(mπ/L_y)²；n、m 为正整数，L_x、L_y 为区域长度。末式要求零初值和齐次 Neumann 边界。",
+      "steps": [
+        {
+          "title": "确认零初值不等于没有热源",
+          "action": "打开 f(x)，展开 Initial conditions 与 Boundary conditions，核对 T 初值 0、Neumann 值 0。读上方方程的额外余弦源项。",
+          "observe": "即便一开始温度处处为零，源项也能让它开始改变。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "改变持续加热的空间形状",
+          "action": "展开 Parameters，将 n=4、m=4 改为 n=2、m=3，点 Restart。",
+          "observe": "两方向的冷热区域数改变；这是改变源项，并非仅给初温画一个图案。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "把形状与稳态条件对应",
+          "action": "播放一段时间，点 Pause，比较颜色分区与余弦乘积的正负。",
+          "observe": "稳态要求 D∇²T+f=0；把 T=Φ 代入可核对。画面观察不构成已经达到稳态的数值证明。",
+          "evidence": "已实操"
+        }
+      ],
+      "think": {
+        "question": "有正热源，为什么平均温度不一定持续上升？",
+        "answer": "本例同时含正源与负源，且整数余弦模态的空间积分为零。绝热边界下，总温度积分的变化率等于源项积分，因此平均值保持初始值。若改成处处正的净热源又保持绝热边界，一般就不存在这种稳定平均温度。",
+        "formula": "\\frac{d}{dt}\\int_\\Omega T\\,dA=\\int_\\Omega f\\,dA\\quad\\text{(zero boundary flux)}"
+      },
+      "cautions": [
+        "这里的负源表示冷却，负温度变量表示偏差，不是负绝对温度。",
+        "稳态不等于均匀；有源稳态通常满足泊松方程。",
+        "没有测量稳态误差、能量积分或收敛时间。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读有源热方程说明，实际查看零初值、Neumann=0、n/m 参数，改 n=2、m=3 后重置，看到对应冷热分区并暂停。"
+      },
+      "visual": "heat",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "§8.2 非齐次振动方程和输运方程；§8.4 泊松方程。",
+          "source": "liang5"
+        },
+        {
+          "book": "顾樵《数学物理方法》2012 年第一版",
+          "location": "§8.3.1 绝热系统的有源热传导方程。",
+          "source": "gu1"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": "原站说明把稳态写为负的余弦乘积；对其列出的正源项，代入方程可得稳态应为正的余弦乘积（还可加由平均初温决定的常数）。原文的温度平方积分式也不能用作总热量式；本页使用对 T 积分得到的正确平衡关系。",
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 inhomogHeatEquation，在 f(x) 面板同时核对方程、初值和边界。",
+        "startingState": [
+          "初值 T = 0，Boundary conditions 为 Neumann、值 0。",
+          "Parameters 初始 n = 4、m = 4；扩散系数为 1。",
+          "改变 n、m 会改变持续源项；不要把它当成只编辑初温。"
+        ],
+        "controls": [
+          {
+            "name": "Initial conditions",
+            "meaning": "初始条件",
+            "usage": "核对温度从 0 开始。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Boundary conditions",
+            "meaning": "边界条件",
+            "usage": "核对 Neumann = 0。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Parameters → n, m",
+            "meaning": "热源空间序号",
+            "usage": "本次改为 n = 2、m = 3。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Restart / Pause",
+            "meaning": "重置 / 暂停",
+            "usage": "按新源项从零初温重新运行。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "点 Restart 回到零初温，保留 n、m；需恢复起点就改回 4、4，核对边界后再重置。",
+        "testedRange": "零初值、零法向导数边界和 (n,m) = (2,3) 已核对。未定量测量达到稳态的时间。",
+        "troubleshooting": [
+          {
+            "symptom": "零初值仍出现冷热区",
+            "action": "持续源项仍在起作用，初温为零并不意味着以后保持为零。"
+          },
+          {
+            "symptom": "原站稳态符号与导读不同",
+            "action": "本站按方程代入核对稳态符号；详见下方“原站公式核对”。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原始预设入口，再逐项核对本卡起点。入口会打开新标签页；Restart 本身不恢复所有参数。"
+      },
+      "subjects": [
+        "thermodynamics",
+        "mathematical-tools"
+      ]
+    },
+    {
+      "id": "advection-diffusion",
+      "title": "一团分布在移动，还是只在变宽？",
+      "originalName": "Advection–diffusion equation",
+      "source": "VisualPDE",
+      "author": "Benjamin Walker、Adam Townsend、Andrew Krause（VisualPDE 团队）",
+      "descriptionUrl": "https://visualpde.com/basic-pdes/advection-equation",
+      "url": "https://visualpde.com/sim/?preset=AdvectionEquationDirected",
+      "backupUrl": "https://visualpde.com/explore.html",
+      "topics": [
+        "advection",
+        "heat",
+        "boundary"
+      ],
+      "question": "怎样把整体输运与扩散展宽这两种变化分开观察？",
+      "prerequisites": "偏导数、向量、热扩散",
+      "depth": "课程核心",
+      "format": "交互模拟",
+      "language": "英文",
+      "controls": "V 与 theta 滑块；画笔、播放/暂停、重置；当前扩散系数为 1，边界为 Periodic。",
+      "guide": "对流/平流（advection）把一个标量分布随速度场输运，扩散（diffusion）则使局部起伏变平缓。先关掉输运看斑点变宽，再打开输运看斑点一边移动一边变宽。这里可以把 u 理解为被输运的标量浓度；不需要先学计算流体程序。",
+      "reading": "平面横纵方向是空间 x、y，颜色为标量 u；动画推进时间。亮斑是一个分布而非单个粒子。本预设物理 y 向上，屏幕向下是 y 减小；方向必须结合方程的正负号判断。",
+      "formula": "u_t+\\mathbf v\\cdot\\nabla u=D\\nabla^2u,\\qquad\\mathbf v=-V(\\cos\\theta,\\sin\\theta)",
+      "symbols": "u 是被输运的标量，t 为时间，v 是实际输运速度，D>0 为扩散率。当前界面写成 u_t=∇²u+V(cosθ u_x+sinθ u_y)，故 D=1，v 带负号；V 为非负参数，θ 用弧度。",
+      "steps": [
+        {
+          "title": "先看只有扩散的变化",
+          "action": "打开 f(x) → Parameters，把 V 调为 0。暂停，在区域中央拖出一个小斑点，再播放。",
+          "observe": "斑点逐渐展宽、峰值降低；中心附近没有统一向一侧平移的趋势。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "加入水平方向输运",
+          "action": "把 V 调为 2、theta 调为 0，再在中央画一个小斑点，停止拖动后观察。",
+          "observe": "本预设斑点向左移动并扩散；其对流项在等号右边为加号，所以实际速度向负 x。",
+          "evidence": "已实操"
+        },
+        {
+          "title": "把方向转过约四分之一圈",
+          "action": "保持 V=2，将 theta 改为 1.57，再画一个小斑点。",
+          "observe": "新斑点主要朝负 y 方向移动（屏幕向下），仍会展宽。比较前先辨认新斑点，旧斑点可能仍在区域内。",
+          "evidence": "已实操"
+        }
+      ],
+      "think": {
+        "question": "峰值降低能否判断“物质被消耗了”？",
+        "answer": "不能。峰值可因分布展宽而降低。对常速度、周期边界、无源汇的模型，标量总积分守恒；输运搬动分布，扩散把它摊开。要检验守恒需计算空间积分，不能只看最亮的颜色。"
+      },
+      "cautions": [
+        "当前预设的符号与说明页常用写法不同，不能直接把 theta 当作实际速度指向角。",
+        "周期边界把相对边缘连接起来；跨边界不是物质凭空出现。",
+        "本次只测试 V=0、2，theta=0、1.57；高速度或更改数值步长后的稳定性未核验。",
+        "相同颜色可能受色标设置影响，未经读数与固定尺度不能作定量守恒结论。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-09-12",
+        "environment": "本机 Codex 内置桌面浏览器；网络出口未判定",
+        "availability": "observed",
+        "mobile": "未实测",
+        "mainland": "未核验",
+        "note": "已读定向对流扩散说明，实际核对方程加号、V/theta 参数和 Periodic 边界；在 V=0 时画斑并播放，在 V=2、theta=0 与 1.57 时分别画斑，观察向左和向下的输运。"
+      },
+      "visual": "advection",
+      "mappings": [
+        {
+          "book": "梁昆淼《数学物理方法》第五版",
+          "location": "第 7 章 数学物理定解问题；作为输运与扩散概念的扩展例，不声称教材逐项讲解本预设。",
+          "source": "liang5"
+        }
+      ],
+      "featured": false,
+      "aliases": [],
+      "errata": "本次实际预设为 u_t=∇²u+V(cosθ u_x+sinθ u_y)。与 u_t+v·∇u=D∇²u 对照，v=−V(cosθ,sinθ)。本页操作按当前界面符号解释，未照搬说明页的方向约定。",
+      "operation": {
+        "reviewedAt": "2026-09-12",
+        "entry": "打开 AdvectionEquationDirected，展开 f(x) → Parameters。",
+        "startingState": [
+          "边界为 Periodic；先将 V 设为 0。",
+          "Pause 后在中央画一小斑点，松开再 Play；以后观察新画的斑点，避免把旧斑点混在一起。",
+          "水平比较用 V = 2、theta = 0；转向比较保持 V = 2，theta = 1.57。"
+        ],
+        "controls": [
+          {
+            "name": "Parameters → V",
+            "meaning": "输运参数大小",
+            "usage": "界面范围 0～10；本卡只实际比较 0 和 2。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Parameters → theta",
+            "meaning": "方向参数",
+            "usage": "界面范围 −6.4～6.4，采用弧度；已测试 0 与 1.57。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "Pause / Play",
+            "meaning": "暂停 / 播放",
+            "usage": "暂停时画斑，松开后播放。",
+            "evidence": "已实操"
+          },
+          {
+            "name": "画布拖动",
+            "meaning": "添加分布",
+            "usage": "每次辨认新斑点；连续拖动会持续加入分布。",
+            "evidence": "已实操"
+          }
+        ],
+        "restart": "回到扩散起点，把 V 设为 0，再暂停画一个新斑点。为避免旧斑点干扰，可重新打开原始入口并重新设置 V；此入口也会带回原站默认 V。",
+        "testedRange": "已操作 V = 0；V = 2 且 theta = 0、1.57。未测试整个滑块范围；未核验独立扩散率滑块。",
+        "troubleshooting": [
+          {
+            "symptom": "斑点朝左，和直觉相反",
+            "action": "当前预设一阶导数项在等号右边为加号，实际速度为 −V(cosθ,sinθ)。"
+          },
+          {
+            "symptom": "旧斑点从另一边出现",
+            "action": "周期边界连接相对两边；比较时先找出刚画的新斑点。"
+          }
+        ],
+        "evidenceNote": "本卡依据原站说明及本项目实操记录整理；下列控件和三个任务分别标明核验范围。尚未完成手机实机或中国大陆直连测试。",
+        "restoreDefault": "重新打开本条原始预设入口，再逐项核对本卡起点。入口会打开新标签页；Restart 本身不恢复所有参数。"
+      },
+      "subjects": [
+        "thermodynamics",
+        "mathematical-tools"
+      ]
+    }
+  ],
+  "books": [
+    {
+      "id": "liang5",
+      "title": "《数学物理方法》第五版",
+      "authors": "梁昆淼 编；刘法、缪国庆、邵陆兵 修订",
+      "publisher": "高等教育出版社",
+      "edition": "第五版；所核产品页出版日期为 2020-11-19",
+      "isbn": "978-7-04-051457-5",
+      "evidence": "已核实高等教育出版社产品页的书名、作者、版次、ISBN 与完整公开目录；这里记录产品页日期，不外推所有印次。 最后链接检查中桌面入口出现 TLS/超时错误，已改用本次成功读取的出版社移动版入口；它指向同一本书。",
+      "mapping": "本版目录可用于具体章节映射：第 5 章傅里叶变换、第 7 章数学物理定解问题、第 8 章分离变数法、第 9 章本征值问题、第 11 章柱函数、第 12 章格林函数法、第 14 章保角变换法。",
+      "links": [
+        {
+          "label": "出版社书目与目录（移动版入口）",
+          "url": "https://xuanshu.hep.com.cn/front/h5Mobile/bookDetails?bookId=61704c84938b7cc2960edca7"
+        }
+      ]
+    },
+    {
+      "id": "wu3",
+      "title": "《数学物理方法》第三版",
+      "authors": "吴崇试、高春媛",
+      "publisher": "北京大学出版社",
+      "edition": "第三版，2019 年",
+      "isbn": "9787301302804",
+      "evidence": "书名、作者、出版社、第三版、2019 年及 ISBN，依据北京大学《本科专业核心课程手册——理科卷（2021）》核实。检索到部分零售书目把同一 ISBN 写成“数学物理方法专题”，因此不采用其目录作章节映射。",
+      "mapping": "本次尚未取得可靠的第三版出版社目录或版权页/目录扫描，具体章节映射保留为空。北大课程教学内容与本书目录不混用。",
+      "links": [
+        {
+          "label": "北京大学课程手册（PDF）",
+          "url": "https://marxism.pku.edu.cn/docs/20210831111421546310.pdf"
+        },
+        {
+          "label": "北大教师课程参考书目",
+          "url": "https://www.icourse163.org/course/PKU-1469691217?tid=1471065538"
+        }
+      ]
+    },
+    {
+      "id": "gu1",
+      "title": "《数学物理方法》",
+      "authors": "顾樵（Qiao GU）编著",
+      "publisher": "科学出版社",
+      "edition": "2012 年 1 月第一版（出版社样章版权页）",
+      "isbn": "978-7-03-033064-2",
+      "evidence": "已取得出版社公开样章，版权页（PDF 第 3 页）明确写明第一版与首印日期。商城产品页另列 2016-01-26，两者不作为同一次出版事件混写。",
+      "mapping": "已视觉核对出版社样章 PDF 第 7–9 页目录：第 2 章傅里叶级数，第 5 章基本数学物理方程，第 6–7 章分离变量，第 8 章本征函数法，第 9 章施图姆–刘维尔理论，第 10 章行波法。仅在本次可见目录范围内建立章节关联。",
+      "links": [
+        {
+          "label": "出版社样章（PDF）",
+          "url": "https://www.ecsponline.com/yz/BDB650FD7054A4C8C8D4CAD48F30F98E1000.pdf"
+        },
+        {
+          "label": "出版社产品页",
+          "url": "https://www.ecsponline.com/goods.php?id=20405"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "VisualPDE · 本版优先来源",
+      "url": "https://visualpde.com/explore.html",
+      "license": "https://github.com/Pecnut/visual-pde/blob/main/LICENSE.md",
+      "note": "由 Benjamin Walker、Adam Townsend、Andrew Krause 编写维护。适合探索初始条件、边界条件与参数的作用。本版仅提供原站链接。原仓库分别列出软件、HTML/CSS 与第三方组件的许可，不能把全站概括成单一许可。"
+    },
+    {
+      "name": "Falstad · 模态与傅里叶可视化",
+      "url": "https://www.falstad.com/mathphysics.html",
+      "license": "https://www.falstad.com/licensing.html",
+      "note": "主要作者 Paul Falstad；复映射查看器另有原始作者，详见该条目署名。部分说明仍沿用 Java 时代措辞，实操记录以当前页面为准。许可页允许特定教学、截图和非商业再分发用途，同时提醒部分第三方代码另有限制。本版不转载演示和截图。"
+    },
+    {
+      "name": "Math Insight · 候选，暂未正式收录",
+      "url": "https://mathinsight.org/applet/list",
+      "license": null,
+      "note": "已阅读 applet 列表首页。覆盖较广，但本次未逐项核验与主线匹配的具体演示；不会把目录页包装成一项已验证资源。"
+    },
+    {
+      "name": "CalcPlot3D · 通用工具候选",
+      "url": "https://c3d.libretexts.org/CalcPlot3D/index.html",
+      "license": null,
+      "note": "已读取页面，包含函数曲面、参数曲面和向量场等绘图入口。它属于通用绘图工具；本次未核验针对数学物理方法的完整操作任务，未计入正式资源数量。"
+    },
+    {
+      "name": "QuVis · 后续课程拓展候选",
+      "url": "https://www.st-andrews.ac.uk/physics/quvis/",
+      "license": "https://www.st-andrews.ac.uk/physics/quvis/",
+      "note": "圣安德鲁斯大学的量子力学可视化项目。目录含本征值、本征态展开等相关主题，但本版先聚焦经典波动与扩散；未把量子态演示当作已完成本课程核验。原站标注 CC-BY-NC-SA；具体版本与单项使用条件仍需逐项确认。"
+    },
+    {
+      "name": "PhET · 中文入门候选",
+      "url": "https://phet.colorado.edu/zh_CN/",
+      "license": null,
+      "note": "已访问中文入口。具体中文模拟及其操作、手机与许可条件尚未逐项核验，因此暂不计入正式目录。"
+    }
+  ],
+  "pending": [
+    "吴崇试、高春媛第三版的可靠原版目录尚待核实，未添加具体章节映射。",
+    "复积分、留数、拉普拉斯变换、勒让德多项式、球谐函数暂无完整独立条目；格林函数仅作镜像法关联。",
+    "未对第三方演示进行手机实机、触屏、辅助技术或中国大陆直连网络测试。",
+    "外部模拟的数值精度、长时间稳定性与所有参数组合没有全面验证；阅读说明不等于运行成功。"
+  ],
+  "subjects": [
+    {
+      "id": "classical-mechanics",
+      "name": "理论力学",
+      "aliases": [
+        "经典力学",
+        "classical mechanics",
+        "theoretical mechanics"
+      ]
+    },
+    {
+      "id": "electrodynamics",
+      "name": "电动力学",
+      "aliases": [
+        "电磁学",
+        "电磁场",
+        "electromagnetism",
+        "electrodynamics"
+      ]
+    },
+    {
+      "id": "quantum-mechanics",
+      "name": "量子力学",
+      "aliases": [
+        "量子",
+        "quantum mechanics"
+      ]
+    },
+    {
+      "id": "thermodynamics",
+      "name": "热力学与统计物理",
+      "aliases": [
+        "热统",
+        "热力学",
+        "统计力学",
+        "统计物理",
+        "thermodynamics",
+        "statistical mechanics"
+      ]
+    },
+    {
+      "id": "mathematical-tools",
+      "name": "数学工具",
+      "aliases": [
+        "数学物理方法",
+        "数学物理方程",
+        "mathematical physics"
+      ]
+    }
+  ]
+}

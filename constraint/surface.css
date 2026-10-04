@@ -1,0 +1,41 @@
+
+    #constraint-uv-w { color:var(--foreground); }
+    #constraint-uv-w .parameters { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-bottom:8px; }
+    #constraint-uv-w .parameter-head { display:flex; justify-content:space-between; gap:12px; margin-bottom:4px; }
+    #constraint-uv-w .options { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:8px 0; }
+    #constraint-uv-w .fixed-field { display:grid; grid-template-columns:max-content max-content; align-items:center; gap:8px; }
+    #constraint-uv-w .legend { display:flex; flex-wrap:wrap; gap:8px 18px; margin:10px 0 4px; }
+    #constraint-uv-w .legend-item { display:inline-flex; align-items:center; gap:6px; }
+    #constraint-uv-w .swatch { width:18px; height:3px; display:inline-block; }
+    #constraint-uv-w .series-w { background:var(--viz-series-1); }
+    #constraint-uv-w .series-v { background:var(--viz-series-2); }
+    #constraint-uv-w .series-u { background:var(--viz-series-3); }
+    #constraint-uv-w .scene { position:relative; }
+    #constraint-uv-w canvas { display:block; width:100%; height:390px; touch-action:none; cursor:grab; }
+    #constraint-uv-w canvas.dragging { cursor:grabbing; }
+    #constraint-uv-w .point-readout { margin:8px 0 2px; }
+    #constraint-uv-w .local-readout { display:flex; flex-wrap:wrap; gap:6px 18px; margin:5px 0 12px; }
+    #constraint-uv-w .lower { display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); gap:24px; align-items:start; }
+    #constraint-uv-w .projection-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px; }
+    #constraint-uv-w .projection { display:block; width:100%; height:225px; }
+    #constraint-uv-w .projection text { fill:var(--foreground); font-family:inherit; font-size:var(--font-size-base); }
+    #constraint-uv-w .derivatives { display:grid; gap:12px; padding-top:6px; }
+    #constraint-uv-w .derivative-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; }
+    #constraint-uv-w .derivative-label { display:flex; align-items:center; flex-wrap:wrap; gap:4px 6px; }
+    #constraint-uv-w .product { display:flex; justify-content:space-between; gap:12px; padding-top:10px; }
+    #constraint-uv-w .projection-value { margin-top:2px; }
+    #constraint-uv-w .active-detail { margin-top:12px; }
+    #constraint-uv-w .weight-medium { font-weight:500; }
+    @media(max-width:580px) {
+      #constraint-uv-w .lower { grid-template-columns:minmax(0,1fr); gap:10px; }
+      #constraint-uv-w canvas { height:330px; }
+      #constraint-uv-w .projection { height:240px; }
+    }
+    @media(max-width:360px) {
+      #constraint-uv-w .parameters { grid-template-columns:minmax(0,1fr); gap:8px; }
+    }
+  
+
+.constraint-page{max-width:1100px;margin:auto}.constraint-heading{margin-bottom:30px}.constraint-heading>p{color:var(--muted)}.constraint-heading .button-row{margin-top:18px}.constraint-prose{max-width:870px;margin:32px auto 40px}.constraint-prose h2{margin-bottom:18px}.constraint-prose h3{margin-top:28px}.constraint-prose p{margin-bottom:16px}.constraint-prose .formula{background:var(--white);border:1px solid var(--line)}.constraint-visual{padding:26px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);scroll-margin-top:15px}.constraint-controls-note{max-width:900px;margin:0 auto 20px;color:var(--muted);font-size:.875rem}.constraint-observations li{margin-bottom:18px}.constraint-observations li p{margin:8px 0}.constraint-observations details{margin:20px 0}
+#constraint-uv-w{--foreground:var(--ink);--background:var(--white);--muted-foreground:var(--muted);--border:var(--line);--font-size-base:14px;--viz-series-1:var(--accent);--viz-series-2:var(--orange);--viz-series-3:var(--teal);max-width:900px;margin:auto}
+#constraint-uv-w .form-label{display:block;margin:0}#constraint-uv-w .form-range{display:block;width:100%;accent-color:var(--accent)}#constraint-uv-w .form-select{padding:7px 9px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:7px}#constraint-uv-w .form-check{display:inline-flex;align-items:center;gap:7px}#constraint-uv-w .form-check-input{width:17px;height:17px;accent-color:var(--accent);margin:0}#constraint-uv-w .tabular-nums{font-variant-numeric:tabular-nums}#constraint-uv-w .text-small{font-size:.875rem}#constraint-uv-w .button[aria-pressed=true]{background:var(--soft);color:var(--blue)}#constraint-uv-w canvas{height:470px}
