@@ -1,0 +1,206 @@
+{
+  "date": "2026-09-12",
+  "method": "HTTP GET, initial response read; not a simulation runtime test; network exit not classified",
+  "results": [
+    {
+      "url": "https://marxism.pku.edu.cn/docs/20210831111421546310.pdf",
+      "status": 200,
+      "finalUrl": "https://marxism.pku.edu.cn/docs/20210831111421546310.pdf",
+      "type": "application/pdf",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/advection-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/advection-equation",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/heat-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/heat-equation",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/inhomogeneous-heat-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/inhomogeneous-heat-equation",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/wave-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/wave-equation",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/explore.html",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/explore.html",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=AdvectionEquationDirected",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=AdvectionEquationDirected",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=heatEquation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=heatEquation",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=heatEquation1D",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=heatEquation1D",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=inhomogHeatEquation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=inhomogHeatEquation",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=waveEquation1D",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=waveEquation1D",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=waveEquationICs",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=waveEquationICs",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.ecsponline.com/goods.php?id=20405",
+      "status": 200,
+      "finalUrl": "https://www.ecsponline.com/goods.php?id=20405",
+      "type": "text/html; charset=utf-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.ecsponline.com/yz/BDB650FD7054A4C8C8D4CAD48F30F98E1000.pdf",
+      "status": 200,
+      "finalUrl": "https://www.ecsponline.com/yz/BDB650FD7054A4C8C8D4CAD48F30F98E1000.pdf",
+      "type": "application/pdf",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/circosc/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/circosc/",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/circosc/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/circosc/directions.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/complexviewer/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/complexviewer/",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/emstatic/EMStatic.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/emstatic/EMStatic.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/emstatic/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/emstatic/directions.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/fourier/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/fourier/",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/fourier/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/fourier/directions.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/loadedstring/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/loadedstring/",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/loadedstring/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/loadedstring/directions.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/mathphysics.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/mathphysics.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/membrane/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/membrane/",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.falstad.com/membrane/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/membrane/directions.html",
+      "type": "text/html",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://www.icourse163.org/course/PKU-1469691217?tid=1471065538",
+      "status": 200,
+      "finalUrl": "https://www.icourse163.org/course/PKU-1469691217?tid=1471065538",
+      "type": "text/html;charset=UTF-8",
+      "receivedBytesAtLeast": 512
+    },
+    {
+      "url": "https://xuanshu.hep.com.cn/front/book/findBookDetails?bookId=61704c84938b7cc2960edca7",
+      "status": "request-failed",
+      "reason": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)>"
+    }
+  ],
+  "followUp": {
+    "date": "2026-09-12",
+    "url": "https://xuanshu.hep.com.cn/front/h5Mobile/bookDetails?bookId=61704c84938b7cc2960edca7",
+    "method": "web reader open",
+    "result": "Publisher mobile book page successfully read, with metadata and complete table of contents. Replaced desktop link in catalog."
+  }
+}

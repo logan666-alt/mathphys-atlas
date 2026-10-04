@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-12",
+  "resourceCount": 12,
+  "actualInteraction": 11,
+  "partialInteraction": 1,
+  "routeSteps": 6,
+  "formulasRendered": 17,
+  "detailPagesChecked": 12,
+  "desktop": true,
+  "narrowViewportChecks": [
+    {
+      "width": 390,
+      "height": 844,
+      "pages": 5,
+      "pageOverflow": false
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "pages": 5,
+      "pageOverflow": false
+    }
+  ],
+  "mobileDeviceTest": false,
+  "externalMobileTest": false,
+  "mainlandNetworkTest": false,
+  "consoleErrors": 0
+}

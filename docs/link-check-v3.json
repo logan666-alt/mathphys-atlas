@@ -1,0 +1,156 @@
+{
+  "checkedAt": "2026-09-15T09:46:19.244841+00:00",
+  "method": "HTTP GET; read first 512 bytes. No simulator, mobile or mainland connectivity claim.",
+  "links": [
+    {
+      "url": "https://visualpde.com/basic-pdes/advection-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/advection-equation",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/heat-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/heat-equation",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/heat-equation#exact-solutions-in-1d",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/heat-equation#exact-solutions-in-1d",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/inhomogeneous-heat-equation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/inhomogeneous-heat-equation",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/wave-equation#1d-and-2d-waves",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/wave-equation#1d-and-2d-waves",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/basic-pdes/wave-equation#standing-wave-solutions",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/basic-pdes/wave-equation#standing-wave-solutions",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/explore.html",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/explore.html",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=AdvectionEquationDirected",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=AdvectionEquationDirected",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=heatEquation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=heatEquation",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=heatEquation1D",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=heatEquation1D",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=inhomogHeatEquation",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=inhomogHeatEquation",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=waveEquation1D",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=waveEquation1D",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://visualpde.com/sim/?preset=waveEquationICs",
+      "status": 200,
+      "finalUrl": "https://visualpde.com/sim/?preset=waveEquationICs",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.falstad.com/circosc/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/circosc/",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/circosc/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/circosc/directions.html",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/complexviewer/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/complexviewer/",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/emstatic/EMStatic.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/emstatic/EMStatic.html",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/emstatic/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/emstatic/directions.html",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/fourier/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/fourier/",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/fourier/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/fourier/directions.html",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/loadedstring/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/loadedstring/",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/loadedstring/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/loadedstring/directions.html",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/mathphysics.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/mathphysics.html",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/membrane/",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/membrane/",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.falstad.com/membrane/directions.html",
+      "status": 200,
+      "finalUrl": "https://www.falstad.com/membrane/directions.html",
+      "contentType": "text/html"
+    }
+  ]
+}
