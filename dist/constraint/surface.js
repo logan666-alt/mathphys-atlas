@@ -2,20 +2,20 @@
 (function(){
   'use strict';
   let dispose=function(){};
-  const markup="<div id=\"constraint-uv-w\">\n  \n  <h3>约束曲面 uv = w</h3>\n  <div class=\"parameters\">\n    <label class=\"form-label\">\n      <span class=\"parameter-head\"><span>u₀</span><output id=\"uv-u-value\" class=\"tabular-nums\">1.00</output></span>\n      <input id=\"uv-u\" class=\"form-range\" type=\"range\" min=\"0.4\" max=\"1.8\" step=\"0.01\" value=\"1\" aria-label=\"点 P 的 u 坐标\">\n    </label>\n    <label class=\"form-label\">\n      <span class=\"parameter-head\"><span>v₀</span><output id=\"uv-v-value\" class=\"tabular-nums\">1.00</output></span>\n      <input id=\"uv-v\" class=\"form-range\" type=\"range\" min=\"0.4\" max=\"1.8\" step=\"0.01\" value=\"1\" aria-label=\"点 P 的 v 坐标\">\n    </label>\n  </div>\n  <div class=\"options\">\n    <div class=\"fixed-field\">\n      <label class=\"form-label\" for=\"uv-fixed\">当前固定</label>\n      <select id=\"uv-fixed\" class=\"form-select\">\n        <option value=\"w\">w · 等温截线</option>\n        <option value=\"v\">v · 等容截线</option>\n        <option value=\"u\">u · 等压截线</option>\n      </select>\n    </div>\n    <label class=\"form-check\"><input id=\"uv-slice\" class=\"form-check-input\" type=\"checkbox\" checked><span class=\"form-check-label\">截平面</span></label>\n    <label class=\"form-check\"><input id=\"uv-tangent\" class=\"form-check-input\" type=\"checkbox\" checked><span class=\"form-check-label\">切平面</span></label>\n    <label class=\"form-check\"><input id=\"uv-normal\" class=\"form-check-input\" type=\"checkbox\" checked><span class=\"form-check-label\">法向量</span></label>\n  </div>\n  <div class=\"legend text-small\" aria-label=\"截线与切向量颜色\">\n    <span class=\"legend-item\"><i class=\"swatch series-w\" aria-hidden=\"true\"></i>固定 w：uv = w₀ · t<sub>w</sub></span>\n    <span class=\"legend-item\"><i class=\"swatch series-v\" aria-hidden=\"true\"></i>固定 v：w = v₀u · t<sub>v</sub></span>\n    <span class=\"legend-item\"><i class=\"swatch series-u\" aria-hidden=\"true\"></i>固定 u：w = u₀v · t<sub>u</sub></span>\n  </div>\n  <div class=\"point-readout tabular-nums\" id=\"uv-point\">P = (1.00, 1.00, 1.00) · 截平面 w = 1.00</div>\n  <div class=\"scene\">\n    <canvas id=\"uv-scene\" tabindex=\"0\" role=\"img\" aria-keyshortcuts=\"ArrowLeft ArrowRight ArrowUp ArrowDown + - Home\" aria-label=\"可旋转缩放的约束曲面，显示 P 点、三条截线、三条切向量、切平面及法向量\">三维曲面及局部几何；可以使用上方滑块和选择框改变状态。</canvas>\n  </div>\n  <div class=\"local-readout text-small tabular-nums\">\n    <span id=\"uv-plane-value\">切平面：1.00δu + 1.00δv − δw = 0</span>\n    <span id=\"uv-normal-value\">∇F = (1.00, 1.00, −1)</span>\n  </div>\n  <div class=\"lower\">\n    <div>\n      <div class=\"projection-head\">\n        <span class=\"weight-medium\">当前截线的二维投影</span>\n        <button id=\"uv-swap\" class=\"button outline small\" type=\"button\" aria-pressed=\"false\">交换横纵轴</button>\n      </div>\n      <svg id=\"uv-projection\" class=\"projection\" role=\"img\" aria-label=\"截线、局部切线及斜率增量三角形\"></svg>\n      <div id=\"uv-projection-value\" class=\"projection-value text-small tabular-nums\" aria-live=\"polite\"></div>\n    </div>\n    <div class=\"derivatives\" aria-live=\"polite\">\n      <div class=\"derivative-row\">\n        <span class=\"derivative-label\"><i class=\"swatch series-w\" aria-hidden=\"true\"></i><span>(∂v/∂u)<sub>w</sub> = −v₀/u₀</span></span>\n        <output id=\"uv-dw\" class=\"tabular-nums weight-medium\">−1.000</output>\n      </div>\n      <div class=\"derivative-row\">\n        <span class=\"derivative-label\"><i class=\"swatch series-v\" aria-hidden=\"true\"></i><span>(∂u/∂w)<sub>v</sub> = 1/v₀</span></span>\n        <output id=\"uv-dv\" class=\"tabular-nums weight-medium\">1.000</output>\n      </div>\n      <div class=\"derivative-row\">\n        <span class=\"derivative-label\"><i class=\"swatch series-u\" aria-hidden=\"true\"></i><span>(∂w/∂v)<sub>u</sub> = u₀</span></span>\n        <output id=\"uv-du\" class=\"tabular-nums weight-medium\">1.000</output>\n      </div>\n      <div class=\"product weight-medium\"><span>三项循环乘积</span><output id=\"uv-product\" class=\"tabular-nums\">−1.000</output></div>\n      <div id=\"uv-vector-value\" class=\"active-detail text-small tabular-nums\"></div>\n      <div id=\"uv-dot-value\" class=\"text-small tabular-nums\">∇F·t<sub>w</sub> = ∇F·t<sub>v</sub> = ∇F·t<sub>u</sub> = 0</div>\n    </div>\n  </div>\n  <span id=\"uv-accessible\" class=\"sr-only\" aria-live=\"polite\"></span>\n  \n</div>\n";
+  const markup="\n<div id=\"constraint-pvt\">\n  <h3>状态曲面 pv = nRt</h3>\n  <div class=\"parameters\">\n    <label class=\"form-label\">\n      <span class=\"parameter-head\"><span>压强 p（kPa）</span><output id=\"pvt-p-value\" class=\"tabular-nums\">100</output></span>\n      <input id=\"pvt-p\" class=\"form-range\" type=\"range\" min=\"40\" max=\"180\" step=\"1\" value=\"100\" aria-label=\"压强 p，单位 kPa\">\n    </label>\n    <label class=\"form-label\">\n      <span class=\"parameter-head\"><span>体积 v（L）</span><output id=\"pvt-v-value\" class=\"tabular-nums\">25.0</output></span>\n      <input id=\"pvt-v\" class=\"form-range\" type=\"range\" min=\"10\" max=\"45\" step=\"0.1\" value=\"25\" aria-label=\"体积 v，单位 L\">\n    </label>\n  </div>\n  <div class=\"options\">\n    <div class=\"fixed-field\">\n      <label class=\"form-label\" for=\"pvt-fixed\">固定量</label>\n      <select id=\"pvt-fixed\" class=\"form-select\">\n        <option value=\"t\">t · 等温</option>\n        <option value=\"v\">v · 等容</option>\n        <option value=\"p\">p · 等压</option>\n      </select>\n    </div>\n    <label class=\"form-check\"><input id=\"pvt-slice\" class=\"form-check-input\" type=\"checkbox\" checked><span class=\"form-check-label\">截平面</span></label>\n    <label class=\"form-check\"><input id=\"pvt-tangent\" class=\"form-check-input\" type=\"checkbox\" checked><span class=\"form-check-label\">切平面</span></label>\n  </div>\n  <div class=\"legend text-small\" aria-label=\"三条截线的颜色\">\n    <span class=\"legend-item\"><i class=\"swatch series-t\" aria-hidden=\"true\"></i>固定 t · 等温</span>\n    <span class=\"legend-item\"><i class=\"swatch series-v\" aria-hidden=\"true\"></i>固定 v · 等容</span>\n    <span class=\"legend-item\"><i class=\"swatch series-p\" aria-hidden=\"true\"></i>固定 p · 等压</span>\n  </div>\n  <div class=\"point-readout tabular-nums\" id=\"pvt-point\"></div>\n  <div class=\"scene\">\n    <canvas id=\"pvt-scene\" tabindex=\"0\" role=\"img\" aria-keyshortcuts=\"ArrowLeft ArrowRight ArrowUp ArrowDown + - Home\" aria-label=\"理想气体 p、v、t 状态曲面，显示当前点、三条截线及切平面\">可旋转的 p、v、t 状态曲面。</canvas>\n  </div>\n  <div class=\"lower\">\n    <div>\n      <div class=\"projection-head\">\n        <span class=\"weight-medium\">当前截线的二维投影</span>\n        <button id=\"pvt-swap\" class=\"button outline small\" type=\"button\" aria-pressed=\"false\">交换横纵轴</button>\n      </div>\n      <svg id=\"pvt-projection\" class=\"projection\" role=\"img\" aria-label=\"当前截线和切线斜率\"></svg>\n      <div id=\"pvt-projection-value\" class=\"projection-value text-small tabular-nums\" aria-live=\"polite\"></div>\n    </div>\n    <div class=\"derivatives\" aria-live=\"polite\">\n      <div class=\"derivative-row\">\n        <span class=\"derivative-label\"><i class=\"swatch series-t\" aria-hidden=\"true\"></i><span>(∂v/∂p)<sub>t</sub> = −v/p</span></span>\n        <output id=\"pvt-dt\" class=\"tabular-nums weight-medium\"></output>\n      </div>\n      <div class=\"derivative-row\">\n        <span class=\"derivative-label\"><i class=\"swatch series-v\" aria-hidden=\"true\"></i><span>(∂p/∂t)<sub>v</sub> = nR/v</span></span>\n        <output id=\"pvt-dv\" class=\"tabular-nums weight-medium\"></output>\n      </div>\n      <div class=\"derivative-row\">\n        <span class=\"derivative-label\"><i class=\"swatch series-p\" aria-hidden=\"true\"></i><span>(∂t/∂v)<sub>p</sub> = p/nR</span></span>\n        <output id=\"pvt-dp\" class=\"tabular-nums weight-medium\"></output>\n      </div>\n      <div class=\"product weight-medium\"><span>循环乘积</span><output id=\"pvt-product\" class=\"tabular-nums\">−1.000</output></div>\n    </div>\n  </div>\n  <span id=\"pvt-accessible\" class=\"sr-only\" aria-live=\"polite\"></span>\n</div>\n";
   function mount(){
     dispose();
 
-    const root = document.getElementById('constraint-uv-w');
+    const root = document.getElementById('constraint-pvt');
     if (!root) return;
     const controller = new AbortController();
     const on = function (node, type, handler, options) { node.addEventListener(type, handler, Object.assign({}, options, {signal:controller.signal})); };
     let frameId = 0;
     const find = function (id) { return root.querySelector('#' + id); };
-    const canvas = find('uv-scene');
+    const canvas = find('pvt-scene');
     const ctx = canvas.getContext('2d');
-    const projection = find('uv-projection');
-    const defaults = {version:1,u:1,v:1,fixed:'w',slice:true,tangent:true,normal:true,swap:false,az:0.60,el:0.55,zoom:1};
+    const projection = find('pvt-projection');
+    const defaults = {version:2,p:100,v:25,fixed:'t',slice:true,tangent:true,swap:false,az:0.60,el:0.55,zoom:1};
     let state = Object.assign({}, defaults);
     let colors = {};
     let themeKey = '';
@@ -24,6 +24,10 @@
     let width = 0;
     let height = 0;
     let unitScale = 0;
+    const GAS = 8.314; // nR for n = 1 mol, in kPa·L/K.
+    const axisScale = [100,25,2500/GAS]; // Drawing scale for the three physical axes.
+    const units = {p:'kPa',v:'L',t:'K'};
+    const plotPoint = function (a) { return a.map(function(value,i){return value/axisScale[i];}); };
     const center = [1,1,1.75];
     const minCoord = 0.22;
     const maxCoord = 2;
@@ -34,29 +38,35 @@
     const normalize = function (a) { return mul(a,1/norm(a)); };
     const clamp = function (x,a,b) { return Math.max(a,Math.min(b,x)); };
     const fmt = function (x,d) { return (Math.abs(x)<0.5*Math.pow(10,-d)?0:x).toFixed(d).replace('-','−'); };
-    const signed = function (x,d) { return (x>=0?'+':'') + fmt(x,d); };
-    const vectorText = function (a) { return '('+a.map(function(x){return fmt(x,2);}).join(', ')+')'; };
-    const tangents = function () { return {w:[state.u,-state.v,0],v:[1,0,state.v],u:[0,1,state.u]}; };
-    const point = function () { return [state.u,state.v,state.u*state.v]; };
+    const tangents = function () { return {t:[state.p,-state.v,0],v:[1,0,state.v/GAS],p:[0,1,state.p/GAS]}; };
+    const plotTangents = function () { return Object.fromEntries(Object.entries(tangents()).map(function(entry){return [entry[0],plotPoint(entry[1])];})); };
+    const point = function () { return [state.p,state.v,state.p*state.v/GAS]; };
     function readState() {
       const params=new URLSearchParams(location.hash.split('?')[1]||'');
-      ['u','v','az','el','zoom'].forEach(function(k){
-        if(!params.has(k)||params.get(k).trim()==='')return;
-        const value=Number(params.get(k));if(!Number.isFinite(value))return;
-        state[k]=(k==='u'||k==='v')?clamp(value,0.4,1.8):k==='el'?clamp(value,-1.25,1.35):k==='zoom'?clamp(value,0.62,2.5):value%(Math.PI*2);
+      const oldVolume=Number(params.get('v'));
+      const legacy=params.has('u')||['u','w'].includes(params.get('fixed'))||(!params.has('p')&&params.has('v')&&oldVolume>=0.4&&oldVolume<=1.8);
+      const numeric=function(key){const value=params.get(key);return value!==null&&value.trim()!==''&&Number.isFinite(Number(value))?Number(value):null;};
+      const pressure=numeric(legacy?'u':'p'),volume=numeric('v');
+      if(pressure!==null)state.p=clamp(pressure*(legacy?100:1),40,180);
+      if(volume!==null)state.v=clamp(volume*(legacy?25:1),10,45);
+      ['az','el','zoom'].forEach(function(k){
+        const value=numeric(k);if(value===null)return;
+        state[k]=k==='el'?clamp(value,-1.25,1.35):k==='zoom'?clamp(value,0.62,2.5):value%(Math.PI*2);
       });
-      if(['u','v','w'].includes(params.get('fixed')))state.fixed=params.get('fixed');
-      ['slice','tangent','normal','swap'].forEach(function(k){if(['0','1'].includes(params.get(k)))state[k]=params.get(k)==='1';});
+      const fixed=legacy?({u:'p',v:'v',w:'t'}[params.get('fixed')]):params.get('fixed');
+      if(['p','v','t'].includes(fixed))state.fixed=fixed;
+      ['slice','tangent','swap'].forEach(function(k){if(['0','1'].includes(params.get(k)))state[k]=params.get(k)==='1';});
     }
     function save() {
       if(!location.hash.startsWith('#/resource/constraint-surface'))return;
       const params=new URLSearchParams(location.hash.split('?')[1]||'');
-      ['u','v','az','el','zoom'].forEach(function(k){
+      ['u','normal'].forEach(function(k){params.delete(k);});
+      ['p','v','az','el','zoom'].forEach(function(k){
         if(Math.abs(state[k]-defaults[k])<0.0001)params.delete(k);
-        else params.set(k,state[k].toFixed(k==='u'||k==='v'?2:3));
+        else params.set(k,state[k].toFixed(k==='p'||k==='v'?2:3));
       });
       if(state.fixed===defaults.fixed)params.delete('fixed');else params.set('fixed',state.fixed);
-      ['slice','tangent','normal','swap'].forEach(function(k){if(state[k]===defaults[k])params.delete(k);else params.set(k,state[k]?'1':'0');});
+      ['slice','tangent','swap'].forEach(function(k){if(state[k]===defaults[k])params.delete(k);else params.set(k,state[k]?'1':'0');});
       const query=params.toString();history.replaceState(null,'','#/resource/constraint-surface'+(query?'?'+query:''));
     }
     function scheduleSave() { clearTimeout(saveTimer);saveTimer=setTimeout(save,220); }
@@ -75,9 +85,9 @@
         bg:resolveColor('--background'),
         muted:resolveColor('--muted-foreground'),
         border:resolveColor('--border'),
-        w:resolveColor('--viz-series-1'),
+        t:resolveColor('--viz-series-1'),
         v:resolveColor('--viz-series-2'),
-        u:resolveColor('--viz-series-3')
+        p:resolveColor('--viz-series-3')
       };
       themeKey=Object.values(colors).join('|');
     }
@@ -119,16 +129,13 @@
       return end;
     }
     function curveFor(key) {
-      const p=point();
-      const list=[];
-      let low=minCoord,high=maxCoord;
-      if(key==='w') {
-        low=Math.max(minCoord,p[2]/maxCoord);
-        high=Math.min(maxCoord,p[2]/minCoord);
-      }
-      for(let i=0;i<=100;i++) {
-        const s=low+(high-low)*i/100;
-        list.push(key==='w'?[s,p[2]/s,p[2]]:key==='v'?[s,state.v,state.v*s]:[state.u,s,state.u*s]);
+      const temperature=point()[2],list=[];
+      let low=key==='p'?5.5:22,high=key==='p'?50:200;
+      if(key==='t'){low=Math.max(low,GAS*temperature/50);high=Math.min(high,GAS*temperature/5.5);}
+      for(let i=0;i<=100;i++){
+        const value=low+(high-low)*i/100;
+        const coordinates=key==='t'?[value,GAS*temperature/value,temperature]:key==='v'?[value,state.v,state.v*value/GAS]:[state.p,value,state.p*value/GAS];
+        list.push(plotPoint(coordinates));
       }
       return list;
     }
@@ -144,9 +151,8 @@
       ctx.setTransform(ratio,0,0,ratio,0,0);
       ctx.clearRect(0,0,width,height);
       unitScale=Math.min(width/4.3,height/4.1)*state.zoom;
-      const p=point();
-      const ts=tangents();
-      const normal=[state.v,state.u,-1];
+      const p=plotPoint(point());
+      const ts=plotTangents();
       const primitives=[];
       let planeLabelPoint=null;
       const pushFace=function(vertices,color,opacity) {
@@ -163,8 +169,8 @@
         }
       };
       patch(function(a,b) {
-        const u=minCoord+(maxCoord-minCoord)*a,v=minCoord+(maxCoord-minCoord)*b;
-        return [u,v,u*v];
+        const pressure=100*(minCoord+(maxCoord-minCoord)*a),volume=25*(minCoord+(maxCoord-minCoord)*b);
+        return plotPoint([pressure,volume,pressure*volume/GAS]);
       },24,colors.fg,0.07);
       for(let i=0;i<=8;i++) {
         const fixed=minCoord+(maxCoord-minCoord)*i/8;
@@ -176,9 +182,9 @@
       }
       if(state.slice) {
         const map=function(a,b) {
-          const sliceHeight=state.fixed==='v'?state.v*2+0.25:state.u*2+0.25;
-          const c1=0.05+2.15*a,c2=0.05+(state.fixed==='w'?2.15:sliceHeight)*b;
-          return state.fixed==='w'?[c1,c2,p[2]]:state.fixed==='v'?[c1,state.v,c2]:[state.u,c1,c2];
+          const sliceHeight=state.fixed==='v'?p[1]*2+0.25:p[0]*2+0.25;
+          const c1=0.05+2.15*a,c2=0.05+(state.fixed==='t'?2.15:sliceHeight)*b;
+          return state.fixed==='t'?[c1,c2,p[2]]:state.fixed==='v'?[c1,p[1],c2]:[p[0],c1,c2];
         };
         patch(map,7,colors[state.fixed],0.065);
         pushLine([map(0,0),map(1,0),map(1,1),map(0,1),map(0,0)],colors[state.fixed],0.42,1.1);
@@ -186,9 +192,9 @@
       if(state.tangent) {
         const first=normalize(ts.v);
         const second=normalize([
-          ts.u[0]-dot(ts.u,first)*first[0],
-          ts.u[1]-dot(ts.u,first)*first[1],
-          ts.u[2]-dot(ts.u,first)*first[2]
+          ts.p[0]-dot(ts.p,first)*first[0],
+          ts.p[1]-dot(ts.p,first)*first[1],
+          ts.p[2]-dot(ts.p,first)*first[2]
         ]);
         const map=function(a,b) {return add(p,add(mul(first,(a-0.5)*1.75),mul(second,(b-0.5)*1.75)));};
         patch(map,6,colors.fg,0.11);
@@ -224,10 +230,10 @@
         options.forEach(function(offset) {
           const x=clamp(pos.x+offset[0],5,width-textWidth-6);
           const y=clamp(pos.y+offset[1],lineHeight,height-6);
-          const box={x:x-3,y:y-lineHeight+2,w:textWidth+6,h:lineHeight};
+          const box={x:x-3,y:y-lineHeight+2,t:textWidth+6,h:lineHeight};
           let penalty=0;
           labels.forEach(function(other) {
-            if(box.x<other.x+other.w+4 && box.x+box.w+4>other.x && box.y<other.y+other.h+4 && box.y+box.h+4>other.y) penalty+=100;
+            if(box.x<other.x+other.t+4 && box.x+box.t+4>other.x && box.y<other.y+other.h+4 && box.y+box.h+4>other.y) penalty+=100;
           });
           penalty+=Math.abs(x-pos.x-offset[0])+Math.abs(y-pos.y-offset[1]);
           if(penalty<bestPenalty){bestPenalty=penalty;best={x:x,y:y,box:box};}
@@ -237,34 +243,22 @@
         ctx.strokeText(text,best.x,best.y);
         ctx.fillStyle=colors.fg;ctx.fillText(text,best.x,best.y);
       }
-      axisEnds.forEach(function(e,i){labelAt(e,['u','v','w'][i]);});
+      axisEnds.forEach(function(e,i){labelAt(e,['p / kPa','v / L','t / K'][i]);});
       if(planeLabelPoint)labelAt(planeLabelPoint,'切平面');
-      ['w','v','u'].forEach(function(key){line3(curveFor(key),colors[key],key===state.fixed?3.8:1.9,key===state.fixed?1:0.72);});
+      ['t','v','p'].forEach(function(key){line3(curveFor(key),colors[key],key===state.fixed?3.8:1.9,key===state.fixed?1:0.72);});
       const tangentEnds={};
-      ['w','v','u'].forEach(function(key) {
+      ['t','v','p'].forEach(function(key) {
         const direction=normalize(ts[key]);
         line3([add(p,mul(direction,-0.43)),p],colors[key],key===state.fixed?2.5:1.5,0.9,[4,3]);
         tangentEnds[key]=arrow3(p,ts[key],key===state.fixed?0.86:0.69,colors[key],key===state.fixed?3.5:2.4);
       });
-      if(state.normal) {
-        const n=normalize(normal);
-        const end=arrow3(p,normal,0.98,colors.fg,2.5);
-        ['w','v','u'].forEach(function(key) {
-          const t=normalize(ts[key]);
-          const a=add(p,mul(t,0.15)),b=add(a,mul(n,0.15)),c=add(p,mul(n,0.15));
-          line3([a,b,c],colors[key],1.2,key===state.fixed?1:0.65);
-        });
-        labelAt(end,'∇F');
-      }
       const screenP=project(p);
       ctx.fillStyle=colors.bg;ctx.beginPath();ctx.arc(screenP.x,screenP.y,7,0,Math.PI*2);ctx.fill();
       ctx.fillStyle=colors.fg;ctx.beginPath();ctx.arc(screenP.x,screenP.y,4.5,0,Math.PI*2);ctx.fill();
       labelAt(p,'P',[[10,-13],[10,22],[-20,-13],[-20,22]]);
-      [state.fixed].concat(['w','v','u'].filter(function(k){return k!==state.fixed;})).forEach(function(key){
-        labelAt(tangentEnds[key],'t'+({w:'w',v:'v',u:'u'}[key]));
-      });
+      labelAt(tangentEnds[state.fixed],'固定 '+state.fixed);
       canvas.dataset.camera=JSON.stringify({az:state.az,el:state.el,zoom:state.zoom});
-      canvas.dataset.geometry=JSON.stringify({p:p,normal:normal,tangents:ts,dots:[dot(normal,ts.w),dot(normal,ts.v),dot(normal,ts.u)]});
+      canvas.dataset.geometry=JSON.stringify({point:point(),tangents:tangents(),gas:GAS,axisScale:axisScale});
     }
     function svgNode(tag,attrs,text) {
       const node=document.createElementNS('http://www.w3.org/2000/svg',tag);
@@ -279,18 +273,18 @@
       projection.replaceChildren();
       const p=point(),ts=tangents();
       let xIndex,yIndex,xName,yName;
-      if(state.fixed==='w'){xIndex=0;yIndex=1;xName='u';yName='v';}
-      else if(state.fixed==='v'){xIndex=2;yIndex=0;xName='w';yName='u';}
-      else{xIndex=1;yIndex=2;xName='v';yName='w';}
+      if(state.fixed==='t'){xIndex=0;yIndex=1;xName='p';yName='v';}
+      else if(state.fixed==='v'){xIndex=2;yIndex=0;xName='t';yName='p';}
+      else{xIndex=1;yIndex=2;xName='v';yName='t';}
       if(state.swap){const i=xIndex;xIndex=yIndex;yIndex=i;const n=xName;xName=yName;yName=n;}
       const x0=p[xIndex],y0=p[yIndex],t=ts[state.fixed],slope=t[yIndex]/t[xIndex];
-      const halfSpan=Math.min(0.32,x0*0.38);
-      const dx=Math.min(0.2,halfSpan*0.7);
+      const halfSpan=x0*0.28;
+      const dx=halfSpan*0.6;
       const dy=slope*dx;
       function curveY(x) {
-        if(state.fixed==='w')return p[2]/x;
-        if(state.fixed==='v')return xName==='w'?x/state.v:x*state.v;
-        return xName==='v'?state.u*x:x/state.u;
+        if(state.fixed==='t')return GAS*p[2]/x;
+        if(state.fixed==='v')return xName==='t'?GAS*x/state.v:state.v*x/GAS;
+        return xName==='v'?state.p*x/GAS:GAS*x/state.p;
       }
       const curve=[];
       for(let i=0;i<=64;i++) {
@@ -305,13 +299,12 @@
       const yMin=Math.min.apply(null,ys),yMax=Math.max.apply(null,ys);
       const margin={l:64,r:20,t:21,b:48};
       const plotWidth=svgWidth-margin.l-margin.r,plotHeight=svgHeight-margin.t-margin.b;
-      const scale=Math.min(plotWidth/(xMax-xMin),plotHeight/(yMax-yMin))/1.35;
+      const xSpan=(xMax-xMin)*1.35,ySpan=(yMax-yMin)*1.35;
       const xMid=(xMin+xMax)/2,yMid=(yMin+yMax)/2;
-      const domainX=[xMid-plotWidth/scale/2,xMid+plotWidth/scale/2];
-      const domainY=[yMid-plotHeight/scale/2,yMid+plotHeight/scale/2];
-      const X=function(x){return margin.l+(x-domainX[0])*scale;};
-      const Y=function(y){return margin.t+plotHeight-(y-domainY[0])*scale;};
-      const color='var(--viz-series-'+({w:1,v:2,u:3}[state.fixed])+')';
+      const domainX=[xMid-xSpan/2,xMid+xSpan/2],domainY=[yMid-ySpan/2,yMid+ySpan/2];
+      const X=function(x){return margin.l+(x-domainX[0])*plotWidth/xSpan;};
+      const Y=function(y){return margin.t+plotHeight-(y-domainY[0])*plotHeight/ySpan;};
+      const color='var(--viz-series-'+({t:1,v:2,p:3}[state.fixed])+')';
       projection.appendChild(svgNode('title',{},'固定 '+state.fixed+' 的截线投影，横轴 '+xName+'，纵轴 '+yName));
       projection.appendChild(svgNode('desc',{},'实线是截线，虚线是 P 处切线；直角三角形的增量取在切线上，斜率 '+fmt(slope,3)));
       projection.appendChild(svgNode('rect',{x:margin.l,y:margin.t,width:plotWidth,height:plotHeight,fill:'none',stroke:'var(--border)','data-chart-frame':''}));
@@ -325,46 +318,42 @@
         projection.appendChild(svgNode('line',{x1:margin.l,y1:posY,x2:margin.l+plotWidth,y2:posY,stroke:'var(--border)','stroke-width':0.8}));
         projection.appendChild(svgNode('text',{x:margin.l-7,y:posY+4,'text-anchor':'end',class:'text-small'},fmt(valueY,2)));
       }
-      projection.appendChild(svgNode('text',{x:margin.l+plotWidth/2,y:svgHeight-6,'text-anchor':'middle',class:'axis-title','data-axis':'x'},xName+'（横坐标）'));
-      projection.appendChild(svgNode('text',{x:16,y:margin.t+plotHeight/2,'text-anchor':'middle',transform:'rotate(-90 16 '+(margin.t+plotHeight/2)+')',class:'axis-title','data-axis':'y'},yName+'（纵坐标）'));
+      projection.appendChild(svgNode('text',{x:margin.l+plotWidth/2,y:svgHeight-6,'text-anchor':'middle',class:'axis-title','data-axis':'x'},xName+' / '+units[xName]));
+      projection.appendChild(svgNode('text',{x:16,y:margin.t+plotHeight/2,'text-anchor':'middle',transform:'rotate(-90 16 '+(margin.t+plotHeight/2)+')',class:'axis-title','data-axis':'y'},yName+' / '+units[yName]));
       projection.appendChild(svgNode('path',{d:curve.map(function(p,i){return(i?'L':'M')+X(p[0])+','+Y(p[1]);}).join(' '),fill:'none',stroke:color,'stroke-width':2.5,opacity:0.55}));
       projection.appendChild(svgNode('line',{x1:X(tangentStart[0]),y1:Y(tangentStart[1]),x2:X(tangentEnd[0]),y2:Y(tangentEnd[1]),stroke:color,'stroke-width':2,'stroke-dasharray':'6 4','data-tangent-slope':slope}));
       const a=[X(x0),Y(y0)],b=[X(x0+dx),Y(y0)],c=[X(x0+dx),Y(y0+dy)];
       projection.appendChild(svgNode('path',{d:'M'+a.join(',')+'L'+b.join(',')+'L'+c.join(','),fill:'none',stroke:'var(--foreground)','stroke-width':1.5,'data-slope-triangle':''}));
       const sy=dy>=0?-1:1;
       projection.appendChild(svgNode('path',{d:'M'+(b[0]-7)+','+b[1]+'L'+(b[0]-7)+','+(b[1]+sy*7)+'L'+b[0]+','+(b[1]+sy*7),fill:'none',stroke:'var(--foreground)','stroke-width':1}));
-      projection.appendChild(svgNode('text',{x:(a[0]+b[0])/2,y:a[1]+(dy>=0?20:-9),'text-anchor':'middle'},'δ'+xName));
-      projection.appendChild(svgNode('text',{x:b[0]+8,y:(b[1]+c[1])/2+4,'text-anchor':'start'},'δ'+yName));
+      projection.appendChild(svgNode('text',{x:(a[0]+b[0])/2,y:a[1]+(dy>=0?20:-9),'text-anchor':'middle'},'d'+xName));
+      projection.appendChild(svgNode('text',{x:b[0]+8,y:(b[1]+c[1])/2+4,'text-anchor':'start'},'d'+yName));
       projection.appendChild(svgNode('circle',{cx:a[0],cy:a[1],r:4,fill:'var(--foreground)'}));
       projection.appendChild(svgNode('text',{x:a[0]-8,y:a[1]+(dy>=0?18:-10),'text-anchor':'end'},'P'));
       projection.appendChild(svgNode('text',{x:margin.l+5,y:15,class:'text-small'},'实线：截线  ·  虚线：切线'));
       const subscript=state.fixed;
-      find('uv-projection-value').textContent='δ'+yName+'/δ'+xName+' = '+signed(dy,3)+' / '+signed(dx,3)+' = '+fmt(slope,3);
+      find('pvt-projection-value').innerHTML='(∂'+yName+'/∂'+xName+')<sub>'+state.fixed+'</sub> = '+fmt(slope,3)+' '+units[yName]+'/'+units[xName];
       projection.dataset.axes=xName+','+yName;
       projection.dataset.slope=String(slope);
       projection.dataset.fixed=subscript;
       projection.setAttribute('aria-label','固定 '+subscript+'；纵坐标 '+yName+'，横坐标 '+xName+'；P 处切线斜率 '+fmt(slope,3));
     }
     function updateLabels() {
-      const p=point(),ts=tangents(),normal=[state.v,state.u,-1];
-      find('uv-u').value=state.u;find('uv-v').value=state.v;
-      find('uv-u-value').textContent=fmt(state.u,2);find('uv-v-value').textContent=fmt(state.v,2);
-      find('uv-fixed').value=state.fixed;
-      ['slice','tangent','normal'].forEach(function(k){find('uv-'+k).checked=state[k];});
-      find('uv-swap').setAttribute('aria-pressed',state.swap?'true':'false');
-      find('uv-point').textContent='P = '+vectorText(p)+(state.slice?' · 截平面 '+state.fixed+' = '+fmt(p[{u:0,v:1,w:2}[state.fixed]],2):'');
-      find('uv-plane-value').textContent='切平面：'+fmt(state.v,2)+'δu + '+fmt(state.u,2)+'δv − δw = 0';
-      find('uv-plane-value').hidden=!state.tangent;
-      find('uv-normal-value').textContent='∇F = '+vectorText(normal);
-      find('uv-normal-value').hidden=!state.normal;
-      const d1=-state.v/state.u,d2=1/state.v,d3=state.u;
-      find('uv-dw').textContent=fmt(d1,3);find('uv-dv').textContent=fmt(d2,3);find('uv-du').textContent=fmt(d3,3);
-      find('uv-product').textContent=fmt(d1*d2*d3,3);
-      find('uv-vector-value').textContent='当前 t'+state.fixed+' = '+vectorText(ts[state.fixed]);
-      find('uv-dot-value').hidden=!state.normal;
-      const summary='P='+vectorText(p)+'。固定'+state.fixed+'。三个循环偏导分别为'+[d1,d2,d3].map(function(x){return fmt(x,3);}).join('，')+'，乘积为负一。三条切向量均与梯度正交。';
-      find('uv-accessible').textContent=summary;
-      canvas.setAttribute('aria-label',summary+' 可拖动旋转，用滚轮缩放，或聚焦后用方向键、加减号和 Home 控制视角。');
+      const coordinates=point();
+      find('pvt-p').value=state.p;find('pvt-v').value=state.v;
+      find('pvt-p-value').textContent=fmt(state.p,0);find('pvt-v-value').textContent=fmt(state.v,1);
+      find('pvt-fixed').value=state.fixed;
+      ['slice','tangent'].forEach(function(k){find('pvt-'+k).checked=state[k];});
+      find('pvt-swap').setAttribute('aria-pressed',state.swap?'true':'false');
+      find('pvt-point').textContent='P：p = '+fmt(state.p,0)+' kPa，v = '+fmt(state.v,1)+' L，t = '+fmt(coordinates[2],2)+' K';
+      const d1=-state.v/state.p,d2=GAS/state.v,d3=state.p/GAS;
+      find('pvt-dt').textContent=fmt(d1,3)+' L/kPa';
+      find('pvt-dv').textContent=fmt(d2,3)+' kPa/K';
+      find('pvt-dp').textContent=fmt(d3,3)+' K/L';
+      find('pvt-product').textContent=fmt(d1*d2*d3,3);
+      const summary='压强 '+fmt(state.p,0)+' kPa，体积 '+fmt(state.v,1)+' L，绝对温度 '+fmt(coordinates[2],2)+' K。固定 '+state.fixed+'。三个循环偏导分别为 '+fmt(d1,3)+' L/kPa，'+fmt(d2,3)+' kPa/K，'+fmt(d3,3)+' K/L，乘积为负一。';
+      find('pvt-accessible').textContent=summary;
+      canvas.setAttribute('aria-label',summary+' 可拖动旋转，滚轮缩放；聚焦后可用方向键、加减号和 Home 控制视角。');
     }
     function drawAll() {
       renderPending=false;
@@ -378,13 +367,13 @@
       renderPending=true;
       frameId=requestAnimationFrame(drawAll);
     }
-    ['u','v'].forEach(function(k) {
-      on(find('uv-'+k),'input',function(event){state[k]=Number(event.target.value);requestDraw();scheduleSave();});
-      on(find('uv-'+k),'change',save);
+    ['p','v'].forEach(function(k) {
+      on(find('pvt-'+k),'input',function(event){state[k]=Number(event.target.value);requestDraw();scheduleSave();});
+      on(find('pvt-'+k),'change',save);
     });
-    on(find('uv-fixed'),'change',function(event){state.fixed=event.target.value;requestDraw();save();});
-    ['slice','tangent','normal'].forEach(function(k){on(find('uv-'+k),'change',function(event){state[k]=event.target.checked;requestDraw();save();});});
-    on(find('uv-swap'),'click',function(){state.swap=!state.swap;requestDraw();save();});
+    on(find('pvt-fixed'),'change',function(event){state.fixed=event.target.value;requestDraw();save();});
+    ['slice','tangent'].forEach(function(k){on(find('pvt-'+k),'change',function(event){state[k]=event.target.checked;requestDraw();save();});});
+    on(find('pvt-swap'),'click',function(){state.swap=!state.swap;requestDraw();save();});
     const pointers=new Map();let pinchDistance=null;
     on(canvas,'pointerdown',function(event){canvas.setPointerCapture(event.pointerId);pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});canvas.classList.add('dragging');if(pointers.size===2){const pair=Array.from(pointers.values());pinchDistance=Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y);}});
     on(canvas,'pointermove',function(event){
@@ -409,7 +398,7 @@
       if(event.key==='Home'){state.az=defaults.az;state.el=defaults.el;state.zoom=defaults.zoom;}
       requestDraw();save();
     });
-    readState();refreshTheme();
+    readState();refreshTheme();save();
     const resize=new ResizeObserver(requestDraw);resize.observe(root);
     const mutation=new MutationObserver(function(){const previous=themeKey;refreshTheme();if(previous!==themeKey)requestDraw();});
     mutation.observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});

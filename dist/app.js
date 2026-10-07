@@ -20,11 +20,11 @@ function diagram(kind='wave',large=false){
   return '<svg viewBox="0 0 400 140" role="img" aria-label="本站原创等压位移与 T、V 两个坐标分量的概念图"><path d="M75 115H330M95 120V20" fill="none" stroke="var(--line)"/><path d="M130 95H275" stroke="var(--orange)" stroke-width="3"/><path d="M130 95V35" stroke="var(--teal)" stroke-width="3"/><path d="M130 95L275 35" stroke="var(--accent)" stroke-width="3"/><path d="M130 35H275V95" fill="none" stroke="var(--muted)" stroke-dasharray="4 4"/><circle cx="130" cy="95" r="4" fill="var(--ink)"/><circle cx="275" cy="35" r="4" fill="var(--accent)"/><text x="113" y="108" fill="var(--ink)" font-size="14">A</text><text x="280" y="28" fill="var(--ink)" font-size="14">D</text><text x="334" y="119" fill="var(--muted)" font-size="14">T</text><text x="85" y="18" fill="var(--muted)" font-size="14">V</text></svg>';
  }
  if(kind==='constraint'){
-  const project=(u,v,w)=>[200+58*(u-v),122-20*w-7*(u+v)];
+  const project=(p,v,t)=>[200+58*(p-v),122-20*t-7*(p+v)];
   const path=points=>points.map((p,i)=>(i?'L':'M')+project(...p).join(',')).join(' ');
   let mesh='';for(let i=0;i<=6;i++){const s=.25+1.75*i/6;for(const along of [0,1])mesh+=`<path d="${path(Array.from({length:25},(_,j)=>{const t=.25+1.75*j/24;return along?[s,t,s*t]:[t,s,t*s];}))}" fill="none" stroke="#88a6b8" stroke-width=".8"/>`;}
-  const curve=path(Array.from({length:41},(_,i)=>{const u=.5+1.5*i/40;return [u,1/u,1];}));
-  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创约束曲面 uv = w 的概念图，蓝线为固定 w 的截线"><path d="M84 108L200 122L316 108M200 122V30" fill="none" stroke="#bfd0dd"/>${mesh}<path d="${curve}" fill="none" stroke="#166eaa" stroke-width="3"/><circle cx="200" cy="88" r="4" fill="#172a40"/><text x="210" y="84" fill="#172a40" font-size="14">P</text><text x="322" y="110" fill="#52677b" font-size="14">u</text><text x="70" y="110" fill="#52677b" font-size="14">v</text><text x="208" y="28" fill="#52677b" font-size="14">w</text></svg>`;
+  const curve=path(Array.from({length:41},(_,i)=>{const p=.5+1.5*i/40;return [p,1/p,1];}));
+  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创理想气体 pv = nRt 状态曲面的概念图，蓝线为固定 t 的截线"><path d="M84 108L200 122L316 108M200 122V30" fill="none" stroke="#bfd0dd"/>${mesh}<path d="${curve}" fill="none" stroke="#166eaa" stroke-width="3"/><circle cx="200" cy="88" r="4" fill="#172a40"/><text x="210" y="84" fill="#172a40" font-size="14">P</text><text x="322" y="110" fill="#52677b" font-size="14">p</text><text x="70" y="110" fill="#52677b" font-size="14">v</text><text x="208" y="28" fill="#52677b" font-size="14">t</text></svg>`;
  }
 
  let marks='';const line=(fn,c,opacity=1,dash='')=>`<path d="${points(fn)}" stroke="${c}" opacity="${opacity}" stroke-width="2.5" fill="none" ${dash?'stroke-dasharray="'+dash+'"':''}/>`;
