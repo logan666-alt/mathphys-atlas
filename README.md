@@ -47,7 +47,7 @@ GitHub 完成网页发布后，原有网站地址即可加载新内容。
 | `dist/compare.js` | 对照页、资源选择与三组推荐组合，正文直接从目录读取 |
 | `dist/thermo/page.js`、`chain.js`、`chain.css` | 偏导链式关系专题、分步播放、位移分解与路径对照 |
 | `dist/constraint/page.js` | 约束曲面专题的数学推导、几何解释与站内演示入口 |
-| `dist/constraint/surface.js`、`surface.css` | p、v、t 状态曲面、截线、切平面、投影及链接状态恢复 |
+| `dist/constraint/surface.js`、`surface.css` | P、V、T 状态曲面、截线、切平面、投影及链接状态恢复 |
 | `dist/operation-cards.css` | 操作卡、中英文控件词典、可编辑问题记录的布局 |
 | `dist/lab/physics.js` | 原创六模态解析模型，可独立运行数学检查 |
 | `dist/lab/ui.js`、`lab.css` | 实验室控件、SVG 曲线、模态系数图和手机布局 |
@@ -88,7 +88,7 @@ node --test scripts/lab.test.cjs scripts/v3.test.cjs
 
 ## 分类与站内演示
 
-本站约束曲面演示的入口为 `/#/resource/constraint-surface`，直接用 p、v、t 表示压强、体积和绝对温度，模型为固定物质量的理想气体 pv=nRt。资源条目用 `kind: "local"`、`module: "constraint-surface"` 和 `localAssets` 声明站内模块；外部资源仍使用 HTTPS 链接。站内模块在 `window.SiteDemos` 注册 `page`、`mount`、`unmount`，切换页面时移除旧事件监听和绘图任务。压强、体积、固定量、显示开关和视角自动写入链接；无参数入口恢复默认，Home 仅恢复视角。旧参数链接自动转换到 p、v、t。已检查桌面交互及窄屏布局。
+本站约束曲面演示的入口为 `/#/resource/constraint-surface`，直接用 P、V、T 表示压强、体积和绝对温度，模型为固定物质量的理想气体 PV=nRT。资源条目用 `kind: "local"`、`module: "constraint-surface"` 和 `localAssets` 声明站内模块；外部资源仍使用 HTTPS 链接。站内模块在 `window.SiteDemos` 注册 `page`、`mount`、`unmount`，切换页面时移除旧事件监听和绘图任务。压强、体积、固定量、显示开关和视角自动写入链接；无参数入口恢复默认，Home 仅恢复视角。旧参数链接自动转换到 P、V、T。已检查桌面交互及窄屏布局。
 
 首页与资源目录共用搜索、学科分类和知识点筛选。学科数量由条目自动统计；没有条目的学科显示空状态。
 
