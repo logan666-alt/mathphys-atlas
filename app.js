@@ -21,10 +21,10 @@ function diagram(kind='wave',large=false){
  }
  if(kind==='constraint'){
   const project=(p,v,t)=>[200+58*(p-v),122-20*t-7*(p+v)];
-  const path=points=>points.map((p,i)=>(i?'L':'M')+project(...p).join(',')).join(' ');
+  const path=points=>points.map((p,i)=>(i?'L':'M')+project(...P).join(',')).join(' ');
   let mesh='';for(let i=0;i<=6;i++){const s=.25+1.75*i/6;for(const along of [0,1])mesh+=`<path d="${path(Array.from({length:25},(_,j)=>{const t=.25+1.75*j/24;return along?[s,t,s*t]:[t,s,t*s];}))}" fill="none" stroke="#88a6b8" stroke-width=".8"/>`;}
-  const curve=path(Array.from({length:41},(_,i)=>{const p=.5+1.5*i/40;return [p,1/p,1];}));
-  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创理想气体 pv = nRt 状态曲面的概念图，蓝线为固定 t 的截线"><path d="M84 108L200 122L316 108M200 122V30" fill="none" stroke="#bfd0dd"/>${mesh}<path d="${curve}" fill="none" stroke="#166eaa" stroke-width="3"/><circle cx="200" cy="88" r="4" fill="#172a40"/><text x="210" y="84" fill="#172a40" font-size="14">P</text><text x="322" y="110" fill="#52677b" font-size="14">p</text><text x="70" y="110" fill="#52677b" font-size="14">v</text><text x="208" y="28" fill="#52677b" font-size="14">t</text></svg>`;
+  const curve=path(Array.from({length:41},(_,i)=>{const P=.5+1.5*i/40;return [P,1/P,1];}));
+  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创理想气体 PV = nRT 状态曲面的概念图，蓝线为固定 T 的截线"><path d="M84 108L200 122L316 108M200 122V30" fill="none" stroke="#bfd0dd"/>${mesh}<path d="${curve}" fill="none" stroke="#166eaa" stroke-width="3"/><circle cx="200" cy="88" r="4" fill="#172a40"/><text x="210" y="84" fill="#172a40" font-size="14">A</text><text x="322" y="110" fill="#52677b" font-size="14">A</text><text x="70" y="110" fill="#52677b" font-size="14">V</text><text x="208" y="28" fill="#52677b" font-size="14">T</text></svg>`;
  }
 
  let marks='';const line=(fn,c,opacity=1,dash='')=>`<path d="${points(fn)}" stroke="${c}" opacity="${opacity}" stroke-width="2.5" fill="none" ${dash?'stroke-dasharray="'+dash+'"':''}/>`;
