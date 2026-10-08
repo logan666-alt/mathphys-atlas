@@ -42,6 +42,6 @@ assert.equal(topicIds.size,c.topics.length);assert.equal(bookIds.size,c.books.le
 for(const t of c.topics)assert(['method','application'].includes(t.kind)&&t.aliases.length);
 assert(c.books.find(b=>b.id==='wu3'));assert(c.resources.every(r=>r.mappings.every(m=>m.source!=='wu3')),'Do not invent unverified Wu chapter mappings');
 const html=fs.readFileSync(path.join(base,'dist/index.html'),'utf8');
-for(const m of html.matchAll(/(?:src|href)="([^"#]+)"/g)){if(!m[1].startsWith('http'))assert(fs.existsSync(path.join(base,'dist',m[1])),`Missing asset ${m[1]}`);}
+for(const m of html.matchAll(/(?:src|href)="([^"#]+)"/g)){if(!m[1].startsWith('http'))assert(fs.existsSync(path.join(base,'dist',m[1].split('?')[0])),`Missing asset ${m[1]}`);}
 assert(html.includes('lang="zh-CN"'));assert(html.includes('name="viewport"'));
 console.log(`PASS: ${ids.size} unique resources and operation cards, ${c.subjects.length} subjects, ${equations} formulas; fields, references, local assets and source URL syntax valid.`);

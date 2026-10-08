@@ -21,10 +21,10 @@ function diagram(kind='wave',large=false){
  }
  if(kind==='constraint'){
   const project=(p,v,t)=>[200+58*(p-v),122-20*t-7*(p+v)];
-  const path=points=>points.map((p,i)=>(i?'L':'M')+project(...P).join(',')).join(' ');
+  const path=points=>points.map((point,i)=>(i?'L':'M')+project(...point).join(',')).join(' ');
   let mesh='';for(let i=0;i<=6;i++){const s=.25+1.75*i/6;for(const along of [0,1])mesh+=`<path d="${path(Array.from({length:25},(_,j)=>{const t=.25+1.75*j/24;return along?[s,t,s*t]:[t,s,t*s];}))}" fill="none" stroke="#88a6b8" stroke-width=".8"/>`;}
   const curve=path(Array.from({length:41},(_,i)=>{const P=.5+1.5*i/40;return [P,1/P,1];}));
-  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创理想气体 PV = nRT 状态曲面的概念图，蓝线为固定 T 的截线"><path d="M84 108L200 122L316 108M200 122V30" fill="none" stroke="#bfd0dd"/>${mesh}<path d="${curve}" fill="none" stroke="#166eaa" stroke-width="3"/><circle cx="200" cy="88" r="4" fill="#172a40"/><text x="210" y="84" fill="#172a40" font-size="14">A</text><text x="322" y="110" fill="#52677b" font-size="14">A</text><text x="70" y="110" fill="#52677b" font-size="14">V</text><text x="208" y="28" fill="#52677b" font-size="14">T</text></svg>`;
+  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创理想气体 PV = nRT 状态曲面的概念图，蓝线为固定 T 的截线"><path d="M84 108L200 122L316 108M200 122V30" fill="none" stroke="#bfd0dd"/>${mesh}<path d="${curve}" fill="none" stroke="#166eaa" stroke-width="3"/><circle cx="200" cy="88" r="4" fill="#172a40"/><text x="210" y="84" fill="#172a40" font-size="14">A</text><text x="322" y="110" fill="#52677b" font-size="14">P</text><text x="70" y="110" fill="#52677b" font-size="14">V</text><text x="208" y="28" fill="#52677b" font-size="14">T</text></svg>`;
  }
 
  let marks='';const line=(fn,c,opacity=1,dash='')=>`<path d="${points(fn)}" stroke="${c}" opacity="${opacity}" stroke-width="2.5" fill="none" ${dash?'stroke-dasharray="'+dash+'"':''}/>`;
@@ -108,6 +108,39 @@ function bind(){
  document.querySelectorAll('.filters select').forEach(el=>el.addEventListener('change',()=>{const p=Object.fromEntries(readParams());if(el.value)p[el.name]=el.value;else delete p[el.name];location.hash=href('resources',p);}));
 }
 document.addEventListener('click',e=>{if(e.target.closest('.skip')){e.preventDefault();main.focus();main.scrollIntoView();return;}if(e.target.closest('[data-clear]')){if(location.hash==='#/resources'){render();}else location.hash='#/resources';}const s=e.target.closest('[data-scroll]');if(s){e.preventDefault();document.getElementById(s.dataset.scroll)?.scrollIntoView();}});
-function render(){if(!catalog)return;const path=(location.hash.replace(/^#\/?/,'').split('?')[0]||'');if(path==='route'){location.replace(href('resources'));return;}const section=path.split('/')[0];C.sync(readParams(),section);window.MathPhysLab?.unmount();activeDemo?.unmount();activeDemo=null;main.innerHTML=path===''?home():path==='resources'?resourceList():path==='compare'?C.page():path.startsWith('resource/')?resourceDetail(path.slice(9)):path==='lab'?window.MathPhysLab.page():path==='about'?about():notFound();document.querySelectorAll('[data-nav]').forEach(a=>{const active=a.dataset.nav===(['resource','compare',''].includes(section)?'resources':section);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});const title=main.querySelector('h1')?.textContent||'物理可视化';document.title=(path===''||path==='resources')?'物理可视化 · 交互演示资源库':(title==='物理可视化'?title:title+' · 物理可视化');bind();if(path==='lab')window.MathPhysLab.mount();activeDemo?.mount();window.scrollTo(0,0);main.focus({preventScroll:true});if(path==='about'&&readParams().get('section')==='books'){const books=document.getElementById('books');books.open=true;books.scrollIntoView();}}
-window.addEventListener('hashchange',render);
-fetch('catalog.json').then(r=>{if(!r.ok)throw Error('目录加载失败');return r.json();}).then(data=>{catalog=data;C.configure({catalog,esc,external,badge,tags});render();}).catch(()=>{main.innerHTML='<div class="empty"><h1>资源目录未能加载</h1><p>请通过项目的本地预览服务打开网站，并检查 catalog.json 是否存在。</p><button class="button" onclick="location.reload()">重新加载</button></div>';});
+function render(){
+ if(!catalog)return;
+ const path=(location.hash.replace(/^#\/?/,'').split('?')[0]||'');
+ if(path==='route'||path==='lab'){location.replace(href('resources'));return;}
+ const section=path.split('/')[0];
+ C.sync(readParams(),section);
+ activeDemo?.unmount();activeDemo=null;
+ main.innerHTML=path===''?home():path==='resources'?resourceList():path==='compare'?C.page():path.startsWith('resource/')?resourceDetail(path.slice(9)):path==='about'?about():notFound();
+ document.querySelectorAll('[data-nav]').forEach(a=>{const active=a.dataset.nav===(['resource','compare',''].includes(section)?'resources':section);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+ const title=main.querySelector('h1')?.textContent||'物理可视化';
+ document.title=(path===''||path==='resources')?'物理可视化 · 交互演示资源库':(title==='物理可视化'?title:title+' · 物理可视化');
+ bind();activeDemo?.mount();window.scrollTo(0,0);main.focus({preventScroll:true});
+ if(path==='about'&&readParams().get('section')==='books'){const books=document.getElementById('books');books.open=true;books.scrollIntoView();}
+}
+function renderPage(){
+ try{render();}catch(error){
+  console.error('Page render failed',error);
+  main.innerHTML='<div class="empty"><h1>页面暂时无法显示</h1><p>请重新加载，或返回资源目录。</p><button class="button" onclick="location.reload()">重新加载</button> <a class="button outline" href="#/resources">返回资源目录</a></div>';
+ }
+}
+async function loadCatalog(){
+ let data;
+ try{
+  const response=await fetch('catalog.json');
+  if(!response.ok)throw new Error('目录请求失败：'+response.status);
+  data=await response.json();
+ }catch(error){
+  console.error('Catalog load failed',error);
+  const message=location.protocol==='file:'?'请通过项目的本地预览地址打开网站。':'请检查网络连接后重新加载。';
+  main.innerHTML='<div class="empty"><h1>资源目录未能加载</h1><p>'+message+'</p><button class="button" onclick="location.reload()">重新加载</button></div>';
+  return;
+ }
+ catalog=data;C.configure({catalog,esc,external,badge,tags});renderPage();
+}
+window.addEventListener('hashchange',renderPage);
+loadCatalog();

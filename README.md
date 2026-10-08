@@ -28,7 +28,7 @@ node server.mjs
 
 ```powershell
 node scripts/check.mjs
-node --test scripts/lab.test.cjs scripts/v3.test.cjs
+node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 git add .
 git commit -m "Update physics visualizations"
 git push origin main
@@ -43,27 +43,22 @@ GitHub 完成网页发布后，原有网站地址即可加载新内容。
 | --- | --- |
 | `dist/catalog.json` | 所有资源、中文导读、学科、知识点分类、教材映射及待补事项 |
 | `dist/app.js` | 页面组件、搜索、筛选、页面切换、原创 SVG 概念图 |
-| `dist/styles.css`、`v3.css` | 基础布局，以及对照表、快照链接和预测题卡布局 |
+| `dist/styles.css`、`v3.css` | 基础布局及资源对照表布局 |
 | `dist/compare.js` | 对照页、资源选择与三组推荐组合，正文直接从目录读取 |
 | `dist/thermo/page.js`、`chain.js`、`chain.css` | 偏导链式关系专题、分步播放、位移分解与路径对照 |
 | `dist/constraint/page.js` | 约束曲面专题的数学推导、几何解释与站内演示入口 |
 | `dist/constraint/surface.js`、`surface.css` | P、V、T 状态曲面、截线、切平面、投影及链接状态恢复 |
 | `dist/operation-cards.css` | 操作卡、中英文控件词典、可编辑问题记录的布局 |
-| `dist/lab/physics.js` | 原创六模态解析模型，可独立运行数学检查 |
-| `dist/lab/ui.js`、`lab.css` | 实验室控件、SVG 曲线、模态系数图和手机布局 |
-| `dist/lab/state.js` | 实验链接格式、数值范围验证与恢复 |
-| `dist/lab/inquiries.js` | 三个原创预测实验的条件、选项、解释和关联资源 |
-| `dist/lab/activities.js` | 题卡、实验链接与能量读数界面 |
 | `dist/index.html` | 网站入口、导航与基础信息 |
 | `dist/vendor/katex/` | 本地公式排版程序、字体、许可证 |
 | `server.mjs` | 仅本机可访问的预览服务 |
 | `scripts/check.mjs` | 目录完整性、引用、重复项、公式与静态文件检查 |
 | `docs/verification.md` | 人工操作记录、界面检查与尚未完成事项 |
 | `docs/link-check.json` | 链接请求结果，包括失败记录和替代入口 |
-| `scripts/lab.test.cjs` | 初值、边界、PDE、周期、衰减、叠加、能量及排版的 9 项检查 |
+| `scripts/catalog.test.cjs` | 首页缩略图渲染与加载错误提示检查 |
 | `docs/verification-v2.md` | 第二版核验范围、实操读数、限制与待办 |
 | `docs/link-check-v2.json` | 第二版资源、说明和备用链接的请求记录 |
-| `scripts/v3.test.cjs` | 实验链接、能量读数、预测结论与资源对照的新增检查 |
+| `scripts/v3.test.cjs` | 资源对照链接与推荐组合检查 |
 | `docs/verification-v3.md`、`link-check-v3.json` | 第三版核验、限制与 25 个链接请求结果 |
 
 ## 新增一条资源
@@ -81,7 +76,7 @@ JSON 是“字段名 + 内容”的结构化文本。它让内容独立于页面
 
 ```powershell
 node scripts/check.mjs
-node --test scripts/lab.test.cjs scripts/v3.test.cjs
+node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 ```
 
 正文目前按纯文本渲染，不接受自行插入 HTML。数学公式使用 KaTeX 支持的 LaTeX 写法；在 JSON 字符串中反斜杠要写两次，例如 `\\frac{a}{b}`。`think.formula` 可选。不要把 LaTeX 放进普通正文后期待自动转换。
@@ -99,23 +94,19 @@ node --test scripts/lab.test.cjs scripts/v3.test.cjs
 ## 使用与维护边界
 
 - 首版数据核验日期为 2026-09-12。它不是实时链接监测；原站界面更改后，应复查任务文字。
-- 网站代码无数据库或第三方统计脚本。搜索、资源对照选择以及已生成的实验快照保存在地址中的 `#` 之后。没有快照的实验室会在刷新时恢复默认。练习选择与临时问题记录不跨页面保存。此 GitHub Pages 版本公开访问。
-- 实验室入口为 `/#/lab`，两端为零边界、波动初始速度为零，采用相同初始系数和模拟时间。所有量无量纲化，曲线由最多六个解析模态叠加而成，不是任意 PDE 数值求解器。参数变化会暂停并回到 t=0；“回到 t=0”保留设置，“恢复默认”重置全部设置。
+- 网站代码无数据库或第三方统计脚本。搜索与资源对照选择保存在地址中的 `#` 之后；临时问题记录不跨页面保存。此 GitHub Pages 版本公开访问。
+- 对照实验室已移除，旧实验链接自动返回资源目录。
 - 操作卡按钮会显示完整纯文本并尝试复制；浏览器限制自动复制时可手动选择。问题记录在当前页面生成和编辑，不自动发送，也不跨页面保存。
 - 吴崇试第三版目录尚未取得可靠原版依据，因此没有具体章节映射。梁昆淼第五版和顾樵第一版只在可核实范围内关联。
 - 已做本站 320 / 390 像素窄屏检查，未做手机实机与第三方模拟的触屏检查，也未验证中国大陆直连可用性。
 - 长公式和对照表在窄屏可横向滚动；可用 Tab 聚焦、方向键滚动、Enter 展开思考题。
 
-第一版历史记录见 `docs/verification.md`；当前版本更新与待办见 `docs/verification-v3.md`。一维热模态已补上相同模拟时间的定性对照，不再沿用第一版“操作部分核验”状态。
+历次核验记录见 `docs/verification.md`、`docs/verification-v2.md` 与 `docs/verification-v3.md`。记录中的实验室功能已移除。
 
 
 ## 第三版怎样使用和维护
 
 - **对照资源**：在目录或详情点“加入对照”；选 2–3 项后点“开始对照”。资源正文仍只修改 `catalog.json`，对照页自动同步。`compare.js` 中的 `groups` 仅保存推荐组合的标题、目的和资源 ID，不复制导读。
-- **保存实验**：调整系数、参数和时间，点击“生成当前实验链接”。实验会暂停，页面地址变为当前快照；可收藏地址或复制展开的文本。修改后需重新生成。打开此链接会恢复同一画面，且不会自动播放。
-- **理解链接范围**：本地地址 `127.0.0.1` 只在运行预览服务的电脑可用。要分享给其他人，先在上方在线网站生成链接。未提供云端笔记、收藏库或练习成绩记录。
-- **新增预测实验**：在 `lab/inquiries.js` 添加唯一 `id`，填写 6 个初始系数 `a`、模态 `n`、`c`、`D`、观察时刻 `t`、位置 `x`、问题、选项、从 0 开始的正确答案索引、观察任务、解释、公式和资源 ID。随后实际载入并操作，检查题意条件、读数和解释。当前仅适用于固定端、零初始速度的原模型。
-- **修改数学模型**：解析表达式和能量量放在 `physics.js`。若改变模型条件，必须同时重审 `inquiries.js`、页面说明及数学测试；不要只修改曲线。
-- **链接兼容性**：`state.js` 的快照格式版本为 1，和网站第三版不是同一个版本号。已发布的格式应保留解码支持；不支持的格式和越界值会显示明确提示并载入默认值。
+- **理解链接范围**：本地地址 `127.0.0.1` 只在运行预览服务的电脑可用。要分享给其他人，请使用上方在线网址。
 
-发布前运行上述目录检查与 15 项测试，实际检查桌面和窄屏、题卡、链接刷新、零初值、无结果筛选及对照表。不要把链接请求成功写成已操作外部模拟器。
+发布前运行上述目录与渲染检查，实际检查桌面和窄屏、原创演示、链接刷新、无结果筛选及对照表。不要把链接请求成功写成已操作外部模拟器。

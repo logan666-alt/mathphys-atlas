@@ -5,7 +5,7 @@
   "description": "按学科与知识点查找精选物理交互演示的资源库",
   "scripts": {
     "start": "node server.mjs",
-    "check": "node scripts/check.mjs && node --test scripts/lab.test.cjs scripts/v3.test.cjs"
+    "check": "node scripts/check.mjs && node --test scripts/catalog.test.cjs scripts/v3.test.cjs"
   },
   "engines": {
     "node": ">=22"
