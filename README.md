@@ -1,6 +1,6 @@
 # 物理可视化：交互演示资源库
 
-按学科、知识点和问题查找精选交互演示，逐步扩充理论力学、电动力学、量子力学、热力学与统计物理，并保留通用数学工具。当前 3.2 版收录 14 个演示，包括 12 个外部演示、约束曲面与偏导链式关系两个本站原创专题。首页直接进入搜索与分类；外部演示可从卡片直接打开。
+按学科、知识点和问题查找精选交互演示，逐步扩充理论力学、电动力学、量子力学、热力学与统计物理，并保留通用数学工具。当前收录 15 个演示，包括 12 个外部演示，以及约束曲面、偏导链式关系、焦耳—汤姆孙节流三个本站原创专题。首页直接进入搜索与分类；外部演示可从卡片直接打开。
 
 ## 打开网站
 
@@ -28,7 +28,7 @@ node server.mjs
 
 ```powershell
 node scripts/check.mjs
-node --test scripts/catalog.test.cjs scripts/v3.test.cjs
+node --test scripts/catalog.test.cjs scripts/v3.test.cjs scripts/joule-thomson.test.cjs
 git add .
 git commit -m "Update physics visualizations"
 git push origin main
@@ -46,6 +46,7 @@ GitHub 完成网页发布后，原有网站地址即可加载新内容。
 | `dist/styles.css`、`v3.css` | 基础布局及资源对照表布局 |
 | `dist/compare.js` | 对照页、资源选择与三组推荐组合，正文直接从目录读取 |
 | `dist/thermo/page.js`、`chain.js`、`chain.css` | 偏导链式关系专题、分步播放、位移分解与路径对照 |
+| `dist/joule-thomson/` | 节流专题、一致的 van der Waals 热力学模型、反转曲线和理想气体对照 |
 | `dist/constraint/page.js` | 约束曲面专题的数学推导、几何解释与站内演示入口 |
 | `dist/constraint/surface.js`、`surface.css` | P、V、T 状态曲面、截线、切平面、投影及链接状态恢复 |
 | `dist/operation-cards.css` | 操作卡、中英文控件词典、可编辑问题记录的布局 |
@@ -90,6 +91,8 @@ node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 `visual` 选择本站原创概念图：`heat`、`wave`、`membrane`、`bessel`、`fourier`、`complex`、`potential`、`advection`。这些仅是概念示意，不是截图或计算结果。替换成原站图片、嵌入模拟、转载代码之前，需单独核对许可与运行情况。
 
 偏导链式关系的入口为 `/#/resource/thermo-chain-rule`，归入“约束与偏导”。动作、步长和暂停进度保存在链接参数中；不带参数时恢复默认起点。页面切换会停止动画并移除监听。
+
+焦耳—汤姆孙节流入口为 `/#/resource/joule-thomson`，归入“热力学与统计物理”和“节流与反转曲线”。从同一入口比较小压降与有限压降，支持单步、暂停、重播及理想气体切换。真实气体采用 van der Waals 物态方程、CV=3R/2 及一致的焓模型；α 与 CP 从模型计算，有限压降解完整等焓方程。参考临界量统一用于两种气体，过程限于 T/Tc≥1.05 的单相范围；参数、步长与暂停位置保存在链接中。`scripts/joule-thomson.test.cjs` 核对焓守恒、物态方程、CP/α/μJT 数值差分、反转点的二阶温差与理想气体水平等焓线。
 
 ## 使用与维护边界
 

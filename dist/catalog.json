@@ -206,6 +206,24 @@
         "平流",
         "输运方程"
       ]
+    },
+    {
+      "id": "throttling",
+      "name": "节流与反转曲线",
+      "kind": "application",
+      "symbol": "H",
+      "home": true,
+      "aliases": [
+        "焦耳汤姆孙",
+        "焦耳汤姆逊",
+        "Joule Thomson",
+        "JT",
+        "节流",
+        "反转曲线",
+        "等焓",
+        "焓",
+        "膨胀系数"
+      ]
     }
   ],
   "resources": [
@@ -483,6 +501,146 @@
         "thermodynamics",
         "mathematical-tools"
       ]
+    },
+    {
+      "id": "joule-thomson",
+      "kind": "local",
+      "module": "joule-thomson",
+      "localAssets": [
+        "joule-thomson/model.js",
+        "joule-thomson/demo.js",
+        "joule-thomson/page.js",
+        "joule-thomson/style.css"
+      ],
+      "title": "焦耳—汤姆孙节流：反转曲线与升降温",
+      "originalName": "Joule–Thomson Throttling and Inversion Curve",
+      "source": "本站原创",
+      "author": "物理可视化",
+      "url": "#/resource/joule-thomson",
+      "descriptionUrl": "#/resource/joule-thomson",
+      "backupUrl": "#/resources?subject=thermodynamics",
+      "subjects": [
+        "thermodynamics"
+      ],
+      "topics": [
+        "throttling",
+        "constrained-derivatives"
+      ],
+      "question": "沿等焓线降压，温度为何会下降或上升？反转点的一阶温差为零，有限压降后的温差也一定为零吗？",
+      "prerequisites": "焓、热容量、膨胀系数与带固定条件的偏导。",
+      "depth": "课程核心",
+      "format": "分步交互演示",
+      "language": "中文",
+      "controls": "气体模型、四种初始状态、入口 P 与 T、单步压降、有限压降、单步、播放与暂停、回到 A 和重播。",
+      "guide": "在 P–T 状态图中把局部 JT 斜率、压降方向和总温差联系起来，对照同一入口的 van der Waals 示例气体与理想气体。",
+      "reading": "横轴 P/Pc，纵轴 T/Tc；青色区降压降温，浅橙色区降压升温，反转曲线上局部 μJT 为零。两种模型共用参考尺度。",
+      "formula": "\\mu_{\\rm JT}=\\left(\\frac{\\partial T}{\\partial P}\\right)_H=\\frac{V(\\alpha T-1)}{C_P}",
+      "symbols": "P、T 为压强和绝对温度；V、H、CP 为摩尔量；α 为定压膨胀系数；临界量 Pc、Tc、Vc 由示例 van der Waals 模型确定。",
+      "steps": [
+        {
+          "title": "看斜率与压降方向",
+          "action": "从降温起点单步降压，再切换升温起点。",
+          "observe": "μJT > 0 时 ΔP < 0 对应 ΔT < 0；μJT < 0 时降压升温。",
+          "evidence": "模型、有限差分斜率与代表性状态核对"
+        },
+        {
+          "title": "从反转点比较小压降与有限压降",
+          "action": "选择反转点起步，逐渐缩小单步压降，再查看有限压降终点。",
+          "observe": "A 点一阶估计为零，完整等焓线的有限温差仍不为零；小温差按二阶趋近零。",
+          "evidence": "反转公式、焓守恒和二阶变化核对"
+        },
+        {
+          "title": "跨越反转曲线并切换理想气体",
+          "action": "播放跨越反转曲线预设，暂停后切换理想气体。",
+          "observe": "真实气体沿同一条等焓线先升温后降温；理想气体从相同 A 出发，所有出口压力下温度都不变。",
+          "evidence": "反转点求解与理想气体全域模型核对"
+        }
+      ],
+      "think": {
+        "question": "为什么反转点的局部 μJT 为零，有限压降后的总温差仍可能不为零？",
+        "answer": "反转条件只约束当前点的等焓线斜率。有限压降会经过斜率不同的状态，总温差来自整条等焓线；入口的一阶近似 μJT(A)ΔP 无法包含曲率的作用。理想气体则在全部适用状态都满足 μJT=0，因此整条等焓线水平。"
+      },
+      "cautions": [
+        "采用同一 van der Waals 物态方程、U 与 H 计算 α 和 CP；CV=3R/2。",
+        "图中每一帧为同一入口对应的出口平衡态；节流条件为稳态绝热、无轴功并忽略动能与势能差。",
+        "温度限制为 T/Tc≥1.05 的单相范围；示例参数没有拟合具体真实气体。"
+      ],
+      "verification": {
+        "read": true,
+        "interaction": "tested",
+        "date": "2026-10-14",
+        "environment": "本机 Codex 浏览器；单步、暂停、重播、模型切换、有限终点、链接恢复、目录搜索及320/390像素窄屏检查。",
+        "availability": "本站静态模块；计算与字体均不依赖外部接口。",
+        "mobile": "已检查320/390像素窄屏布局、读数和图表；未做手机实机检查。",
+        "mainland": "沿用本站访问条件。",
+        "note": "完整焓方程求解有限压降；μJT、α、CP 使用一致模型。"
+      },
+      "visual": "throttling",
+      "mappings": [],
+      "featured": true,
+      "aliases": [
+        "焦耳—汤姆孙",
+        "焦耳汤姆逊",
+        "Joule Thomson",
+        "JT",
+        "节流",
+        "等焓线",
+        "反转曲线",
+        "反转温度",
+        "理想气体",
+        "真实气体",
+        "升温",
+        "降温"
+      ],
+      "operation": {
+        "entry": "从热力学与统计物理或搜索节流打开本站演示。",
+        "startingState": [
+          "默认 van der Waals 模型，A：P/Pc=4、T/Tc=2.5。",
+          "默认单步压降 0.1Pc、有限压降为入口压力的80%，起点暂停。"
+        ],
+        "controls": [
+          {
+            "name": "单步降压",
+            "meaning": "推进一次小压降",
+            "usage": "沿完整等焓线移动选定压降，结束后停住。",
+            "evidence": "模型求解与步长核对"
+          },
+          {
+            "name": "播放 / 暂停",
+            "meaning": "连续降压并可停住",
+            "usage": "暂停后可继续；到达本次出口压力时停止。",
+            "evidence": "播放、暂停、回到 A 和重播已在浏览器核对"
+          },
+          {
+            "name": "反转点起步",
+            "meaning": "从局部斜率为零的位置开始",
+            "usage": "同时观察小压降和有限压降的实际温差。",
+            "evidence": "反转点与二阶温差模型核对"
+          },
+          {
+            "name": "选择气体模型",
+            "meaning": "相同入口的理想与真实气体对照",
+            "usage": "切换模型后返回相同 A，压降条件保持一致。",
+            "evidence": "两种模型使用相同入口与出口压力"
+          }
+        ],
+        "restart": "点击回到 A 重新比较；从 A 重播会从同一入口开始播放。",
+        "restoreDefault": "打开不带参数的演示入口，恢复默认起点；当前设置与暂停位置保存在链接中。",
+        "testedRange": "默认压降0.1Pc与最小压降0.005Pc；四种起点、模型切换、暂停与链接恢复。模型检查覆盖入口P/Pc=0.5–10、T/Tc=1.5–7.5。",
+        "troubleshooting": [
+          {
+            "symptom": "入口 μJT 为零，出口温度仍改变",
+            "action": "比较一阶估计与完整等焓线的实际温差；缩小单步压降观察二阶变化。"
+          },
+          {
+            "symptom": "有限压降提前结束",
+            "action": "查看终点提示；真实气体到达 T/Tc=1.05 的模型范围边界时，两种气体在同一出口压力停止比较。"
+          }
+        ],
+        "reviewedAt": "2026-10-14",
+        "evidenceNote": "原创数值模型与操作界面；理论来源列于页面末尾。",
+        "guideSource": "https://farside.ph.utexas.edu/teaching/sm1/Thermalhtml/node68.html"
+      }
     },
     {
       "id": "heat-boundaries",
