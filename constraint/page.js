@@ -5,7 +5,10 @@
     constraint: 'PV=nRT,\\qquad V\\,dP+P\\,dV=nR\\,dT',
     derivatives: '\\begin{aligned}dT=0:&\\quad\\left(\\frac{\\partial V}{\\partial P}\\right)_T=-\\frac{V}{P}\\quad\\text{（等温）}\\\\dV=0:&\\quad\\left(\\frac{\\partial P}{\\partial T}\\right)_V=\\frac{nR}{V}\\quad\\text{（等容）}\\\\dP=0:&\\quad\\left(\\frac{\\partial T}{\\partial V}\\right)_P=\\frac{P}{nR}\\quad\\text{（等压）}\\end{aligned}',
     reciprocal: '\\left(\\frac{\\partial V}{\\partial P}\\right)_T\\left(\\frac{\\partial P}{\\partial V}\\right)_T=\\left(-\\frac{V}{P}\\right)\\left(-\\frac{P}{V}\\right)=1',
-    cyclic: '\\left(\\frac{\\partial V}{\\partial P}\\right)_T\\left(\\frac{\\partial P}{\\partial T}\\right)_V\\left(\\frac{\\partial T}{\\partial V}\\right)_P=\\left(-\\frac{V}{P}\\right)\\frac{nR}{V}\\frac{P}{nR}=-1'
+    cyclic: '\\left(\\frac{\\partial V}{\\partial P}\\right)_T\\left(\\frac{\\partial P}{\\partial T}\\right)_V\\left(\\frac{\\partial T}{\\partial V}\\right)_P=\\left(-\\frac{V}{P}\\right)\\frac{nR}{V}\\frac{P}{nR}=-1',
+    tangents: '\\begin{aligned}\\boldsymbol{\\tau}_T&=\\left(1,\\left(\\frac{\\partial V}{\\partial P}\\right)_T,0\\right)\\\\\\boldsymbol{\\tau}_V&=\\left(\\left(\\frac{\\partial P}{\\partial T}\\right)_V,0,1\\right)\\\\\\boldsymbol{\\tau}_P&=\\left(0,1,\\left(\\frac{\\partial T}{\\partial V}\\right)_P\\right)\\end{aligned}',
+    determinant: '\\begin{vmatrix}1&\\left(\\dfrac{\\partial P}{\\partial T}\\right)_V&0\\\\[0.5em]\\left(\\dfrac{\\partial V}{\\partial P}\\right)_T&0&1\\\\[0.5em]0&1&\\left(\\dfrac{\\partial T}{\\partial V}\\right)_P\\end{vmatrix}=0',
+    expansion: '0=-1-\\left(\\frac{\\partial V}{\\partial P}\\right)_T\\left(\\frac{\\partial P}{\\partial T}\\right)_V\\left(\\frac{\\partial T}{\\partial V}\\right)_P'
   };
   function page(resource, helpers) {
     const equation = function (name) {
@@ -23,9 +26,14 @@
       '<p class="constraint-controls-note">实线是截线，虚线是当前点的切线。拖动三维图旋转，滚轮缩放；方向键旋转，＋／− 缩放，Home 恢复视角。当前设置保存在页面链接中。</p></section>' +
       '<section class="constraint-prose" aria-labelledby="constraint-reciprocal"><h2 id="constraint-reciprocal">倒数关系</h2>' +
       '<p>固定 T，在同一条截线上交换横纵轴，斜率互为倒数。点击图中的“交换横纵轴”即可对照。</p>' + equation('reciprocal') + '</section>' +
-      '<section class="constraint-prose" aria-labelledby="constraint-cyclic"><h2 id="constraint-cyclic">循环关系</h2>' +
-      '<p>在同一个状态点，分别沿等温、等容、等压截线取偏导：</p>' + equation('cyclic') +
-      '<p>三项固定的量各不相同。移动状态点，三个偏导随之改变，乘积仍为 −1。</p>' +
+      '<section class="constraint-prose" aria-labelledby="constraint-cyclic"><h2 id="constraint-cyclic">循环关系：三条切向量共面</h2>' +
+      '<p>在光滑约束曲面的同一点 A，固定 T、V、P 的三条截线，其切向量都落在 A 处的二维切平面内。下列偏导均取 A 处的有限值。</p>' +
+      '<p>以 P、T、V 分别作为对应截线的参数，按 (P,V,T) 的坐标顺序写出切向量：</p>' + equation('tangents') +
+      '<p>下标表示固定量。分量中的 1 是参数对自身的导数，0 对应被固定的坐标。</p>' +
+      '<p>依次把这三个向量作为矩阵的列。共面意味着线性相关，所以行列式为 0：</p>' + equation('determinant') +
+      '<p>展开行列式：</p>' + equation('expansion') +
+      '<p>因此循环乘积为 −1；这就是三个切向量共面的代数表达。</p>' +
+      '<p>对本页的理想气体，代入三个偏导即可核对：</p>' + equation('cyclic') +
       '<a href="#/resources?topic=constrained-derivatives">浏览相关演示</a></section></article>';
   }
   window.ConstraintLesson = { page: page, formulas: formulas };
