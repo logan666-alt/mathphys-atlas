@@ -16,6 +16,13 @@ function math(tex){if(!window.katex)return `<code>${esc(tex)}</code>`;try{return
 function tags(r){return `<div class="tags">${r.topics.map(id=>`<a class="tag" href="${href('resources',{topic:id})}">${esc(topic(id)?.name||id)}</a>`).join('')}</div>`;}
 function points(fn,x0=20,x1=380,y0=70,amp=36){return Array.from({length:121},(_,i)=>{const x=i/120;return `${i?'L':'M'}${(x0+x*(x1-x0)).toFixed(1)},${(y0-amp*fn(x)).toFixed(1)}`;}).join(' ');}
 function diagram(kind='wave',large=false){
+ if(kind==='throttling'){
+  const project=s=>[45+29*s.P,131-16*s.T];
+  const path=states=>states.map((s,i)=>(i?'L':'M')+project(s).join(',')).join(' ');
+  const curve=Array.from({length:101},(_,i)=>{const q=.6*i/100;return {P:27*(2*q-3*q*q),T:27/4*(1-q)**2};});
+  const isenthalp=Array.from({length:101},(_,i)=>{const q=.025+.31*i/100,t=(2+2*q)/(1.5+1/(1-q));return {P:27*(t*q/(1-q)-q*q),T:t*27/8};});
+  return `<svg viewBox="0 0 400 140" role="img" aria-label="本站原创焦耳汤姆孙反转曲线与等焓线概念图，横轴 P，纵轴 T"><path d="M45 115H355V15H45Z" fill="#fcf0e5"/><path d="M45 115 ${path(curve).replace(/^M/,'L')}Z" fill="#e0f2ed"/><path d="${path(curve)}" stroke="#b14f63" stroke-width="2" fill="none"/><path d="${path(isenthalp)}" stroke="#173b63" stroke-width="3" fill="none"/><path d="M210 98H125L135 93M125 98L135 103" stroke="#173b63" fill="none"/><text x="135" y="61" fill="#176b65" font-size="14">μJT &gt; 0</text><text x="285" y="42" fill="#9b5529" font-size="14">μJT &lt; 0</text><text x="360" y="118" fill="#52677b" font-size="14">P</text><text x="31" y="23" fill="#52677b" font-size="14">T</text></svg>`;
+ }
  if(kind==='chain'){
   return '<svg viewBox="0 0 400 140" role="img" aria-label="本站原创等压位移与 T、V 两个坐标分量的概念图"><path d="M75 115H330M95 120V20" fill="none" stroke="var(--line)"/><path d="M130 95H275" stroke="var(--orange)" stroke-width="3"/><path d="M130 95V35" stroke="var(--teal)" stroke-width="3"/><path d="M130 95L275 35" stroke="var(--accent)" stroke-width="3"/><path d="M130 35H275V95" fill="none" stroke="var(--muted)" stroke-dasharray="4 4"/><circle cx="130" cy="95" r="4" fill="var(--ink)"/><circle cx="275" cy="35" r="4" fill="var(--accent)"/><text x="113" y="108" fill="var(--ink)" font-size="14">A</text><text x="280" y="28" fill="var(--ink)" font-size="14">D</text><text x="334" y="119" fill="var(--muted)" font-size="14">T</text><text x="85" y="18" fill="var(--muted)" font-size="14">V</text></svg>';
  }
