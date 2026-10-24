@@ -16,6 +16,9 @@ function math(tex){if(!window.katex)return `<code>${esc(tex)}</code>`;try{return
 function tags(r){return `<div class="tags">${r.topics.map(id=>`<a class="tag" href="${href('resources',{topic:id})}">${esc(topic(id)?.name||id)}</a>`).join('')}</div>`;}
 function points(fn,x0=20,x1=380,y0=70,amp=36){return Array.from({length:121},(_,i)=>{const x=i/120;return `${i?'L':'M'}${(x0+x*(x1-x0)).toFixed(1)},${(y0-amp*fn(x)).toFixed(1)}`;}).join(' ');}
 function diagram(kind='wave',large=false){
+ if(kind==='gas-liquid'){
+  return '<svg viewBox="0 0 400 140" role="img" aria-label="本站原创气液相变概念图：等温压缩经过A、B之间的水平共存平台"><path d="M46 116H358M46 116V18" fill="none" stroke="var(--line)"/><path d="M73 21C77 48 80 66 91 73H271C301 87 321 96 347 104" fill="none" stroke="var(--blue)" stroke-width="3"/><path d="M91 73C108 125 140 105 172 69S224 44 271 73" fill="none" stroke="var(--orange)" stroke-width="2" stroke-dasharray="5 4"/><path d="M238 96H142L151 91M142 96L151 101" fill="none" stroke="var(--teal)" stroke-width="2"/><circle cx="91" cy="73" r="4" fill="var(--blue)"/><circle cx="271" cy="73" r="4" fill="var(--blue)"/><text x="84" y="61" fill="var(--ink)" font-size="14">A</text><text x="274" y="62" fill="var(--ink)" font-size="14">B</text><text x="157" y="55" fill="var(--muted)" font-size="14">气液共存</text><text x="357" y="132" fill="var(--muted)" font-size="14">Vm</text><text x="29" y="23" fill="var(--muted)" font-size="14">p</text></svg>';
+ }
  if(kind==='throttling'){
   const project=s=>[45+29*s.P,131-16*s.T];
   const path=states=>states.map((s,i)=>(i?'L':'M')+project(s).join(',')).join(' ');

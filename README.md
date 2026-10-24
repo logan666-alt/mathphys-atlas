@@ -1,6 +1,6 @@
 # 物理可视化：交互演示资源库
 
-按学科、知识点和问题查找精选交互演示，逐步扩充理论力学、电动力学、量子力学、热力学与统计物理，并保留通用数学工具。当前收录 15 个演示，包括 12 个外部演示，以及约束曲面、偏导链式关系、焦耳—汤姆孙节流三个本站原创专题。首页直接进入搜索与分类；外部演示可从卡片直接打开。
+按学科、知识点和问题查找精选交互演示，逐步扩充理论力学、电动力学、量子力学、热力学与统计物理，并保留通用数学工具。当前收录 16 个演示，包括 12 个外部演示，以及约束曲面、偏导链式关系、焦耳—汤姆孙节流、气液相变四个本站原创专题。首页直接进入搜索与分类；外部演示可从卡片直接打开。
 
 ## 打开网站
 
@@ -28,7 +28,7 @@ node server.mjs
 
 ```powershell
 node scripts/check.mjs
-node --test scripts/catalog.test.cjs scripts/v3.test.cjs scripts/joule-thomson.test.cjs
+node --test scripts/catalog.test.cjs scripts/v3.test.cjs scripts/joule-thomson.test.cjs scripts/gas-liquid.test.cjs
 git add .
 git commit -m "Update physics visualizations"
 git push origin main
@@ -46,6 +46,7 @@ GitHub 完成网页发布后，原有网站地址即可加载新内容。
 | `dist/styles.css`、`v3.css` | 基础布局及资源对照表布局 |
 | `dist/compare.js` | 对照页、资源选择与三组推荐组合，正文直接从目录读取 |
 | `dist/thermo/page.js`、`chain.js`、`chain.css` | 偏导链式关系专题、分步播放、位移分解与路径对照 |
+| `dist/gas-liquid/` | 气液相变专题、等温压缩、亚稳态、化学势和等面积构造 |
 | `dist/joule-thomson/` | 节流专题、一致的 van der Waals 热力学模型、反转曲线和理想气体对照 |
 | `dist/constraint/page.js` | 约束曲面专题的数学推导、几何解释与站内演示入口 |
 | `dist/constraint/surface.js`、`surface.css` | P、V、T 状态曲面、截线、切平面、投影及链接状态恢复 |
@@ -95,6 +96,8 @@ node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 焦耳—汤姆孙节流入口为 `/#/resource/joule-thomson`，归入“热力学与统计物理”和“节流与反转曲线”。入口1固定，出口2表示当前比较的稳态结果；目标出口压强直接给定。压差 ΔP=P₂−P₁，降压时为负；温差 ΔT=T₂−T₁，负值表示出口比入口冷。支持逐档比较、暂停、重置、从头播放及理想气体切换。真实气体采用 van der Waals 物态方程、CV=3R/2 及一致的焓模型；α 与 CP 从模型计算，出口温度由完整等焓方程求解。参考临界量统一用于两种气体，出口限于 T/Tc≥1.05 的单相范围；参数、档位大小与暂停位置保存在链接中，旧链接继续有效。`scripts/joule-thomson.test.cjs` 核对焓守恒、物态方程、CP/α/μJT 数值差分、反转点的二阶温差与理想气体水平等焓线。
 
 ## 使用与维护边界
+
+气液相变专题入口为 `/#/resource/gas-liquid`。三个读图步骤依次展示恒温活塞压缩、稳定与亚稳的均匀相分支、移动水平线时的面积与化学势比较；温度可在 0.85–1.10 Tc 之间调整。模型从同一范氏物态方程和自由能求出共存压强、相体积、化学势与面积，临界点前后连续切换。温度、压缩进度、回折线开关、读图步骤与试画压强保存在链接中。数值和界面核验见 `docs/verification-gas-liquid.md`。
 
 - 首版数据核验日期为 2026-09-12。它不是实时链接监测；原站界面更改后，应复查任务文字。
 - 网站代码无数据库或第三方统计脚本。搜索与资源对照选择保存在地址中的 `#` 之后；临时问题记录不跨页面保存。此 GitHub Pages 版本公开访问。
