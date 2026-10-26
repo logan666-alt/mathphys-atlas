@@ -1,6 +1,6 @@
 # 物理可视化：交互演示资源库
 
-按学科、知识点和问题查找精选交互演示，逐步扩充理论力学、电动力学、量子力学、热力学与统计物理，并保留通用数学工具。当前收录 16 个演示，包括 12 个外部演示，以及约束曲面、偏导链式关系、焦耳—汤姆孙节流、气液相变四个本站原创专题。首页直接进入搜索与分类；外部演示可从卡片直接打开。
+按学科、知识点和问题查找精选交互演示，逐步扩充理论力学、电动力学、量子力学、热力学与统计物理，并保留通用数学工具。当前收录 17 个演示，包括 12 个外部演示，以及约束曲面、偏导链式关系、焦耳—汤姆孙节流、气液相变、三相图与化学势曲面五个本站原创专题。首页直接进入搜索与分类；外部演示可从卡片直接打开。
 
 ## 打开网站
 
@@ -28,7 +28,7 @@ node server.mjs
 
 ```powershell
 node scripts/check.mjs
-node --test scripts/catalog.test.cjs scripts/v3.test.cjs scripts/joule-thomson.test.cjs scripts/gas-liquid.test.cjs
+node --test scripts/catalog.test.cjs scripts/v3.test.cjs scripts/joule-thomson.test.cjs scripts/gas-liquid.test.cjs scripts/three-phase.test.cjs
 git add .
 git commit -m "Update physics visualizations"
 git push origin main
@@ -116,3 +116,7 @@ node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 - **理解链接范围**：本地地址 `127.0.0.1` 只在运行预览服务的电脑可用。要分享给其他人，请使用上方在线网址。
 
 发布前运行上述目录与渲染检查，实际检查桌面和窄屏、原创演示、链接刷新、无结果筛选及对照表。不要把链接请求成功写成已操作外部模拟器。
+
+## 三相图与化学势曲面
+
+入口：`/#/resource/three-phase`。三相化学势、相图、恒温和恒压截面由同一组解析自由能生成；支持沿共存线移动、旋转曲面与平衡下包络、固定温压改变相比例、总容积与总焓约束求解，以及链接参数恢复。源码为 `dist/three-phase/`，核验见 `docs/verification-three-phase.md`。
