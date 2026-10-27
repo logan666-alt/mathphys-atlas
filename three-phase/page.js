@@ -13,10 +13,10 @@
   };
   function page(resource,h){const eq=k=>`<div class="formula" tabindex="0">${h.math(formulas[k])}</div>`;
     return `<article class="tp-page"><div class="breadcrumbs"><a href="#/resources">资源目录</a><span>/</span><a href="#/resources?subject=thermodynamics">热力学与统计物理</a><span>/</span><span>三相与化学势</span></div>
-    <header><div class="eyebrow">相平衡 · 从曲面到相比例</div><h1>${h.esc(resource.title)}</h1><p class="tp-lead">同一温压下，最低的化学势决定稳定相。改变各相的数量，状态点可以留在原地。</p></header>
+    <header><h1>${h.esc(resource.title)}</h1></header>
     ${window.ThreePhaseDemo.markup}
-    <section class="tp-reading"><h2>从三张曲面读出一张相图</h2><p>取同一 T、p，把三张曲面上的高度放在一起比较。最低的一张给出平衡化学势；两张同为最低时形成两相共存线；三张同时相交于最低值时得到三相点。两张较高曲面的交线投影只表示两相化学势相等，第三相仍可能更稳定。</p>${eq('minimum')}
-    <h2>沿共存线走，共同的化学势会改变</h2><p>“等化学势”比较的是同一个温压点上的两相。切换到汽化线并拖动“沿线压强”，观察共同高度从三相点的零参考值离开。三维图中的交线通常上下起伏；在 T–p 平面上的投影才是相界线。</p>${eq('differential')}${eq('clapeyron')}
+    <details class="tp-reading"><summary>展开原理、公式与模型说明</summary><h2>从三张曲面读出一张相图</h2><p>取同一 T、p，把三张曲面上的高度放在一起比较。最低的一张给出平衡化学势；两张同为最低时形成两相共存线；三张同时相交于最低值时得到三相点。两张较高曲面的交线投影只表示两相化学势相等，第三相仍可能更稳定。</p>${eq('minimum')}
+    <h2>沿共存线走，共同的化学势会改变</h2><p>“等化学势”比较的是同一个温压点上的两相。在第二步选择汽化线并拖动“沿线移动：压强”，观察共同高度从三相点的零参考值离开。第二步直接绘制实际共同化学势随压强的变化。第一步的差异放大视图在每个温压点统一减去液相参考曲面，再作纵向放大；它用于比较三相高低，沿线共同高度的变化应看第二步的实际值曲线。</p>${eq('differential')}${eq('clapeyron')}
     <p>μ 的单位为 J/mol，摩尔熵 Sm 为 J/(mol·K)，摩尔体积 Vm 为 m³/mol。恒压截面的斜率为 −Sm；恒温截面的斜率为 Vm。共存线上两相的 dμ 相等，由此得到克拉珀龙方程；共同 dμ 本身通常不等于零。</p>
     <h2>温压不动，相比例仍能变化</h2><p>这里讨论单组分、可分离的宏观固液气相，忽略界面贡献。xᵢ = nᵢ/n 是摩尔分数。把三相各自的吉布斯自由能相加，得到：</p>${eq('mixture')}
     <p>在液相区，固相和气相的化学势更高，平衡终态为纯液相。在汽化线上，固相消失后，任何液气比例都具有相同的体相 G。在三相点，三相比例的任意组合都给出相同的体相 G。</p>
@@ -28,7 +28,7 @@
     <p>参数 aₛ = 1、aℓ = 2.2；bₛ = 0.06、bℓ = 0.08。下标 t 表示三相点尺度。图中 θ、π、g、s、v、h 均无量纲；h = Hm/(RTt)，G/(nRTt) = Σxᵢgᵢ。统一采用这一参考零点，沿线读数可直接比较。</p>${eq('derived')}
     <p>所有相界线从同一组 gᵢ 解出，并检查第三相的高度；高于下包络的曲面表示延拓的候选相。模型未加入成核势垒。灰色虚线可显示非稳定的两相等高线。</p></details>
     <p>共存线斜率推导参考：<a href="https://farside.ph.utexas.edu/teaching/sm1/Thermalhtml/node120.html" target="_blank" rel="noopener noreferrer">Richard Fitzpatrick · Clausius–Clapeyron Equation</a>。</p>
-    <div class="button-row"><a class="button outline" href="#/resource/gas-liquid">气液相变与等面积法则</a><a class="button outline" href="#/resource/thermo-chain-rule">偏导链式关系</a>${h.compare}</div></section></article>`;
+    <div class="button-row"><a class="button outline" href="#/resource/gas-liquid">气液相变与等面积法则</a><a class="button outline" href="#/resource/thermo-chain-rule">偏导链式关系</a>${h.compare}</div></details></article>`;
   }
   window.ThreePhaseLesson={page,formulas};window.SiteDemos=Object.assign(window.SiteDemos||{},{'three-phase':{page,mount:()=>window.ThreePhaseDemo.mount(),unmount:()=>window.ThreePhaseDemo.unmount()}});
 })();

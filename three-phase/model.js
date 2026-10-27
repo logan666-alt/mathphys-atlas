@@ -20,6 +20,10 @@
   function physical(kind,p){const a=boundary(kind,p);return pairs[kind].every(i=>a.stable.includes(i));}
   const normalize=xs=>{const a=xs.map(x=>Math.max(0,Number(x)||0)),sum=a.reduce((s,x)=>s+x,0);return sum?a.map(x=>x/sum):[1/3,1/3,1/3];};
   const mix=(xs,values)=>xs.reduce((a,x,i)=>a+x*values[i],0);
+  function rebalance(xs,index,value){
+    const current=normalize(xs),v=clamp(value,0,1),rest=1-current[index];
+    return current.map((x,i)=>i===index?v:(1-v)*(rest>1e-12?x/rest:1/2));
+  }
   // Vertices of the equilibrium fraction simplex, intersected with one extensive constraint.
   function solutions(a,kind='none',target=0){
     const ids=a.stable,vertices=[];
@@ -36,5 +40,5 @@
     const weights=vertices.length===2?[1-q,q]:[r,(1-r)*(1-q),(1-r)*q];
     return [0,1,2].map(i=>vertices.reduce((s,x,j)=>s+weights[j]*x[i],0));
   }
-  return {names,entropy0,volumes,cp,clamp,state,boundary,pairs,physical,normalize,mix,solutions,choose};
+  return {names,entropy0,volumes,cp,clamp,state,boundary,pairs,physical,normalize,mix,rebalance,solutions,choose};
 });
