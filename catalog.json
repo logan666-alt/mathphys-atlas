@@ -262,7 +262,8 @@
         "three-phase/model.js",
         "three-phase/demo.js",
         "three-phase/page.js",
-        "three-phase/style.css"
+        "three-phase/style.css",
+        "three-phase/view.js"
       ],
       "title": "三相图与化学势曲面：稳定相和相比例",
       "originalName": "Three Phases, Chemical Potential Surfaces and Phase Fractions",
@@ -282,17 +283,17 @@
       "depth": "课程核心",
       "format": "分步交互演示",
       "language": "中文",
-      "controls": "按三步学习：比较三相高低、沿线看共存、改变相比例；曲面并排/叠合、差异放大、直接拖动旋转、情景预设、百分比输入、进阶总量约束。",
-      "guide": "先并排比较三相曲面，放大差异并读取实际化学势；再沿共存线追踪共同高度；最后固定温压调整相比例，观察自由能变化。",
-      "reading": "曲面默认显示局部窗口，三张图共用尺度。差异视图统一减去液相参考并纵向展开，保留相对高低与交点；实际化学势读数和沿线曲线采用真实g。",
+      "controls": "按三步学习；同一坐标系中比较三张曲面；高度差1–4倍放大、拖动旋转与俯仰、滚轮/双指缩放、一键复位、情景预设、百分比输入、进阶总量约束。",
+      "guide": "先在同一三维坐标系比较三相曲面，通过高度差放大和自由视角观察关系；再沿共存线追踪共同高度；最后固定温压调整相比例。",
+      "reading": "三张实际化学势曲面共用一个局部温压窗口及纵轴尺度。高度差放大统一拉伸纵向，刻度及读数仍为实际g，共存交点保持一致。",
       "formula": "\\mu_{\\rm eq}=\\min_i\\mu_i,\\qquad G/n=\\sum_i x_i\\mu_i",
       "symbols": "Tt、pt 是三相点尺度；μ 为摩尔化学势，x 为摩尔分数，n 为总物质的量；图中使用无量纲变量。",
       "steps": [
         {
           "title": "比较三相高低",
-          "action": "选择液相区、汽化线或三相点，比较并排曲面与下方数值；切换差异放大和叠合显示。",
-          "observe": "最低的相稳定；并排显示避免遮挡，差值视图保留相等位置。",
-          "evidence": "并排、叠合、下包络、拖动与实际值切换实测"
+          "action": "选择液相区、汽化线或三相点，调节高度差放大；横向和纵向拖动改变视角，滚轮缩放。",
+          "observe": "同一温压处最低的相稳定；三张曲面在同一空间显示，共存交线保持重合。",
+          "evidence": "二维拖动、滚轮、键盘、倍数、复位和刷新恢复实测"
         },
         {
           "title": "沿线看共存",
@@ -319,11 +320,11 @@
         "read": true,
         "interaction": "tested",
         "date": "2026-10-27",
-        "environment": "第二版：三步切换、局部曲面并排/叠合、直接拖动、视角恢复、实际值切换、终态比例、约束求解与参数恢复。",
+        "environment": "修订版：同一三维场景、转向/俯仰/缩放、实际高度拉伸、参数恢复；保留三步学习与相比例操作。",
         "availability": "本站静态模块，计算、公式和字体不依赖外部接口。",
         "mobile": "320/390像素视口的三个步骤分别检查，页面和控件无横向溢出，SVG标签无裁切。",
         "mainland": "沿用本站访问条件。",
-        "note": "全站29项测试通过。第二版核验见 docs/verification-three-phase-v2.md。"
+        "note": "全站30项测试通过；修订版核验见 docs/verification-three-phase-orbit.md。"
       },
       "visual": "three-phase",
       "mappings": [],
@@ -343,15 +344,15 @@
       "operation": {
         "entry": "搜索三相图或从热力学与统计物理打开本站专题。",
         "startingState": [
-          "默认第一步、液相区，三张曲面并排并开启差异放大。",
-          "温压微调、其他情景、公式和总量约束按需展开。"
+          "默认第一步、液相区；三张实际化学势曲面位于同一坐标系，高度差放大2.5倍。",
+          "直接拖动旋转/俯仰，滚轮缩放；视角滑块和显示内容按需展开。"
         ],
         "controls": [
           {
-            "name": "放大差异",
-            "meaning": "以液相为共同参考并放大纵向差别",
-            "usage": "结合每张图下方的实际g读数；也可关闭以看实际化学势。",
-            "evidence": "第二版浏览器实际操作"
+            "name": "高度差与三维视角",
+            "meaning": "在同一空间突出三相高低关系",
+            "usage": "高度差1–4倍，横向拖动旋转、纵向拖动俯仰、滚轮或双指缩放；恢复视角回到默认相机。",
+            "evidence": "修订版浏览器实际操作"
           },
           {
             "name": "学习步骤",
@@ -380,7 +381,7 @@
           }
         ],
         "reviewedAt": "2026-10-27",
-        "evidenceNote": "第二版以可理解性和操作顺序为重点；核验见 docs/verification-three-phase-v2.md。",
+        "evidenceNote": "修订版恢复共用三维空间并增加俯仰与缩放；见 docs/verification-three-phase-orbit.md。",
         "guideSource": "https://farside.ph.utexas.edu/teaching/sm1/Thermalhtml/node120.html"
       }
     },

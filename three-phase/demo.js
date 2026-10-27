@@ -9,11 +9,12 @@
     <div class="tp-controls" id="tp-state-controls"><label id="tp-tbox">温度 T/Tt <output id="tp-tv"></output><input id="tp-t" aria-label="温度" type="range" min=".7" max="1.3" step=".001" value="1.08"></label><label id="tp-pbox"><span id="tp-plabel">压强 p/pt</span> <output id="tp-pv"></output><input id="tp-p" aria-label="压强" type="range" min=".2" max="2.4" step=".001" value="1.7"></label><p id="tp-locked" class="tp-note"></p></div>
     <div id="tp-state" class="tp-state" role="status" aria-live="polite"></div>
     <section id="tp-panel-1" aria-label="第一步：比较三相高低">
-      <div class="tp-viewbar"><div class="tp-presets" role="group" aria-label="曲面排列"><button type="button" data-layout="split">三相分开看</button><button type="button" data-layout="overlay">叠合看交线</button></div><label class="tp-check"><input type="checkbox" id="tp-magnify" checked>放大差异</label><button type="button" id="tp-home" class="button outline">恢复视角</button></div>
+      <div class="tp-viewbar"><label class="tp-gain">高度差放大 <output id="tp-gainv"></output><input id="tp-gain" aria-label="高度差放大倍数" type="range" min="1" max="4" step=".25" value="2.5"></label><div class="tp-camera-buttons"><button type="button" id="tp-zoom-out" class="button outline" aria-label="缩小曲面">−</button><button type="button" id="tp-zoom-in" class="button outline" aria-label="放大曲面">＋</button><button type="button" id="tp-home" class="button outline">恢复视角</button></div></div>
+      <p class="tp-note">拖动：自由旋转与俯仰 · 滚轮或双指捏合：缩放 · 聚焦图形后可用方向键旋转、＋/−缩放</p>
+      <div class="tp-scene"><canvas id="tp-gl" aria-hidden="true"></canvas><svg id="tp-surface" class="tp-chart tp-rotate" role="img" tabindex="0" aria-label="同一坐标系中的固液气三张曲面，可拖动旋转俯仰和缩放"></svg></div>
+      <div id="tp-surface-values" class="tp-surface-values"></div>
       <p id="tp-scale-note" class="tp-note"></p>
-      <div id="tp-surface-grid" class="tp-surface-grid">${names.map((name,i)=>`<div class="tp-surface-panel" id="tp-phase-${i}" style="--phase:${colors[i]}"><h3>${name}<span id="tp-phase-status-${i}"></span></h3><svg id="tp-surface-${i}" class="tp-chart tp-rotate" role="img" aria-label="${name}化学势曲面，共用尺度"></svg></div>`).join('')}</div>
-      <svg id="tp-surface" class="tp-chart tp-rotate" role="img" aria-label="三张曲面叠合与共存交线" hidden></svg>
-      <div class="tp-controls tp-camera"><label>旋转视角（也可拖动曲面）<input type="range" id="tp-angle" min="-150" max="150" step="1" value="-35"></label><label id="tp-layerbox" hidden>显示内容<select id="tp-layer"><option value="all">全部三相</option><option value="envelope">仅平衡下包络</option></select></label></div>
+      <details class="tp-camera"><summary>视角与显示设置</summary><div class="tp-controls"><label>水平旋转 <output id="tp-anglev"></output><input type="range" id="tp-angle" min="-180" max="180" step="1" value="-35"></label><label>上下俯仰 <output id="tp-pitchv"></output><input type="range" id="tp-pitch" min="-85" max="85" step="1" value="15"></label><label>缩放 <output id="tp-zoomv"></output><input type="range" id="tp-zoom" min=".6" max="2" step=".05" value="1"></label><label>显示内容<select id="tp-layer"><option value="all">全部三相</option><option value="envelope">仅平衡下包络</option></select></label></div></details>
       <div class="tp-two tp-comparison"><div><h3>同一温压下，谁更低？</h3><svg id="tp-heights" class="tp-chart" role="img" aria-label="三个化学势读数及高于最低值的差"></svg><p class="tp-note">横条表示高于最低值的差；数值为实际 g = μ/(RTt)。零差值的相最稳定。</p></div><div><h3>对应的 T–p 相图</h3><svg id="tp-map" class="tp-chart" role="img" aria-label="三相图，可点击选择温压"></svg><p class="tp-note">点击相区可自由选点；共存线用上方情景按钮精确选取。</p></div></div>
       <button type="button" class="button tp-next" data-step="2">下一步：沿共存线看共同高度 →</button>
     </section>
@@ -37,15 +38,15 @@
     unmount();const root=document.getElementById('tp-demo');if(!root)return;const $=id=>root.querySelector('#tp-'+id),clean=[];
     const params=new URLSearchParams(location.hash.split('?')[1]||'');
     const read=(k,d,a,b)=>params.has(k)&&params.get(k).trim()&&Number.isFinite(+params.get(k))?M.clamp(+params.get(k),a,b):d;
-    let t=read('t',1.08,.7,1.3),p=read('p',1.7,.2,2.4),mode=params.get('mode')||'free',angle=read('angle',-35,-150,150),layer=params.get('layer')||'all',ext=params.get('ext')==='1';
+    let t=read('t',1.08,.7,1.3),p=read('p',1.7,.2,2.4),mode=params.get('mode')||'free',angle=read('angle',-35,-180,180),pitch=read('pitch',15,-85,85),zoom=read('zoom',1,.6,2),gain=read('gain',2.5,1,4),layer=params.get('layer')||'all',ext=params.get('ext')==='1';
     if(!['free','sl','lg','sg','triple'].includes(mode))mode='free';if(!['all','envelope','0','1','2'].includes(layer))layer='all';
     let weights=[0,1,2].map(i=>read('x'+i,[50,50,0][i],0,100)),n=read('n',1,.001,1e6),q=read('q',.5,0,1),r=read('r',.33,0,1),progress=read('progress',0,0,1),constraint=params.get('constraint')||'none',total=read('total',.5,-1e8,1e8),choice=read('choice',.5,0,1);
     if(!['none','v','h'].includes(constraint))constraint='none';
-    let step=read('step',1,1,3)|0,layout=params.get('layout')==='overlay'?'overlay':'split',magnify=params.get('magnify')!=='0';
+    let step=read('step',1,1,3)|0;
     weights=M.normalize(weights).map(x=>x*100);
-    let drag=null,tuning=params.get('tuning')==='1';
+    let drag=null;const pointers=new Map();let tuning=params.get('tuning')==='1';
     const listen=(el,event,fn)=>{el.addEventListener(event,fn);clean.push(()=>el.removeEventListener(event,fn));};
-    function save(){const s=new URLSearchParams({t,p,mode,angle,layer,step,layout,tuning:tuning?1:0,magnify:magnify?1:0,ext:ext?'1':'0',n,q,r,progress,constraint,total,choice});weights.forEach((x,i)=>s.set('x'+i,x));history.replaceState(null,'','#/resource/three-phase?'+s);}
+    function save(){const s=new URLSearchParams({t,p,mode,angle,pitch,zoom,gain,layer,step,tuning:tuning?1:0,ext:ext?'1':'0',n,q,r,progress,constraint,total,choice});weights.forEach((x,i)=>s.set('x'+i,x));history.replaceState(null,'','#/resource/three-phase?'+s);}
     function align(){if(mode==='triple'){t=1;p=1;}else if(mode!=='free'){p=M.clamp(p,mode==='sg'?.2:1,mode==='sg'?1:mode==='lg'?2.03:2.4);t=M.boundary(mode,p).t;}}
     const line=(points,stroke,width=2,d='')=>`<path d="${points.map((a,i)=>(i?'L':'M')+a.map(v=>v.toFixed(2)).join(',')).join(' ')}" fill="none" stroke="${stroke}" stroke-width="${width}" ${d?`stroke-dasharray="${d}"`:''}/>`;
     const text=(x,y,s,anchor='middle',cls='')=>`<text x="${x}" y="${y}" text-anchor="${anchor}" class="${cls}">${s}</text>`;
@@ -61,53 +62,46 @@
       out+=text(X(1)-9,Y(1)+5,'★','end')+text(X(1)-12,Y(1)+22,'三相点','end');out+=`<circle cx="${X(a.t)}" cy="${Y(a.p)}" r="6" class="selected"/>`;
       svg.innerHTML=out;svg._frame=f;
     }
+    function cameraControls(){
+      for(const [id,v] of Object.entries({angle,pitch,zoom,gain}))$(id).value=v;
+      $('anglev').textContent=fmt(angle,0)+'°';$('pitchv').textContent=fmt(pitch,0)+'°';$('zoomv').textContent=fmt(zoom,2)+'×';$('gainv').textContent=fmt(gain,2)+'×';
+    }
     function drawSurface(a){
-      // Same local window, camera and vertical scale in every panel. No per-phase offsets.
-      const tl=Math.max(.7,t-.08),th=Math.min(1.3,t+.08),pl=Math.max(.2,p-.25),ph=Math.min(2.4,p+.25);
-      const samples=[],N=16;
-      const height=z=>magnify?z.mu.map(g=>g-z.mu[1]):z.mu;
-      for(let i=0;i<=N;i++)for(let j=0;j<=N;j++){const tt=tl+(th-tl)*i/N,pp=pl+(ph-pl)*j/N,z=M.state(tt,pp);samples.push({tt,pp,z,hh:height(z)});}
-      const all=samples.flatMap(z=>z.hh),lo=Math.min(...all),hi=Math.max(...all),range=Math.max(.08,hi-lo),mid=(hi+lo)/2;
-      $('surface-grid').hidden=layout!=='split';$('surface').toggleAttribute('hidden',layout!=='overlay');$('layerbox').hidden=layout!=='overlay';
-      $('scale-note').textContent=magnify?'差异视图：高度为 g − g液。三相统一减去液相参考，共用尺度并纵向放大。实际 g 见每张图下方。':'实际化学势视图：高度为 g = μ/(RTt)，三张图共用同一零点与尺度。';
-      $('scale-note').textContent+=` 局部窗口：T/Tt ${fmt(tl,2)}–${fmt(th,2)}，p/pt ${fmt(pl,2)}–${fmt(ph,2)}。`;
-      const ids=layout==='split'?[0,1,2]:['all'];
-      ids.forEach(id=>{
-        const svg=id==='all'?$('surface'):$('surface-'+id),w=Math.max(230,svg.getBoundingClientRect().width),h=360,rad=angle*Math.PI/180,c=Math.cos(rad),sn=Math.sin(rad),scale=Math.min(w*.28,140);
-        const zscale=(h-100-scale*.65)/range*(magnify?1:.25);
-        const project=(tt,pp,g)=>{const x=2*(tt-tl)/(th-tl)-1,y=2*(pp-pl)/(ph-pl)-1;return [w/2+scale*(x*c-y*sn),158+scale*.20*(x*sn+y*c)-(g-mid)*zscale];};
-        const depth=(tt,pp)=>2*(tt-tl)/(th-tl)*sn+2*(pp-pl)/(ph-pl)*c;
-        svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.setAttribute('height',h);
-        let out='',polys=[];const phaseIds=id==='all'?[0,1,2]:[id];
-        const at=(i,j)=>samples[i*(N+1)+j];
-        for(let i=0;i<N;i++)for(let j=0;j<N;j++){
-          const corners=[at(i,j),at(i+1,j),at(i+1,j+1),at(i,j+1)];
-          const ks=id==='all'&&layer==='envelope'?[M.state((corners[0].tt+corners[2].tt)/2,(corners[0].pp+corners[2].pp)/2).stable[0]]:phaseIds;
-          ks.forEach(k=>{const points=corners.map(z=>project(z.tt,z.pp,id==='all'&&layer==='envelope'?Math.min(...z.hh):z.hh[k]));polys.push({d:depth(corners[0].tt,corners[0].pp),k,points});});
-        }
-        polys.sort((a,b)=>a.d-b.d);
-        // A shared reference plane makes genuine crossings and gaps visible.
-        const zero=[[tl,pl],[th,pl],[th,ph],[tl,ph],[tl,pl]].map(([tt,pp])=>project(tt,pp,magnify?0:lo));
-        out+=line(zero,'#a7b5bf',1,'4 4');
-        polys.forEach(poly=>{out+=`<polygon points="${poly.points.map(pt=>pt.join(',')).join(' ')}" fill="${colors[poly.k]}" fill-opacity="${id==='all'&&layer!=='envelope'?.36:.78}" stroke="${colors[poly.k]}" stroke-opacity=".6" stroke-width=".6"/>`;});
-        for(const k of ['sl','lg','sg']){
-          if(id!=='all'&&!M.pairs[k].includes(id))continue;
-          const points=[];for(let j=0;j<=160;j++){const pp=pl+(ph-pl)*j/160,z=M.boundary(k,pp);if(z.t>=tl&&z.t<=th&&M.physical(k,pp))points.push(project(z.t,z.p,magnify?z.min-z.mu[1]:z.min));}
-          out+=line(points,'#172b3d',2.8);
-        }
-        const hh=height(a),xy=project(t,p,lo),top=project(t,p,hi);out+=line([xy,top],'#172b3d',1.2,'3 3');
-        phaseIds.forEach(k=>{const pt=project(t,p,hh[k]);out+=`<circle cx="${pt[0]}" cy="${pt[1]}" r="6" fill="${colors[k]}" stroke="white" stroke-width="2"/>`;});
-        if(tl<=1&&th>=1&&pl<=1&&ph>=1){const pt=project(1,1,0);out+=text(pt[0]+10,pt[1]-8,'★');}
-        const floor=lo-range*.10,ax=project(tl,pl,floor),xt=project(th,pl,floor),yp=project(tl,ph,floor);
-        out+=line([xt,ax,yp],'#768b99',1)+text(xt[0],xt[1]+17,'T/Tt')+text(yp[0],yp[1]+17,'p/pt');
-        const ztop=project(tl,pl,hi);out+=line([ax,ztop],'#768b99',1);
-        for(const z of [lo,(lo+hi)/2,hi]){const pt=project(tl,pl,z);out+=text(pt[0]<55?pt[0]+6:pt[0]-6,pt[1]+4,fmt(z,2),pt[0]<55?'start':'end');}
-        out+=text(10,18,magnify?'高度：g − g液 · 纵向放大':'高度：实际 g','start');
-        if(id!=='all')out+=text(w/2,h-10,`当前 g${['固','液','气'][id]} = ${fmt(a.mu[id])}`);
-        else out+=text(w/2,h-10,'黑色粗线：真正的共存交线');
-        svg.innerHTML=out;
-      });
-      names.forEach((name,i)=>{$('phase-status-'+i).textContent=a.stable.includes(i)?'最低 · 稳定':'较高';$('phase-'+i).dataset.stable=a.stable.includes(i);});
+      const tl=Math.max(.7,t-.08),th=Math.min(1.3,t+.08),pl=Math.max(.2,p-.25),ph=Math.min(2.4,p+.25),N=20,samples=[];
+      for(let i=0;i<=N;i++)for(let j=0;j<=N;j++){const tt=tl+(th-tl)*i/N,pp=pl+(ph-pl)*j/N;samples.push({tt,pp,z:M.state(tt,pp)});}
+      const values=samples.flatMap(z=>z.z.mu),lo=Math.min(...values),hi=Math.max(...values),range=Math.max(.08,hi-lo),mid=(hi+lo)/2;
+      const svg=$('surface'),w=Math.max(230,svg.getBoundingClientRect().width),h=w<500?400:500;
+      const radius=Math.sqrt(2*2.2**2+Math.pow(.75*gain,2)),distance=radius*5;
+      const raw=(tt,pp,g)=>{const x=(2*(tt-tl)/(th-tl)-1)*2.2,y=(2*(pp-pl)/(ph-pl)-1)*2.2,z=(g-mid)/range*1.5*gain;const v=window.ThreePhaseView.rotate(x,y,z,angle,pitch),perspective=distance/(distance-v[2]);return [v[0]*perspective,v[1]*perspective,v[2]];};
+      const bounds=samples.flatMap(v=>v.z.mu.map(g=>raw(v.tt,v.pp,g)));for(const tt of [tl,th])for(const pp of [pl,ph])bounds.push(raw(tt,pp,lo-range*.06));
+      const scale=Math.min((w-(w<500?50:100))/(2*Math.max(...bounds.map(v=>Math.abs(v[0])))),(h-80)/(2*Math.max(...bounds.map(v=>Math.abs(v[1])))))*zoom;
+      const project=(tt,pp,g)=>{const v=raw(tt,pp,g);return [w/2+v[0]*scale,h/2+v[1]*scale,v[2]];};
+      const xy=point=>point.slice(0,2),path=(points,color,width=2,d='')=>line(points.map(xy),color,width,d);
+      svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.setAttribute('height',h);
+      let out='';const faces=[],at=(i,j)=>samples[i*(N+1)+j];
+      for(let i=0;i<N;i++)for(let j=0;j<N;j++){
+        const corners=[at(i,j),at(i+1,j),at(i+1,j+1),at(i,j+1)],ks=layer==='envelope'?[M.state((corners[0].tt+corners[2].tt)/2,(corners[0].pp+corners[2].pp)/2).stable[0]]:[0,1,2];
+        for(const k of ks){const points=corners.map(v=>project(v.tt,v.pp,layer==='envelope'?v.z.min:v.z.mu[k]));for(const ids of [[0,1,2],[0,2,3]]){const pts=ids.map(i=>points[i]);faces.push({k,points:pts,depth:pts.reduce((s,v)=>s+v[2],0)/3});}}
+      }
+      const floor=lo-range*.06,base=[[tl,pl],[th,pl],[th,ph],[tl,ph],[tl,pl]].map(([tt,pp])=>project(tt,pp,floor));
+      out+=path(base,'#9aaebc',1,'4 4');
+      faces.sort((a,b)=>a.depth-b.depth);
+      const rendered=window.ThreePhaseView.draw($('gl'),faces,w,h,distance,radius);
+      if(!rendered)for(const f of faces)out+=`<polygon points="${f.points.map(pt=>xy(pt).join(',')).join(' ')}" fill="${colors[f.k]}" fill-opacity="${layer==='envelope'?.9:.64}" stroke="${colors[f.k]}" stroke-opacity=".35" stroke-width=".35"/>`;
+      if(!rendered&&layer==='all')for(let k=0;k<3;k++){const edge=[[tl,pl],[th,pl],[th,ph],[tl,ph],[tl,pl]].map(([tt,pp])=>project(tt,pp,M.state(tt,pp).mu[k]));out+=path(edge,colors[k],1.8);}
+      for(const k of ['sl','lg','sg']){const points=[];for(let j=0;j<=160;j++){const pp=pl+(ph-pl)*j/160,z=M.boundary(k,pp);if(z.t>=tl&&z.t<=th&&M.physical(k,pp))points.push(project(z.t,z.p,z.min));}out+=path(points,'#172b3d',3);}
+      out+=path([project(t,p,lo),project(t,p,hi)],'#172b3d',1.4,'3 3');
+      a.mu.forEach((g,k)=>{const pt=project(t,p,g);out+=`<circle cx="${pt[0]}" cy="${pt[1]}" r="${a.stable.length>1?10-k*3:6}" fill="${colors[k]}" stroke="white" stroke-width="2"/>`;});
+      const safeText=(pt,label,dx=0,dy=0)=>text(M.clamp(pt[0]+dx,32,w-32),M.clamp(pt[1]+dy,18,h-10),label);
+      const origin=project(tl,pl,floor),xt=project(th,pl,floor),yp=project(tl,ph,floor),ztop=project(tl,pl,hi);
+      out+=path([xt,origin,yp],'#718796',1.3)+path([origin,ztop],'#718796',1.3);
+      out+=safeText(xt,'T/Tt',0,20)+safeText(yp,'p/pt',-40,12)+safeText(ztop,'g',0,-18);
+      for(const g of [lo,mid,hi])out+=safeText(project(tl,pl,g),fmt(g,2),-24,4);
+      if(tl<=1&&th>=1&&pl<=1&&ph>=1)out+=safeText(project(1,1,0),'★',12,-10);
+      svg.innerHTML=out;
+      $('surface-values').innerHTML=names.map((name,i)=>`<span style="--phase:${colors[i]}"><b>${name}</b> g = ${fmt(a.mu[i])}${a.stable.includes(i)?' · 最低':''}</span>`).join('');
+      $('scale-note').textContent=`三张曲面共用一个坐标系，纵向高度差放大 ${fmt(gain,2)} 倍；刻度与读数仍为实际 g = μ/(RTt)。黑线为共存交线。局部窗口：T/Tt ${fmt(tl,2)}–${fmt(th,2)}，p/pt ${fmt(pl,2)}–${fmt(ph,2)}。`;
+      cameraControls();
     }
     function drawHeights(a){
       const svg=$('heights'),w=Math.max(230,svg.getBoundingClientRect().width),h=228,left=58,right=w-20,max=Math.max(.01,...a.mu.map(g=>g-a.min));
@@ -141,16 +135,15 @@
       [1,2,3].forEach(i=>{$('panel-'+i).hidden=step!==i;});
       root.querySelectorAll('[data-step]').forEach(b=>b.setAttribute('aria-current',b.closest('.tp-steps')&&+b.dataset.step===step?'step':'false'));
       const questions=['哪个相更稳定？先比较三张曲面的高低。','沿共存线移动，两相的共同高度会变吗？','温压不动，改变的是什么？'];
-      const instructions=['选择一个情景。三张图用同一视角与尺度；圆点是同一温压下的三个候选态。','选择汽化线，拖动压强。左边追踪温压位置，右边追踪真正的共同化学势。','先设初态，再选择允许的平衡终态，最后拖动转化进度。'];
+      const instructions=['选择一个情景。三张曲面位于同一坐标系；调大高度差、拖动改变视角，比较同一温压处的三个圆点。','选择汽化线，拖动压强。左边追踪温压位置，右边追踪真正的共同化学势。','先设初态，再选择允许的平衡终态，最后拖动转化进度。'];
       $('question').textContent=questions[step-1];$('instruction').textContent=instructions[step-1];
       $('tune').hidden=mode!=='free';$('tune').setAttribute('aria-expanded',String(tuning));$('state-controls').hidden=mode==='triple'||(mode==='free'&&!tuning);$('t').value=t;$('p').min=mode==='sg'||mode==='free'?.2:1;$('p').max=mode==='sg'?1:mode==='lg'?2.03:2.4;$('p').value=p;
       $('tbox').hidden=mode!=='free';$('pbox').hidden=mode==='triple';$('tv').textContent=fmt(t);$('pv').textContent=fmt(p);$('plabel').textContent=mode==='free'?'压强 p/pt':'沿线移动：压强 p/pt';
       $('locked').textContent=mode==='triple'?'固定三相点：T/Tt = 1，p/pt = 1。':mode!=='free'?`沿共存线自动求温度：T/Tt = ${fmt(t)}。`:'图中温度、压强均以三相点作单位。';
-      $('layer').value=['all','envelope'].includes(layer)?layer:'all';$('angle').value=angle;$('extension').checked=ext;$('magnify').checked=magnify;
+      $('layer').value=['all','envelope'].includes(layer)?layer:'all';cameraControls();$('extension').checked=ext;
       const relation=a.stable.map(i=>names[i]).join(' + ')+(a.stable.length>1?'共存':'稳定');
       $('state').textContent=`${relation} · T/Tt = ${fmt(t)}，p/pt = ${fmt(p)} · 最低 g = ${fmt(a.min)}`;
       root.querySelectorAll('[data-preset]').forEach(b=>{let selected=b.dataset.preset===mode;if(mode==='free'){const presets={liquid:[1.08,1.7],solid:[.9,1.3],gas:[1.2,.6]};selected=presets[b.dataset.preset]?.every((x,i)=>Math.abs(x-[t,p][i])<1e-9)||false;}b.setAttribute('aria-pressed',String(selected));});
-      root.querySelectorAll('[data-layout]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.layout===layout)));
       $('rows').innerHTML=names.map((name,i)=>`<tr data-stable="${a.stable.includes(i)}"><th scope="row">${name}${a.stable.includes(i)?' ✓':''}</th><td>${fmt(a.mu[i])}</td><td>${fmt(a.s[i])}</td><td>${fmt(a.v[i])}</td><td>${fmt(a.h[i])}</td></tr>`).join('');
       if(step===1){drawMap(a);drawSurface(a);drawHeights(a);}
       if(step===2){drawMap(a,'path-map');drawCoexist(a);if($('sections').open){section(a,'p');section(a,'t');}}
@@ -178,19 +171,30 @@
     }
     root.querySelectorAll('[data-preset]').forEach(b=>listen(b,'click',()=>preset(b.dataset.preset)));
     root.querySelectorAll('[data-step]').forEach(b=>listen(b,'click',()=>{step=+b.dataset.step;if(step===2&&mode==='free'){mode='lg';p=1.7;progress=0;constraint='none';}update();root.querySelector('.tp-steps').scrollIntoView({block:'start',behavior:'instant'});}));
-    root.querySelectorAll('[data-layout]').forEach(b=>listen(b,'click',()=>{layout=b.dataset.layout;update();}));
     listen($('tune'),'click',()=>{tuning=!tuning;update();});
-    listen($('magnify'),'change',e=>{magnify=e.target.checked;update();});listen($('home'),'click',()=>{angle=-35;update();});
+    listen($('home'),'click',()=>{angle=-35;pitch=15;zoom=1;update();});
+    for(const [id,factor] of [['zoom-in',1.2],['zoom-out',1/1.2]])listen($(id),'click',()=>{zoom=M.clamp(zoom*factor,.6,2);update();});
     listen($('t'),'input',e=>{t=+e.target.value;progress=0;update();});listen($('p'),'input',e=>{p=+e.target.value;progress=0;update();});
     for(const id of ['map','path-map'])listen($(id),'click',e=>{const svg=$(id),f=svg._frame,rect=svg.getBoundingClientRect(),x=(e.clientX-rect.left)*f.w/rect.width,y=(e.clientY-rect.top)*f.h/rect.height;if(x<f.l||x>f.w-f.rr||y<f.top||y>f.h-f.b)return;mode='free';t=.7+(x-f.l)/(f.w-f.l-f.rr)*.6;p=.2+(f.h-f.b-y)/(f.h-f.b-f.top)*2.2;progress=0;update();});
-    for(const id of ['angle','layer','extension','q','r','progress','n','constraint','total','choice'])listen($(id),['layer','extension','constraint'].includes(id)?'change':'input',e=>{const v=e.target.value;
-      if(id==='angle')angle=+v;if(id==='layer')layer=v;if(id==='extension')ext=e.target.checked;if(id==='q')q=+v;if(id==='r')r=+v;if(id==='progress')progress=+v;if(id==='n'){if(!Number.isFinite(+v)||+v<=0||v==='')return;n=M.clamp(+v,.001,1e6);}if(id==='total'){if(!Number.isFinite(+v)||v==='')return;total=+v;}if(id==='choice')choice=+v;
+    for(const id of ['layer','extension','q','r','progress','n','constraint','total','choice'])listen($(id),['layer','extension','constraint'].includes(id)?'change':'input',e=>{const v=e.target.value;
+      if(id==='layer')layer=v;if(id==='extension')ext=e.target.checked;if(id==='q')q=+v;if(id==='r')r=+v;if(id==='progress')progress=+v;if(id==='n'){if(!Number.isFinite(+v)||+v<=0||v==='')return;n=M.clamp(+v,.001,1e6);}if(id==='total'){if(!Number.isFinite(+v)||v==='')return;total=+v;}if(id==='choice')choice=+v;
       if(id==='constraint'){constraint=v;if(v!=='none'){const a=M.state(t,p);total=n*a.stable.reduce((s,i)=>s+a[v][i],0)/a.stable.length;}}
       update();});
     for(let i=0;i<3;i++)listen($('x'+i),'input',e=>{weights=M.rebalance(weights,i,+e.target.value/100).map(x=>x*100);progress=0;update();});
     listen($('end'),'click',()=>{progress=1;update();});listen($('reset'),'click',()=>{progress=0;update();});listen($('sections'),'toggle',()=>update(false));
-    root.querySelectorAll('.tp-rotate').forEach(svg=>{listen(svg,'pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,angle,id:e.pointerId};svg.setPointerCapture(e.pointerId);});listen(svg,'pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;angle=M.clamp(drag.angle+(e.clientX-drag.x)*.6,-150,150);update(false);});listen(svg,'pointerup',()=>{if(drag){drag=null;save();}});listen(svg,'pointercancel',()=>{drag=null;});});
-    let resizeFrame=0;const observer=new ResizeObserver(()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>update(false));});observer.observe(root);dispose=()=>{observer.disconnect();cancelAnimationFrame(resizeFrame);clean.forEach(f=>f());};update(false);
+    let cameraFrame=0;
+    const wrap=v=>((v+180)%360+360)%360-180;
+    function redrawCamera(){cameraControls();cancelAnimationFrame(cameraFrame);cameraFrame=requestAnimationFrame(()=>{if(step===1)drawSurface(M.state(t,p));});}
+    for(const id of ['angle','pitch','zoom','gain'])listen($(id),'input',e=>{const v=+e.target.value;if(id==='angle')angle=v;if(id==='pitch')pitch=v;if(id==='zoom')zoom=v;if(id==='gain')gain=v;redrawCamera();save();});
+    const surface=$('surface');
+    function startGesture(){const ps=[...pointers.values()];drag=ps.length>=2?{distance:Math.hypot(ps[1].x-ps[0].x,ps[1].y-ps[0].y),zoom}:ps.length?{x:ps[0].x,y:ps[0].y,angle,pitch}:null;}
+    listen(surface,'pointerdown',e=>{if(e.button!==0)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});surface.setPointerCapture(e.pointerId);startGesture();});
+    listen(surface,'pointermove',e=>{if(!pointers.has(e.pointerId)||!drag)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});const ps=[...pointers.values()];if(ps.length>=2){const d=Math.hypot(ps[1].x-ps[0].x,ps[1].y-ps[0].y);if(drag.distance>0)zoom=M.clamp(drag.zoom*d/drag.distance,.6,2);}else{angle=wrap(drag.angle+(e.clientX-drag.x)*.45);pitch=M.clamp(drag.pitch+(e.clientY-drag.y)*.45,-85,85);}redrawCamera();});
+    for(const event of ['pointerup','pointercancel','lostpointercapture'])listen(surface,event,e=>{pointers.delete(e.pointerId);startGesture();save();});
+    const wheel=e=>{e.preventDefault();zoom=M.clamp(zoom*Math.exp(-e.deltaY*(e.deltaMode===1?.035:.0015)),.6,2);redrawCamera();save();};
+    surface.addEventListener('wheel',wheel,{passive:false});clean.push(()=>surface.removeEventListener('wheel',wheel));
+    listen(surface,'keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Home'].includes(e.key))return;e.preventDefault();if(e.key==='ArrowLeft')angle=wrap(angle-5);if(e.key==='ArrowRight')angle=wrap(angle+5);if(e.key==='ArrowUp')pitch=M.clamp(pitch+5,-85,85);if(e.key==='ArrowDown')pitch=M.clamp(pitch-5,-85,85);if(['+','='].includes(e.key))zoom=M.clamp(zoom*1.1,.6,2);if(e.key==='-')zoom=M.clamp(zoom/1.1,.6,2);if(e.key==='Home'){angle=-35;pitch=15;zoom=1;}redrawCamera();save();});
+    let resizeFrame=0;const observer=new ResizeObserver(()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>update(false));});observer.observe(root);dispose=()=>{window.ThreePhaseView.destroy($('gl'));observer.disconnect();cancelAnimationFrame(resizeFrame);cancelAnimationFrame(cameraFrame);clean.forEach(f=>f());};update(false);
   }
   window.ThreePhaseDemo={markup,mount,unmount};
 })();
