@@ -120,3 +120,6 @@ node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 ## 三相图与化学势曲面
 
 入口：`/#/resource/three-phase`。三相化学势、相图、恒温和恒压截面由同一组解析自由能生成；支持沿共存线移动、旋转曲面与平衡下包络、固定温压改变相比例、总容积与总焓约束求解，以及链接参数恢复。源码为 `dist/three-phase/`，核验见 `docs/verification-three-phase.md`。
+
+
+三相专题第二版（2026-10-27）按“比较三相高低 → 沿线看共存 → 改变相比例”组织。默认并排显示共用尺度的三张局部曲面，差异模式统一减去液相参考并放大纵向差别；实际g读数和第二步共存线曲线保留物理值。支持直接拖动曲面、视角恢复、百分比自动归一化，公式和总量约束按需展开。第二版核验见 `docs/verification-three-phase-v2.md`。

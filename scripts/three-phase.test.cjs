@@ -51,3 +51,11 @@ test('Lesson formulas render; local assets and lifecycle are registered',()=>{
   const katex=require('../dist/vendor/katex/katex.min.js');for(const f of Object.values(context.window.ThreePhaseLesson.formulas))katex.renderToString(f,{throwOnError:true});
   assert.ok(context.window.SiteDemos['three-phase']);const r=require('../dist/catalog.json').resources.find(r=>r.id==='three-phase'),html=fs.readFileSync(require.resolve('../dist/index.html'),'utf8');r.localAssets.forEach(a=>assert.ok(html.includes(a)));
 });
+
+
+test('Direct fraction edits preserve the requested percentage and normalize other phases, including pure endpoints',()=>{
+  for(const initial of [[.5,.5,0],[0,0,1],[1,0,0],[.1,.3,.6]])for(let index=0;index<3;index++)for(const value of [0,.1,.37,.99,1]){
+    const x=M.rebalance(initial,index,value);near(x[index],value);near(x.reduce((a,b)=>a+b),1);assert.ok(x.every(v=>v>=0&&v<=1));
+    const others=[0,1,2].filter(i=>i!==index);if(initial[others[0]]>0&&initial[others[1]]>0&&value<1)near(x[others[0]]/x[others[1]],initial[others[0]]/initial[others[1]]);
+  }
+});
