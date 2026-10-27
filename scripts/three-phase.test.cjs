@@ -59,3 +59,13 @@ test('Direct fraction edits preserve the requested percentage and normalize othe
     const others=[0,1,2].filter(i=>i!==index);if(initial[others[0]]>0&&initial[others[1]]>0&&value<1)near(x[others[0]]/x[others[1]],initial[others[0]]/initial[others[1]]);
   }
 });
+
+test('Orbit rotation preserves lengths and separates azimuth, elevation and depth',()=>{
+  const V=require('../dist/three-phase/view.js');
+  for(const yaw of [-180,-90,-35,0,70,180])for(const pitch of [-85,-30,0,30,85])for(const v of [[1,0,0],[0,1,0],[0,0,1],[1.2,-.4,2.5]]){
+    const q=V.rotate(...v,yaw,pitch);near(Math.hypot(...q),Math.hypot(...v));assert.ok(q.every(Number.isFinite));
+  }
+  const a=V.rotate(1,2,3,0,0),b=V.rotate(1,2,3,90,0),c=V.rotate(1,2,3,0,90);
+  near(a[0],1);near(a[1],-3);near(a[2],2);near(b[0],-2);near(c[1],2);near(c[2],3);
+  assert.notDeepEqual(a,b);assert.notDeepEqual(a,c);
+});

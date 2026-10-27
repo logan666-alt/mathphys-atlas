@@ -1,5 +1,7 @@
 # 三相专题第二版核验
 
+此文件记录最初第二版的历史验收。后续按用户反馈取消并排与液相参考差值视图，当前修订见 `verification-three-phase-orbit.md`。
+
 日期：2026-10-27。入口：`/#/resource/three-phase`。
 
 ## 变更

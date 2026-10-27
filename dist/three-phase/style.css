@@ -28,3 +28,13 @@
 .tp-reading{margin-top:26px}.tp-page details.tp-reading{padding-top:20px}
 @media(max-width:900px){.tp-surface-grid{gap:8px}.tp-surface-panel h3{font-size:1rem}}
 @media(max-width:700px){.tp-surface-grid{grid-template-columns:1fr}.tp-steps{gap:0}.tp-steps button{display:block;font-size:.85rem;padding:12px 4px}.tp-steps b{display:block}.tp-viewbar{gap:12px}.tp-more>div{left:auto;right:0}.tp-camera{margin-top:10px}.tp-surface-panel{margin-bottom:12px}.tp-page .tp-task h2{font-size:1.15rem}.tp-state{padding:10px}.tp-energy-result{gap:14px}.tp-viewbar .tp-presets{width:100%}.tp-viewbar .tp-presets button{flex:1}.tp-steps{scroll-margin-top:130px}}
+
+/* Shared 3D scene with orbit and zoom. */
+.tp-rotate{touch-action:none;overflow:hidden;min-height:350px;border:1px solid var(--line);border-radius:8px;background:radial-gradient(ellipse at center,#fff 0%,#f2f6f8 100%)}
+.tp-gain{display:grid;grid-template-columns:1fr auto;gap:5px;min-width:200px;max-width:380px;flex:1}.tp-gain input{grid-column:1/-1;width:100%;accent-color:var(--blue)}
+.tp-camera-buttons{display:flex;gap:8px;margin-left:auto}.tp-camera-buttons button{min-width:44px}.tp-camera{max-width:none}.tp-camera .tp-controls{margin-top:16px}
+.tp-surface-values{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:12px;font-variant-numeric:tabular-nums}.tp-surface-values span{border-left:4px solid var(--phase);padding-left:10px}.tp-surface-values b{color:var(--phase)}
+@media(max-width:500px){.tp-gain{max-width:none;flex-basis:100%}.tp-camera-buttons{margin-left:0}.tp-surface-values{justify-content:flex-start;gap:8px;font-size:.9rem}}
+
+.tp-scene{position:relative;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:radial-gradient(ellipse at center,#fff 0%,#f2f6f8 100%)}
+.tp-scene canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.tp-scene .tp-rotate{position:relative;border:0;border-radius:0;background:none}
