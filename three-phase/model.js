@@ -1,6 +1,9 @@
 (function(root,factory){const m=factory();if(typeof module==='object'&&module.exports)module.exports=m;else root.ThreePhaseModel=m;})(typeof window!=='undefined'?window:globalThis,function(){
   'use strict';
   const names=['固相','液相','气相'], entropy0=[1,2.2,5], volumes=[.06,.08], cp=3;
+  // Dimensional presentation of the illustrative model; internal coordinates stay unchanged.
+  const units={temperature:300,pressure:100000,entropy:8.31446261815324};
+  units.energy=units.entropy*units.temperature;units.volume=units.energy/units.pressure;
   const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
   function state(t,p){
     if(!(t>0&&p>0))throw new RangeError('温度和压强必须为正');
@@ -40,5 +43,5 @@
     const weights=vertices.length===2?[1-q,q]:[r,(1-r)*(1-q),(1-r)*q];
     return [0,1,2].map(i=>vertices.reduce((s,x,j)=>s+weights[j]*x[i],0));
   }
-  return {names,entropy0,volumes,cp,clamp,state,boundary,pairs,physical,normalize,mix,rebalance,solutions,choose};
+  return {names,entropy0,volumes,cp,units,clamp,state,boundary,pairs,physical,normalize,mix,rebalance,solutions,choose};
 });

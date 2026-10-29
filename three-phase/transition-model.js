@@ -45,7 +45,16 @@
       const start=at(lo),end=at(tau,0,fraction),latent=jump*(tau<1&&!close(tau)?0:tau>1&&!close(tau)?1:M.clamp(fraction,0,1));
       return {entropy:end.s-start.s,regularEntropy:end.s-start.s-latent,latentEntropy:latent,heat:end.h-start.h};
     }
-    return {mode,kind,p,tc,lo,hi,width,first,ids,left,right,jump,latent:jump,gref:left.g,sref:(left.s+right.s)/2,at,accumulated};
+    return {mode,kind,p,tc,lo,hi,width,first,ids,left,right,jump,latent:jump,at,accumulated};
   }
-  return {create,A,B,cp0,s0};
+  function physical(mode='first',kind='lg',pressure=170000){
+    const raw=create(mode,kind,pressure/M.units.pressure),R=M.units.entropy;
+    const transitionTemperature=raw.tc*M.units.temperature;
+    const scale=(value,factor)=>value===null?null:value*factor;
+    const convert=z=>({temperature:z.tau*transitionTemperature,mu:z.g*R*transitionTemperature,entropy:z.s*R,enthalpy:z.h*R*transitionTemperature,heatCapacity:scale(z.cp,R),slope:scale(z.d1,R),curvature:scale(z.d2,R/transitionTemperature),phase:z.phase,coexist:z.coexist});
+    const at=(temperature,side=0,fraction=.5)=>convert(raw.at(temperature/transitionTemperature,side,fraction));
+    const accumulated=(temperature,fraction=.5)=>{const q=raw.accumulated(temperature/transitionTemperature,fraction);return {entropy:q.entropy*R,regularEntropy:q.regularEntropy*R,latentEntropy:q.latentEntropy*R,heat:q.heat*R*transitionTemperature};};
+    return {mode:raw.mode,kind:raw.kind,pressure:raw.p*M.units.pressure,first:raw.first,ids:raw.ids,transitionTemperature,lowTemperature:raw.lo*transitionTemperature,highTemperature:raw.hi*transitionTemperature,halfWidth:raw.width*transitionTemperature,left:convert(raw.left),right:convert(raw.right),entropyJump:raw.jump*R,latentHeat:raw.jump*R*transitionTemperature,at,accumulated};
+  }
+  return {create,physical,A,B,cp0,s0};
 });
