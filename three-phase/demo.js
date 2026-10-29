@@ -3,7 +3,7 @@
   const names=M.names,colors=['#366cb1','#16816e','#b26426'],dash=['','7 4','2 4'];
   const fmt=(x,n=4)=>(Math.abs(x)<5e-10?0:x).toFixed(n).replace('-','−');
   const markup=`<section id="tp-demo" aria-label="三相平衡交互演示">
-    <nav class="tp-steps" aria-label="学习顺序">${['比较三相高低','沿线看共存','改变相比例'].map((x,i)=>`<button type="button" data-step="${i+1}" aria-controls="tp-panel-${i+1}"><b>${i+1}</b>${x}</button>`).join('')}</nav>
+    <nav class="tp-steps" aria-label="学习顺序">${['比较三相高低','沿线看共存','改变相比例','从导数看相变'].map((x,i)=>`<button type="button" data-step="${i+1}" aria-controls="tp-panel-${i+1}"><b>${i+1}</b>${x}</button>`).join('')}</nav>
     <div class="tp-task"><h2 id="tp-question"></h2><p id="tp-instruction"></p></div>
     <div class="tp-presets" role="group" aria-label="选择情景"><button type="button" data-preset="liquid">液相区</button><button type="button" data-preset="lg">汽化线</button><button type="button" data-preset="triple">三相点</button><details class="tp-more"><summary>更多情景</summary><div><button type="button" data-preset="solid">固相区</button><button type="button" data-preset="gas">气相区</button><button type="button" data-preset="sl">熔化线</button><button type="button" data-preset="sg">升华线</button><button type="button" data-preset="free">自由选温压</button></div></details><button type="button" id="tp-tune" aria-expanded="false">微调温压</button></div>
     <div class="tp-controls" id="tp-state-controls"><label id="tp-tbox">温度 T/Tt <output id="tp-tv"></output><input id="tp-t" aria-label="温度" type="range" min=".7" max="1.3" step=".001" value="1.08"></label><label id="tp-pbox"><span id="tp-plabel">压强 p/pt</span> <output id="tp-pv"></output><input id="tp-p" aria-label="压强" type="range" min=".2" max="2.4" step=".001" value="1.7"></label><p id="tp-locked" class="tp-note"></p></div>
@@ -30,7 +30,9 @@
       <h3>③ 从初态移到终态</h3><div class="tp-controls"><label>转化进度 <output id="tp-progressv"></output><input type="range" id="tp-progress" aria-label="转化进度" min="0" max="1" step=".01" value="0"></label><button type="button" id="tp-end" class="button">到平衡终态</button><button type="button" id="tp-reset" class="button outline">回到初态</button></div>
       <div id="tp-bar" class="tp-mixbar" role="img" aria-label="当前三相摩尔分数"></div><div id="tp-energy" class="tp-values" aria-live="polite"></div><p class="tp-note">温压在此过程中固定。进度表示选定的相比例路径，不代表转化时间。</p>
       <details class="tp-equilibrium"><summary>进阶：用总容积或总焓确定平衡比例</summary><p>这里单独求满足总量约束的平衡终态。</p><div class="tp-controls"><label>总物质的量 n / mol<input id="tp-n" type="number" min=".001" max="1000000" step=".1" value="1"></label><label>附加条件<select id="tp-constraint"><option value="none">仅固定温压和总物质的量</option><option value="v">指定总体积 V</option><option value="h">指定总焓 H</option></select></label><label id="tp-totalbox"><span id="tp-total-label">目标总量</span><input id="tp-total" type="number" step=".01" value=".5"></label><label id="tp-choicebox">在可行终态之间移动<input id="tp-choice" type="range" min="0" max="1" step=".01" value=".5"></label></div><p id="tp-constraint-result" class="tp-values" aria-live="polite"></p></details>
+      <button type="button" class="button tp-next" data-step="4">下一步：从化学势导数看熵、热容和相变 →</button>
     </section>
+    <section id="tp-panel-4" aria-label="第四步：从导数看相变" hidden>${window.PhaseTransitionDemo.markup}</section>
     <details class="tp-data"><summary>查看当前三相数值与图形选项</summary><div class="tp-table-wrap"><table class="tp-table"><caption>当前温压下的摩尔量（无量纲）</caption><thead><tr><th>相</th><th>g</th><th>s</th><th>v</th><th>h</th></tr></thead><tbody id="tp-rows"></tbody></table></div><label class="tp-check"><input type="checkbox" id="tp-extension">在相图上显示高于第三相的两相等高线</label></details>
   </section>`;
   function unmount(){if(dispose){dispose();dispose=null;}}
@@ -42,11 +44,11 @@
     if(!['free','sl','lg','sg','triple'].includes(mode))mode='free';if(!['all','envelope','0','1','2'].includes(layer))layer='all';
     let weights=[0,1,2].map(i=>read('x'+i,[50,50,0][i],0,100)),n=read('n',1,.001,1e6),q=read('q',.5,0,1),r=read('r',.33,0,1),progress=read('progress',0,0,1),constraint=params.get('constraint')||'none',total=read('total',.5,-1e8,1e8),choice=read('choice',.5,0,1);
     if(!['none','v','h'].includes(constraint))constraint='none';
-    let step=read('step',1,1,3)|0;
+    let step=read('step',1,1,4)|0,transition;
     weights=M.normalize(weights).map(x=>x*100);
     let drag=null;const pointers=new Map();let tuning=params.get('tuning')==='1';
     const listen=(el,event,fn)=>{el.addEventListener(event,fn);clean.push(()=>el.removeEventListener(event,fn));};
-    function save(){const s=new URLSearchParams({t,p,mode,angle,pitch,zoom,gain,layer,step,tuning:tuning?1:0,ext:ext?'1':'0',n,q,r,progress,constraint,total,choice});weights.forEach((x,i)=>s.set('x'+i,x));history.replaceState(null,'','#/resource/three-phase?'+s);}
+    function save(){const s=new URLSearchParams({t,p,mode,angle,pitch,zoom,gain,layer,step,tuning:tuning?1:0,ext:ext?'1':'0',n,q,r,progress,constraint,total,choice,...(transition?transition.serialize():{})});weights.forEach((x,i)=>s.set('x'+i,x));history.replaceState(null,'','#/resource/three-phase?'+s);}
     function align(){if(mode==='triple'){t=1;p=1;}else if(mode!=='free'){p=M.clamp(p,mode==='sg'?.2:1,mode==='sg'?1:mode==='lg'?2.03:2.4);t=M.boundary(mode,p).t;}}
     const line=(points,stroke,width=2,d='')=>`<path d="${points.map((a,i)=>(i?'L':'M')+a.map(v=>v.toFixed(2)).join(',')).join(' ')}" fill="none" stroke="${stroke}" stroke-width="${width}" ${d?`stroke-dasharray="${d}"`:''}/>`;
     const text=(x,y,s,anchor='middle',cls='')=>`<text x="${x}" y="${y}" text-anchor="${anchor}" class="${cls}">${s}</text>`;
@@ -132,12 +134,13 @@
     const fractions=x=>x.map((v,i)=>`${names[i]} ${fmt(v*100,1)}%`).join(' · ');
     function update(saveState=true){
       align();const a=M.state(t,p);
-      [1,2,3].forEach(i=>{$('panel-'+i).hidden=step!==i;});
+      [1,2,3,4].forEach(i=>{$('panel-'+i).hidden=step!==i;});
       root.querySelectorAll('[data-step]').forEach(b=>b.setAttribute('aria-current',b.closest('.tp-steps')&&+b.dataset.step===step?'step':'false'));
-      const questions=['哪个相更稳定？先比较三张曲面的高低。','沿共存线移动，两相的共同高度会变吗？','温压不动，改变的是什么？'];
-      const instructions=['选择一个情景。三张曲面位于同一坐标系；调大高度差、拖动改变视角，比较同一温压处的三个圆点。','选择汽化线，拖动压强。左边追踪温压位置，右边追踪真正的共同化学势。','先设初态，再选择允许的平衡终态，最后拖动转化进度。'];
+      const questions=['哪个相更稳定？先比较三张曲面的高低。','沿共存线移动，两相的共同高度会变吗？','温压不动，改变的是什么？','从图像读出：斜率、熵、曲率与热容。'];
+      const instructions=['选择一个情景。三张曲面位于同一坐标系；调大高度差、拖动改变视角，比较同一温压处的三个圆点。','选择汽化线，拖动压强。左边追踪温压位置，右边追踪真正的共同化学势。','先设初态，再选择允许的平衡终态，最后拖动转化进度。','固定压强，让三张图的游标一起越过相变点，比较一级相变与连续相变。'];
       $('question').textContent=questions[step-1];$('instruction').textContent=instructions[step-1];
-      $('tune').hidden=mode!=='free';$('tune').setAttribute('aria-expanded',String(tuning));$('state-controls').hidden=mode==='triple'||(mode==='free'&&!tuning);$('t').value=t;$('p').min=mode==='sg'||mode==='free'?.2:1;$('p').max=mode==='sg'?1:mode==='lg'?2.03:2.4;$('p').value=p;
+      root.querySelector('.tp-presets').hidden=step===4;root.querySelector('.tp-data').hidden=step===4;$('state').hidden=step===4;
+      $('tune').hidden=mode!=='free';$('tune').setAttribute('aria-expanded',String(tuning));$('state-controls').hidden=step===4||mode==='triple'||(mode==='free'&&!tuning);$('t').value=t;$('p').min=mode==='sg'||mode==='free'?.2:1;$('p').max=mode==='sg'?1:mode==='lg'?2.03:2.4;$('p').value=p;
       $('tbox').hidden=mode!=='free';$('pbox').hidden=mode==='triple';$('tv').textContent=fmt(t);$('pv').textContent=fmt(p);$('plabel').textContent=mode==='free'?'压强 p/pt':'沿线移动：压强 p/pt';
       $('locked').textContent=mode==='triple'?'固定三相点：T/Tt = 1，p/pt = 1。':mode!=='free'?`沿共存线自动求温度：T/Tt = ${fmt(t)}。`:'图中温度、压强均以三相点作单位。';
       $('layer').value=['all','envelope'].includes(layer)?layer:'all';cameraControls();$('extension').checked=ext;
@@ -147,6 +150,7 @@
       $('rows').innerHTML=names.map((name,i)=>`<tr data-stable="${a.stable.includes(i)}"><th scope="row">${name}${a.stable.includes(i)?' ✓':''}</th><td>${fmt(a.mu[i])}</td><td>${fmt(a.s[i])}</td><td>${fmt(a.v[i])}</td><td>${fmt(a.h[i])}</td></tr>`).join('');
       if(step===1){drawMap(a);drawSurface(a);drawHeights(a);}
       if(step===2){drawMap(a,'path-map');drawCoexist(a);if($('sections').open){section(a,'p');section(a,'t');}}
+      if(step===4)transition.render();
       const initial=M.normalize(weights),vertices=M.solutions(a),target=M.choose(vertices,q,r),current=initial.map((x,i)=>x*(1-progress)+target[i]*progress),g=M.mix(current,a.mu),gap=Math.max(0,g-a.min);
       weights.forEach((x,i)=>{$('x'+i).value=x;$('xv'+i).textContent=fmt(x,1)+'%';});
       if(document.activeElement!==$('n'))$('n').value=n;
@@ -169,6 +173,7 @@
       else{mode='free';if(k!=='free')[t,p]=k==='solid'?[.9,1.3]:k==='gas'?[1.2,.6]:[1.08,1.7];weights=[50,50,0];}
       root.querySelector('.tp-more').open=false;update();
     }
+    transition=window.PhaseTransitionDemo.mount($('panel-4'),{params,pressure:p,onChange:save,onSurface:(kind,pressure)=>{mode=kind;p=pressure;step=1;progress=0;constraint='none';update();root.querySelector('.tp-steps').scrollIntoView({block:'start'});}});
     root.querySelectorAll('[data-preset]').forEach(b=>listen(b,'click',()=>preset(b.dataset.preset)));
     root.querySelectorAll('[data-step]').forEach(b=>listen(b,'click',()=>{step=+b.dataset.step;if(step===2&&mode==='free'){mode='lg';p=1.7;progress=0;constraint='none';}update();root.querySelector('.tp-steps').scrollIntoView({block:'start',behavior:'instant'});}));
     listen($('tune'),'click',()=>{tuning=!tuning;update();});
@@ -194,7 +199,7 @@
     const wheel=e=>{e.preventDefault();zoom=M.clamp(zoom*Math.exp(-e.deltaY*(e.deltaMode===1?.035:.0015)),.6,2);redrawCamera();save();};
     surface.addEventListener('wheel',wheel,{passive:false});clean.push(()=>surface.removeEventListener('wheel',wheel));
     listen(surface,'keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Home'].includes(e.key))return;e.preventDefault();if(e.key==='ArrowLeft')angle=wrap(angle-5);if(e.key==='ArrowRight')angle=wrap(angle+5);if(e.key==='ArrowUp')pitch=M.clamp(pitch+5,-85,85);if(e.key==='ArrowDown')pitch=M.clamp(pitch-5,-85,85);if(['+','='].includes(e.key))zoom=M.clamp(zoom*1.1,.6,2);if(e.key==='-')zoom=M.clamp(zoom/1.1,.6,2);if(e.key==='Home'){angle=-35;pitch=15;zoom=1;}redrawCamera();save();});
-    let resizeFrame=0;const observer=new ResizeObserver(()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>update(false));});observer.observe(root);dispose=()=>{window.ThreePhaseView.destroy($('gl'));observer.disconnect();cancelAnimationFrame(resizeFrame);cancelAnimationFrame(cameraFrame);clean.forEach(f=>f());};update(false);
+    let resizeFrame=0;const observer=new ResizeObserver(()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>update(false));});observer.observe(root);dispose=()=>{transition.destroy();window.ThreePhaseView.destroy($('gl'));observer.disconnect();cancelAnimationFrame(resizeFrame);cancelAnimationFrame(cameraFrame);clean.forEach(f=>f());};update(false);
   }
   window.ThreePhaseDemo={markup,mount,unmount};
 })();
