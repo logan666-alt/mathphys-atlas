@@ -138,3 +138,33 @@ test('The expanded lesson formulas render and fourth-step scripts load in depend
   assert.ok(html.indexOf('three-phase/transition-model.js')<html.indexOf('three-phase/transition.js'));
   assert.ok(html.indexOf('three-phase/transition.js')<html.indexOf('three-phase/demo.js'));
 });
+
+test('Dimensional chemical potential has the correct entropy and heat-capacity derivatives in kelvin',()=>{
+  for(const [mode,kind,pressure] of [['first','lg',170000],['first','sl',170000],['first','sg',60000],['jump','lg',170000],['critical','lg',170000]]){
+    const z=P.physical(mode,kind,pressure),step=.002;
+    for(const sign of [-1,1]){
+      const T=z.transitionTemperature+sign*z.halfWidth*.4,a=z.at(T),left=z.at(T-step),right=z.at(T+step);
+      near(-(right.mu-left.mu)/(2*step),a.entropy,3e-7);
+      near((right.mu-2*a.mu+left.mu)/(step*step),a.curvature,2e-6);
+      near(T*(right.entropy-left.entropy)/(2*step),a.heatCapacity,3e-6);
+      near((right.enthalpy-left.enthalpy)/(2*step),a.heatCapacity,3e-6);
+      near(a.enthalpy,a.mu+T*a.entropy);near(a.slope,-a.entropy);
+    }
+  }
+});
+test('Latent heat in J/mol equals transition temperature times entropy difference in J/(mol K)',()=>{
+  for(const kind of ['lg','sl','sg']){
+    const z=P.physical('first',kind,kind==='sg'?60000:170000),T=z.transitionTemperature;
+    near(z.latentHeat,T*z.entropyJump);near(z.right.enthalpy-z.left.enthalpy,z.latentHeat);
+    for(const fraction of [0,.3,1]){
+      const a=z.at(T,0,fraction),q=z.accumulated(T,fraction);
+      near(a.entropy-z.left.entropy,fraction*z.entropyJump);
+      near(a.enthalpy-z.left.enthalpy,fraction*z.latentHeat);
+      near(q.entropy,q.regularEntropy+q.latentEntropy);
+      near(q.latentEntropy,fraction*z.entropyJump);
+    }
+    const source=M.state(T/M.units.temperature,z.pressure/M.units.pressure);
+    near(source.min*M.units.energy,z.left.mu);near(source.s[z.ids[0]]*M.units.entropy,z.left.entropy);
+  }
+  const continuous=P.physical('jump');near(continuous.transitionTemperature,300);near(continuous.left.heatCapacity,15*M.units.entropy);near(continuous.right.heatCapacity,3*M.units.entropy);
+});
