@@ -123,3 +123,5 @@ node --test scripts/catalog.test.cjs scripts/v3.test.cjs
 
 
 三相专题第二版修订（2026-10-27）按“比较三相高低 → 沿线看共存 → 改变相比例”组织。三张实际化学势曲面共用一个三维坐标系，高度差可放大1–4倍；支持水平旋转、上下俯仰、滚轮/双指缩放和视角复位。相比例直接输入百分比，公式和总量约束按需展开。当前核验见 `docs/verification-three-phase-orbit.md`，原第二版验收留存在 `docs/verification-three-phase-v2.md`。
+
+2026-10-29 新增第四步“从导数看相变”，入口 `/#/resource/three-phase?step=4`。恒压化学势、熵与热容三图共用温度游标，比较一级相变、连续相变热容跳跃与对数发散；支持潜热/共存比例、熵变积分、图中拖动和链接恢复。前三步的三相模型用于一级相变，连续相变另用恒压局部自由能示例。核验见 `docs/verification-three-phase-derivatives.md`。

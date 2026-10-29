@@ -69,3 +69,72 @@ test('Orbit rotation preserves lengths and separates azimuth, elevation and dept
   near(a[0],1);near(a[1],-3);near(a[2],2);near(b[0],-2);near(c[1],2);near(c[2],3);
   assert.notDeepEqual(a,b);assert.notDeepEqual(a,c);
 });
+
+const P=require('../dist/three-phase/transition-model.js');
+test('The derivative lesson uses the original stable branches and avoids a third-phase crossing',()=>{
+  for(const kind of ['sl','lg','sg'])for(const p of (kind==='sg'?[.25,.6,.95]:[1.05,1.7,2])){
+    const z=P.create('first',kind,p);
+    near(z.left.g,z.right.g);assert.ok(z.jump>0);near(z.right.h-z.left.h,z.latent);
+    for(let j=0;j<=40;j++){
+      const tau=z.lo+(z.hi-z.lo)*j/40,a=z.at(tau),original=M.state(tau*z.tc,z.p);
+      near(a.g,original.min/z.tc);near(a.h,a.g+tau*a.s);
+      if(Math.abs(tau-1)>1e-12)near(a.cp,3);
+    }
+  }
+});
+test('Entropy, curvature and heat capacity match independent numerical derivatives',()=>{
+  for(const mode of ['first','jump','critical']){
+    const z=P.create(mode),h=1e-5;
+    for(const tau of [z.lo+.003,.985,1.015,z.hi-.003]){
+      const a=z.at(tau),l=z.at(tau-h),r=z.at(tau+h);
+      near(-(r.g-l.g)/(2*h),a.s,3e-7);
+      near((r.g-2*a.g+l.g)/(h*h),a.d2,4e-5);
+      near(tau*(r.s-l.s)/(2*h),a.cp,3e-6);
+      near((r.h-l.h)/(2*h),a.cp,3e-6);assert.ok(a.cp>0);
+    }
+  }
+});
+test('At a first-order transition the derivatives are undefined and fraction tracks latent heat',()=>{
+  for(const kind of ['sl','lg','sg']){
+    const z=P.create('first',kind,kind==='sg'?.6:1.7);
+    for(const x of [0,.25,.5,.75,1]){
+      const a=z.at(1,0,x),q=z.accumulated(1,x);
+      assert.equal(a.d1,null);assert.equal(a.d2,null);assert.equal(a.cp,null);
+      near(a.g,z.left.g);near(a.s-z.left.s,x*z.jump);near(a.h-z.left.h,x*z.latent);
+      near(q.entropy,3*Math.log(1/z.lo)+x*z.jump);
+      near(q.heat,3*(1-z.lo)+x*z.latent);
+    }
+    const q=z.accumulated(z.hi);near(q.entropy,3*Math.log(z.hi/z.lo)+z.jump);near(q.heat,3*(z.hi-z.lo)+z.latent);
+  }
+});
+test('Continuous transition models keep entropy continuous with a Cp jump or integrable divergence',()=>{
+  const j=P.create('jump'),c=P.create('critical');
+  near(j.left.g,j.right.g);near(j.left.s,j.right.s);near(j.jump,0);
+  near(j.left.cp,15);near(j.right.cp,3);near(j.left.d2,-15);near(j.right.d2,-3);
+  assert.equal(j.at(1).cp,null);assert.equal(j.at(1).d2,null);near(j.at(1).d1,-2);
+  near(c.jump,0);assert.equal(c.at(1).cp,Infinity);assert.equal(c.at(1).d2,-Infinity);
+  for(const sign of [-1,1]){
+    assert.ok(c.at(1+sign*1e-6).cp>c.at(1+sign*1e-3).cp);
+    near(c.at(1+sign*1e-8).s,2,7e-7);near(c.at(1+sign*1e-8).g,0,3e-8);
+  }
+});
+test('Heat and entropy shaded integrals agree with endpoint state functions, including the log singularity',()=>{
+  const integrate=(f,a,b)=>{const n=16000,dx=(b-a)/n;let sum=0;for(let i=0;i<n;i++)sum+=f(a+(i+.5)*dx)*dx;return sum;};
+  for(const mode of ['jump','critical']){
+    const z=P.create(mode);
+    for(const end of [1,z.hi]){
+      const intervals=end===1?[[z.lo,1]]:[[z.lo,1],[1,end]],q=z.accumulated(end);
+      near(intervals.reduce((sum,[a,b])=>sum+integrate(t=>z.at(t).cp/t,a,b),0),q.entropy,2e-5);
+      near(intervals.reduce((sum,[a,b])=>sum+integrate(t=>z.at(t).cp,a,b),0),q.heat,2e-5);
+    }
+  }
+});
+test('The expanded lesson formulas render and fourth-step scripts load in dependency order',()=>{
+  const katex=require('../dist/vendor/katex/katex.min.js'),context={window:{katex,PhaseTransitionModel:P}};
+  vm.runInNewContext(fs.readFileSync(require.resolve('../dist/three-phase/transition.js'),'utf8'),context);
+  for(const formula of Object.values(context.window.PhaseTransitionDemo.formulas))katex.renderToString(formula,{throwOnError:true});
+  const html=fs.readFileSync(require.resolve('../dist/index.html'),'utf8');
+  assert.ok(html.indexOf('three-phase/model.js')<html.indexOf('three-phase/transition-model.js'));
+  assert.ok(html.indexOf('three-phase/transition-model.js')<html.indexOf('three-phase/transition.js'));
+  assert.ok(html.indexOf('three-phase/transition.js')<html.indexOf('three-phase/demo.js'));
+});

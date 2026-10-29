@@ -263,10 +263,13 @@
         "three-phase/demo.js",
         "three-phase/page.js",
         "three-phase/style.css",
-        "three-phase/view.js"
+        "three-phase/view.js",
+        "three-phase/transition-model.js",
+        "three-phase/transition.js",
+        "three-phase/transition.css"
       ],
-      "title": "三相图与化学势曲面：稳定相和相比例",
-      "originalName": "Three Phases, Chemical Potential Surfaces and Phase Fractions",
+      "title": "三相图与化学势：相平衡、熵与热容",
+      "originalName": "Three Phases, Chemical Potential, Entropy and Heat Capacity",
       "source": "本站原创",
       "author": "物理可视化",
       "url": "#/resource/three-phase",
@@ -278,16 +281,16 @@
       "topics": [
         "phase-transitions"
       ],
-      "question": "温压不变时，相比例为什么还能改变？共存线上两相等高是否意味着整条线等高？",
+      "question": "化学势曲面的高低决定稳定相；恒压截面的斜率、曲率怎样联系熵、热容与相变？",
       "prerequisites": "物态方程、吉布斯自由能与化学势。",
       "depth": "课程核心",
       "format": "分步交互演示",
       "language": "中文",
-      "controls": "按三步学习；同一坐标系中比较三张曲面；高度差1–4倍放大、拖动旋转与俯仰、滚轮/双指缩放、一键复位、情景预设、百分比输入、进阶总量约束。",
-      "guide": "先在同一三维坐标系比较三相曲面，通过高度差放大和自由视角观察关系；再沿共存线追踪共同高度；最后固定温压调整相比例。",
-      "reading": "三张实际化学势曲面共用一个局部温压窗口及纵轴尺度。高度差放大统一拉伸纵向，刻度及读数仍为实际g，共存交点保持一致。",
+      "controls": "四步学习：三维曲面、沿线共存、相比例、从导数看相变。第四步支持三图温度游标、一级/连续相变切换、共存比例、曲率放大与熵变面积。",
+      "guide": "先比较三相曲面的高低，再沿共存线追踪共同高度，固定温压调整相比例；最后用恒压截面的化学势、熵、热容联动图区分一级与连续相变。",
+      "reading": "三张曲面使用同一坐标系。第四步中，化学势的一阶温度导数为负摩尔熵，二阶温度导数乘以−T为摩尔热容；相变点读左右极限。",
       "formula": "\\mu_{\\rm eq}=\\min_i\\mu_i,\\qquad G/n=\\sum_i x_i\\mu_i",
-      "symbols": "Tt、pt 是三相点尺度；μ 为摩尔化学势，x 为摩尔分数，n 为总物质的量；图中使用无量纲变量。",
+      "symbols": "μ 为摩尔化学势，x 为摩尔分数；前三步 Tt、pt 为三相点尺度。第四步 T* 为所选相变温度，τ=T/T*、g=μ/(RT*)、s=Sₘ/R、c=Cₚ,ₘ/R。",
       "steps": [
         {
           "title": "比较三相高低",
@@ -302,10 +305,10 @@
           "evidence": "汽化线端点与联动实测"
         },
         {
-          "title": "改变相比例",
-          "action": "进入第三步，直接设置初态百分比、选择终态并拖动转化进度；展开进阶总量约束。",
-          "observe": "初态比例总和自动保持100%，温压固定时自由能随相比例改变；约束可进一步限定终态。",
-          "evidence": "百分比分配、液相终态、三相点、约束及刷新恢复实测"
+          "title": "从相比例到熵与热容",
+          "action": "第三步调整相比例；第四步切换相变类型，让温度游标穿过相变点，在共存点拖动高温相比例。",
+          "observe": "一级相变有熵跃变和潜热；连续相变熵连续，热容可跳跃或发散。",
+          "evidence": "同一解析自由能的导数、左右极限和热量/熵积分核验；交互核验见专题文档。"
         }
       ],
       "think": {
@@ -313,18 +316,19 @@
         "answer": "共存条件只确定两相的摩尔性质；总容积或总焓等独立条件通常才能进一步确定两相比例。三相点加一个总量条件一般仍留有一个自由参数。"
       },
       "cautions": [
-        "采用三相点附近的示例模型，固液近似不可压缩，气相为理想气体；无临界点。",
-        "转化进度表示选定的相比例路径；实际速率和分配由动力学或附加约束决定。"
+        "前三步采用无临界点的三相模型；第四步沿用它演示一级相变，并另用恒压局部自由能模型演示连续相变。",
+        "转化进度表示选定的相比例路径；实际速率和分配由动力学或附加约束决定。",
+        "导数关系采用固定压强、固定其他外场的路径；δ峰箭头高度仅作标记，面积对应潜热或熵跃变。"
       ],
       "verification": {
         "read": true,
         "interaction": "tested",
-        "date": "2026-10-27",
-        "environment": "修订版：同一三维场景、转向/俯仰/缩放、实际高度拉伸、参数恢复；保留三步学习与相比例操作。",
+        "date": "2026-10-29",
+        "environment": "四步专题；已验证三图游标、相变类型、共存比例、图中拖动、参数恢复、返回三维和前三步操作。",
         "availability": "本站静态模块，计算、公式和字体不依赖外部接口。",
-        "mobile": "320/390像素视口的三个步骤分别检查，页面和控件无横向溢出，SVG标签无裁切。",
+        "mobile": "320/390像素视口页面无横向溢出；图表纵向排列，公式和对照表在各自容器内滚动。",
         "mainland": "沿用本站访问条件。",
-        "note": "全站30项测试通过；修订版核验见 docs/verification-three-phase-orbit.md。"
+        "note": "全站36项测试通过；导数、左右极限、热量和熵积分核验见 docs/verification-three-phase-derivatives.md。"
       },
       "visual": "three-phase",
       "mappings": [],
@@ -339,7 +343,19 @@
         "相比例",
         "克拉珀龙",
         "phase diagram",
-        "chemical potential"
+        "chemical potential",
+        "一级相变",
+        "一阶相变",
+        "二级相变",
+        "连续相变",
+        "熵变",
+        "热容",
+        "潜热",
+        "一阶导数",
+        "二阶导数",
+        "曲率",
+        "Landau",
+        "临界点"
       ],
       "operation": {
         "entry": "搜索三相图或从热力学与统计物理打开本站专题。",
@@ -357,7 +373,7 @@
           {
             "name": "学习步骤",
             "meaning": "每次专注一个问题",
-            "usage": "先比较三相高低，再沿线看共存，最后改变相比例。",
+            "usage": "比较三相高低 → 沿线看共存 → 改变相比例 → 从导数看相变。",
             "evidence": "第二版浏览器实际操作"
           },
           {
@@ -365,11 +381,17 @@
             "meaning": "直接设置摩尔分数",
             "usage": "调一相时，其余两相自动分配剩余百分比。",
             "evidence": "第二版浏览器实际操作"
+          },
+          {
+            "name": "从导数看相变",
+            "meaning": "让化学势、熵、热容共用温度游标",
+            "usage": "切换相变类型，选择相变前/相变点/相变后；在共存点拖动相比例，或开启熵变面积。",
+            "evidence": "解析模型与积分验证；交互核验见 docs/verification-three-phase-derivatives.md。"
           }
         ],
         "restart": "回到初态将转化进度置零，保留当前温压和初态权重。",
         "restoreDefault": "打开不带参数的专题链接；恢复视角按钮只重置相机。",
-        "testedRange": "θ=0.7–1.3、π=0.2–2.4；共存线、截面导数、三相点及约束解。",
+        "testedRange": "原三相 θ=0.7–1.3、π=0.2–2.4；新增汽化/熔化固定π=1.05–2、升华π=0.25–0.95，自适应相变局部温区；连续相变τ=0.92–1.08。",
         "troubleshooting": [
           {
             "symptom": "两张曲面相交却不是相界线",
@@ -380,8 +402,8 @@
             "action": "将目标总量调整到提示的可行区间，或改变温压。"
           }
         ],
-        "reviewedAt": "2026-10-27",
-        "evidenceNote": "修订版恢复共用三维空间并增加俯仰与缩放；见 docs/verification-three-phase-orbit.md。",
+        "reviewedAt": "2026-10-29",
+        "evidenceNote": "四步专题新增熵、热容与相变的导数联系；核验见 docs/verification-three-phase-derivatives.md。",
         "guideSource": "https://farside.ph.utexas.edu/teaching/sm1/Thermalhtml/node120.html"
       }
     },
